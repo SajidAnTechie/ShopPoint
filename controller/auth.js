@@ -91,7 +91,7 @@ const forgotPassword = asyncHandler(async (req, res, next) => {
 
     res
       .status(200)
-      .send({ status: "success", data: "ResetPassword Email sent" });
+      .send({ status: "success", message: "ResetPassword Email sent" });
   } catch (error) {
     console.log(error);
 
@@ -111,7 +111,7 @@ const resetPassword = asyncHandler(async (req, res, next) => {
 
   const resetToken = crypto
     .createHash("sha256")
-    .update(req.body.resetToken)
+    .update(req.body.token)
     .digest("hex");
 
   const user = await User.findOne({
@@ -119,7 +119,7 @@ const resetPassword = asyncHandler(async (req, res, next) => {
     resetPasswordExpire: { $gt: Date.now() },
   });
 
-  if (!user) throw createError(400, `Invalid token ${req.params.resetToken}`);
+  if (!user) throw createError(400, `Invalid token ${req.body.token}`);
 
   user.password = req.body.newPassword;
   user.resetPasswordToken = undefined;

@@ -15,11 +15,9 @@ const sendEmail = async (options) => {
     to: options.email,
     subject: options.subject,
     text: options.message,
-    html: `<a href=${options.url}></a><button>Click Here</button>`,
+    html: `<a href=${options.url}><button>Click Here</button></a>`,
   };
 
   let info = await transporter.sendMail(message);
-
-  console.log("Message sent: %s", info.messageId);
 };
 module.exports = sendEmail;
