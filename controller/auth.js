@@ -91,7 +91,7 @@ const forgotPassword = asyncHandler(async (req, res, next) => {
 
     res
       .status(200)
-      .send({ status: "success", message: "ResetPassword Email sent" });
+      .send({ status: "success", message: "ResetPassword token Email sent" });
   } catch (error) {
     console.log(error);
 

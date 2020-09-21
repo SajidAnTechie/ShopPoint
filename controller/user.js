@@ -33,12 +33,15 @@ const updateUser = asyncHandler(async (req, res, next) => {
 });
 
 const deleteUser = asyncHandler(async (req, res, next) => {
-  const deleteUser = await User.findByIdAndDelete(req.params.id);
+  const deleteUser = await User.findById(req.params.id);
 
   if (!deleteUser)
     throw createError(404, `User is not found with id of ${req.params.id}`);
 
-  res.status(204).send({ status: "success", data: {} });
+  await deleteUser.remove();
+  res
+    .status(204)
+    .send({ status: "success", message: "User Deleted Successfully" });
 });
 module.exports = {
   getUsers,

@@ -36,6 +36,12 @@ const UserSchema = new mongoose.Schema({
   },
 });
 
+UserSchema.pre("remove", async function (next) {
+  await this.model("Review").deleteMany({ userId: this._id });
+
+  next();
+});
+
 UserSchema.pre("save", async function (next) {
   if (!this.isModified("password")) {
     next();

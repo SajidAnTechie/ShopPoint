@@ -21,26 +21,28 @@ const ReviewSchema = new mongoose.Schema({
     type: Date,
     default: Date.now,
   },
-  productID: {
+  productId: {
     type: mongoose.Schema.ObjectId,
     ref: "Product",
     required: true,
   },
-  userID: {
+  userId: {
     type: mongoose.Schema.ObjectId,
     ref: "User",
     required: true,
   },
 });
 
+ReviewSchema.index({ productId: 1, userId: 1 }, { unique: true });
+
 ReviewSchema.statics.getRating = async function (productId) {
   const obj = await this.aggregate([
     {
-      $match: { productID: productId },
+      $match: { productId: productId },
     },
     {
       $group: {
-        _id: "$productID",
+        _id: "$productId",
         averageRating: { $avg: "$rating" },
       },
     },
@@ -55,11 +57,11 @@ ReviewSchema.statics.getRating = async function (productId) {
 };
 
 ReviewSchema.post("save", function () {
-  this.constructor.getRating(this.productID);
+  this.constructor.getRating(this.productId);
 });
 
 ReviewSchema.pre("remove", function () {
-  this.constructor.getRating(this.productID);
+  this.constructor.getRating(this.productId);
 });
 
 module.exports = mongoose.model("Review", ReviewSchema);
