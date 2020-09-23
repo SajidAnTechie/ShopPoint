@@ -18,7 +18,7 @@ const getUser = asyncHandler(async (req, res, next) => {
 const createUser = asyncHandler(async (req, res, next) => {
   const user = await User.create(req.body);
 
-  res.status(200).send({ status: "success", data: user });
+  res.status(201).send({ status: "success", data: user });
 });
 
 const updateUser = asyncHandler(async (req, res, next) => {

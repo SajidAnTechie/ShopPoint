@@ -56,15 +56,19 @@ const OrderSchema = new mongoose.Schema({
   payment: PaymentSchema,
   itemsPrice: {
     type: Number,
+    required: [true, "Please add a Items price"],
   },
   taxPrice: {
     type: Number,
+    required: [true, "Please add a tax price"],
   },
   shippingPrice: {
     type: Number,
+    required: [true, "Please add a shipping price"],
   },
   totalPrice: {
     type: Number,
+    required: [true, "Please add a total price"],
   },
   isPaid: {
     type: Boolean,
