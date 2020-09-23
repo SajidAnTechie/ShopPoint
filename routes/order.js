@@ -1,5 +1,6 @@
 const {
   getOrders,
+  authOrder,
   getOrder,
   createOrder,
   updateOrder,
@@ -14,11 +15,12 @@ const { protect } = require("../middleware/auth");
 //Product model
 const Order = require("../models/Order");
 
-const router = require("express").Router({ mergeParams: true });
+const router = require("express").Router();
 
 router.use(protect);
 
 router.route("/").get(advanceResults(Order), getOrders).post(createOrder);
+router.route("/authOrders").get(authOrder);
 
 router.route("/:orderId").get(getOrder).put(updateOrder).delete(deleteOrder);
 

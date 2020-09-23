@@ -1,32 +1,17 @@
 const asyncHandler = require("../middleware/async");
 const createError = require("../utilis/createError");
 const Order = require("../models/Order");
-const User = require("../models/User");
 
 const getOrders = asyncHandler(async (req, res, next) => {
-  if (req.params.userId) {
-    const findUser = await User.findById(req.params.userId);
-    if (!findUser)
-      throw createError(
-        404,
-        `User is not found with id of ${req.params.userId}`
-      );
-
-    const userOrders = await Order.find({
-      userId: req.params.userId,
-    }).populate({
-      path: "userId",
-      select: "name email",
-    });
-
-    return res.status(200).send({
-      status: "success",
-      count: userOrders.length,
-      data: userOrders,
-    });
-  } else {
-    res.status(200).send(res.advanceResults);
-  }
+  res.status(200).send(res.advanceResults);
+});
+const authOrder = asyncHandler(async (req, res, next) => {
+  const authOrders = await Order.find({ userId: req.user._id });
+  return res.status(200).send({
+    status: "success",
+    count: authOrders.length,
+    data: authOrders,
+  });
 });
 
 const getOrder = asyncHandler(async (req, res, next) => {
@@ -152,6 +137,7 @@ const deleteOrder = asyncHandler(async (req, res, next) => {
 });
 module.exports = {
   getOrders,
+  authOrder,
   getOrder,
   createOrder,
   updateOrder,

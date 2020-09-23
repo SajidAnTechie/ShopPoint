@@ -135,7 +135,14 @@ const resetPassword = asyncHandler(async (req, res, next) => {
 const sendTokenResponse = (user, statusCode, res) => {
   const token = user.genAuthToken();
 
-  res.status(statusCode).send({ status: "success", token, authData: user });
+  const userData = {
+    id: user._id,
+    name: user.name,
+    email: user.email,
+    role: user.role,
+  };
+
+  res.status(statusCode).send({ status: "success", token, authData: userData });
 };
 
 module.exports = {

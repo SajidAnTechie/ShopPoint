@@ -10,7 +10,7 @@ const ShippingSchema = {
     required: [true, "Please add a city name"],
   },
   postalCode: {
-    type: String,
+    type: Number,
     required: [true, "Please add a postal code"],
   },
   country: {
@@ -35,7 +35,7 @@ const orderItemSchema = new mongoose.Schema({
     type: Number,
     required: [true, "Please add a product quantity"],
   },
-  image: {
+  productImage: {
     type: String,
     required: [true, "Please add a product image"],
   },
@@ -43,7 +43,7 @@ const orderItemSchema = new mongoose.Schema({
     type: String,
     required: [true, "Please add a product price"],
   },
-  product: {
+  productId: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "Product",
     required: true,
