@@ -38,6 +38,7 @@ const UserSchema = new mongoose.Schema({
 
 UserSchema.pre("remove", async function (next) {
   await this.model("Review").deleteMany({ userId: this._id });
+  await this.model("Order").deleteMany({ userId: this._id });
 
   next();
 });

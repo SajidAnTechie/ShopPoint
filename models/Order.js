@@ -51,11 +51,6 @@ const orderItemSchema = new mongoose.Schema({
 });
 
 const OrderSchema = new mongoose.Schema({
-  userId: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: "User",
-    required: true,
-  },
   orderItems: [orderItemSchema],
   shipping: ShippingSchema,
   payment: PaymentSchema,
@@ -84,6 +79,11 @@ const OrderSchema = new mongoose.Schema({
   },
   deliveredAt: {
     type: Date,
+  },
+  userId: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "User",
+    required: true,
   },
   createdAt: {
     type: Date,
