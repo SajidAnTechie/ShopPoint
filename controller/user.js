@@ -22,7 +22,10 @@ const createUser = asyncHandler(async (req, res, next) => {
 });
 
 const updateUser = asyncHandler(async (req, res, next) => {
-  const editUser = await User.findByIdAndUpdate(req.params.id, req.body);
+  const editUser = await User.findByIdAndUpdate(req.params.id, req.body, {
+    new: true,
+    runValidators: true,
+  });
 
   if (!editUser)
     throw createError(404, `User is not found with id of ${req.params.id}`);

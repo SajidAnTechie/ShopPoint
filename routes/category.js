@@ -1,10 +1,10 @@
 const {
-  getUsers,
-  getUser,
-  createUser,
-  updateUser,
-  deleteUser,
-} = require("../controller/user");
+  getCategories,
+  getCategory,
+  addCategory,
+  updateCategory,
+  removeCategory,
+} = require("../controller/category");
 
 //Invoked middleware.
 const advanceResults = require("../middleware/advanceResults");
