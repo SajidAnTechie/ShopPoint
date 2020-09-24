@@ -7,15 +7,15 @@ const getCategories = asyncHandler(async (req, res, next) => {
 });
 
 const getCategory = asyncHandler(async (req, res, next) => {
-  const findcategory = await Category.findById(req.params.categoryId);
+  const category = await Category.findById(req.params.categoryId);
 
-  if (!findcategory)
+  if (!category)
     throw createError(
       404,
       `Category is not found with id of ${req.params.categoryId}`
     );
 
-  res.status(200).send({ status: "success", data: user });
+  res.status(200).send({ status: "success", data: category });
 });
 const addCategory = asyncHandler(async (req, res, next) => {
   const category = await Category.create(req.body);

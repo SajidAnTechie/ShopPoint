@@ -16,6 +16,7 @@ const userRouter = require("./routes/user");
 const productRouter = require("./routes/product");
 const reviewRouter = require("./routes/review");
 const orderRouter = require("./routes/order");
+const categoryRouter = require("./routes/category");
 
 app.use(express.json());
 
@@ -26,6 +27,7 @@ app.use("/api/v1/user", userRouter);
 app.use("/api/v1/product", productRouter);
 app.use("/api/v1/review", reviewRouter);
 app.use("/api/v1/order", orderRouter);
+app.use("/api/v1/category", categoryRouter);
 
 app.use(unknownEndpoints);
 app.use(errorHandler);
