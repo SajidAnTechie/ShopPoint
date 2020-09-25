@@ -4,7 +4,8 @@
     "name": "Sajid Ansari",
     "email": "sajidansari@gmail.com",
     "role": "admin",
-    "password": "12345678"
+    "password": "12345678",
+    "verify": true
   },
   {
     "_id": "5d7a514b5d2c12c7449be043",

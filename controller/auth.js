@@ -1,23 +1,93 @@
 const crypto = require("crypto");
 const createError = require("../utilis/createError");
 const asyncHandler = require("../middleware/async");
-const sendEmail = require("../utilis/sendEmail");
+const verifyEmail = require("../utilis/verifyEmail.js");
+const cron = require("node-cron");
 const User = require("../models/User");
 
 const RegisterUser = asyncHandler(async (req, res, next) => {
-  const newUser = await User.create(req.body);
+  var uid = "";
+  var characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+  var charactersLength = characters.length;
+  for (var i = 0; i < 6; i++) {
+    uid += characters.charAt(Math.floor(Math.random() * charactersLength));
+  }
+  const newUser = await User.create({ ...req.body, uid: uid });
 
-  sendTokenResponse(newUser, 200, res);
+  try {
+    const options = {
+      email: newUser.email,
+      subject: "Email Verification",
+      code: uid,
+      name: newUser.name,
+    };
+
+    await verifyEmail(options);
+
+    var job = cron.schedule(
+      "59 * * * *",
+      async () => {
+        try {
+          const user1 = await User.findOne({
+            email: newUser.email,
+          });
+          if (user1.verify === false) {
+            try {
+              await User.findOneAndDelete({
+                email: user1.email,
+              });
+            } catch (er) {
+              console.log(er);
+            }
+          }
+        } catch (error) {
+          console.log(error);
+        }
+      },
+      {
+        scheduled: false,
+      }
+    );
+
+    job.start();
+
+    res.status(200).send({
+      status: "success",
+      message: "Email Verification Code sent to your email.",
+    });
+  } catch (error) {
+    throw createError(500, "Verification email cound't be sent");
+  }
+
+  // sendTokenResponse(newUser, 200, res);
 });
 
 const login = asyncHandler(async (req, res, next) => {
-  const user = await User.findOne({ email: req.body.email }).select(
-    "+password"
-  );
+  const user = await User.findOne({
+    email: req.body.email,
+    verify: true,
+  }).select("+password");
   if (!user) throw createError(401, `Email doesn't match`);
 
   const isPassword = await user.matchPassword(req.body.password);
   if (!isPassword) throw createError(401, `Password doesn't match`);
+
+  sendTokenResponse(user, 200, res);
+});
+
+const verificationEmail = asyncHandler(async (req, res, next) => {
+  const user = await User.findOne({
+    uid: req.body.verificationCode,
+  });
+
+  if (!user) throw createError(401, "Invalid verifaication code");
+
+  if (user.verify)
+    throw createError(401, "You have already verified. Login in to continue.");
+
+  user.verify = true;
+
+  await user.save({ validateBeforeSave: false });
 
   sendTokenResponse(user, 200, res);
 });
@@ -140,6 +210,7 @@ const sendTokenResponse = (user, statusCode, res) => {
     name: user.name,
     email: user.email,
     role: user.role,
+    verify: user.verify,
   };
 
   res.status(statusCode).send({ status: "success", token, authData: userData });
@@ -152,4 +223,5 @@ module.exports = {
   updatePassword,
   forgotPassword,
   resetPassword,
+  verificationEmail,
 };
