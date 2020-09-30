@@ -2,6 +2,7 @@ const express = require("express");
 const dotenv = require("dotenv");
 const colors = require("colors");
 const path = require("path");
+const fileUpload = require("express-fileupload");
 const { unknownEndpoints, errorHandler } = require("./middleware/error");
 const connectDb = require("./config/db");
 const app = express();
@@ -19,6 +20,8 @@ const orderRouter = require("./routes/order");
 const categoryRouter = require("./routes/category");
 
 app.use(express.json());
+
+app.use(fileUpload());
 
 app.use(express.static(path.join(__dirname, "public")));
 
