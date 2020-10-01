@@ -4,7 +4,23 @@ const path = require("path");
 const Product = require("../models/Product");
 
 const getProducts = asyncHandler(async (req, res, next) => {
-  res.status(200).send({ status: "success", data: res.advanceResults });
+  const keyWord = req.query.keyWord;
+
+  if (keyWord) {
+    const searchItem = keyWord
+      ? { name: { $regex: keyWord, $options: "i" } }
+      : {};
+
+    const searchProduct = await Product.find(searchItem);
+
+    res.status(200).send({
+      status: "success",
+      count: searchProduct.length,
+      data: searchProduct,
+    });
+  } else {
+    res.status(200).send({ status: "success", data: res.advanceResults });
+  }
 });
 
 const getProduct = asyncHandler(async (req, res, next) => {
