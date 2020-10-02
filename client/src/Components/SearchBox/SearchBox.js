@@ -4,7 +4,6 @@ import "./style.css";
 const SearchBox = () => {
   return (
     <Form inline>
-      <i class="fas fa-search"></i>
       <FormControl
         type="text"
         name="seacrh"
@@ -12,6 +11,7 @@ const SearchBox = () => {
         placeholder="Search product..."
         className="mr-sm-2"
       />
+      <i class="fas fa-search"></i>
     </Form>
   );
 };

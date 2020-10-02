@@ -21,12 +21,11 @@ const Header = () => {
                   <span className="cart">1</span>
                 </Nav.Link>
               </LinkContainer>
-              <NavDropdown title="Sajid Ansari" id="username">
-                <LinkContainer to="/profile">
-                  <NavDropdown.Item>Profile</NavDropdown.Item>
-                </LinkContainer>
-                <NavDropdown.Item>Logout</NavDropdown.Item>
-              </NavDropdown>
+              <LinkContainer to="/login">
+                <Nav.Link>
+                  <i className="fas fa-user"></i> Sign In
+                </Nav.Link>
+              </LinkContainer>
 
               {/* {userInfo ? (
                 <NavDropdown title={userInfo.name} id='username'>
