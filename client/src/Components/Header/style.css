@@ -1,0 +1,17 @@
+.bg-dark {
+  background-color: #2b2b52 !important;
+}
+.nav-link {
+  position: relative;
+}
+.cart {
+  position: absolute;
+  background-color: white;
+  width: 17px;
+  height: 18px;
+  border-radius: 50%;
+  color: black;
+  text-align: center;
+  top: 4px;
+  left: -5px;
+}
