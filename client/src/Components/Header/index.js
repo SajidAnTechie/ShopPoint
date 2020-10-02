@@ -2,7 +2,7 @@ import React from "react";
 import { Navbar, Nav, Container, NavDropdown } from "react-bootstrap";
 import { LinkContainer } from "react-router-bootstrap";
 import SearchBox from "../SearchBox/SearchBox";
-import "./style.css";
+import "../style.css";
 const Header = () => {
   return (
     <header>

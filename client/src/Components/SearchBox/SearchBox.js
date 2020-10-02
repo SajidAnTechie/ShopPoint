@@ -1,6 +1,6 @@
 import React from "react";
 import { Form, FormControl } from "react-bootstrap";
-import "./style.css";
+import "../style.css";
 const SearchBox = () => {
   return (
     <Form inline>
