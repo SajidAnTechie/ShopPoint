@@ -2,7 +2,7 @@ import axios from "axios";
 import * as productConstants from "../Constants/productConstants";
 
 export const listProducts = (
-  keyWord,
+  searchProductKey,
   sort,
   category,
   priceRange,
@@ -13,22 +13,24 @@ export const listProducts = (
       dispatch({ type: productConstants.PRODUCT_FETCH_START });
     }
 
-    await axios
-      .get(
-        `/api/v1/product?keyWord=${keyWord}&sort=${sort.join(
-          ","
-        )}&category=${category}&price=${priceRange}`
-      )
-      .then((resp) => {
-        const productList = resp.data.data;
-        const totalProduct = resp.data.count;
+    const queryString = [
+      sort.length > 0 ? `sort=${sort.join(",")}` : "",
+      searchProductKey !== "" ? `&keyWord=${searchProductKey}` : "",
+      category !== "" ? `&category=${category}` : "",
+      priceRange !== "" ? `&price[lt]=${priceRange}` : "",
+    ];
 
-        dispatch({
-          type: productConstants.PRODUCT_FETCH_SUCCESS,
-          payload: { productList, totalProduct },
-        });
+    await axios.get(`/api/v1/product/?${queryString.join("")}`).then((resp) => {
+      const productList = resp.data.data.results;
+      const totalProduct = resp.data.data.count;
+
+      dispatch({
+        type: productConstants.PRODUCT_FETCH_SUCCESS,
+        payload: { productList, totalProduct },
       });
+    });
   } catch (error) {
+    console.log(error.response.data.error);
     dispatch({
       type: productConstants.PRODUCT_FETCH_ERROR,
       payload:
