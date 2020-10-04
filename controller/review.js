@@ -54,6 +54,13 @@ const createReview = asyncHandler(async (req, res, next) => {
       `Product is not found with id of ${req.params.productId}`
     );
 
+  const isReview = await Review.findOne({
+    productId: req.params.productId,
+    userId: req.user._id,
+  });
+
+  if (isReview) throw createError(409, `Already Reviwed`);
+
   const review = await Review.create({
     ...req.body,
     productId: req.params.productId,

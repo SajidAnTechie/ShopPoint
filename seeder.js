@@ -10,6 +10,7 @@ dotenv.config({ path: "./config/config.env" });
 const User = require("./models/User");
 const Product = require("./models/Product");
 const Category = require("./models/Category");
+const Review = require("./models/Review");
 
 // Connect to DB
 
@@ -32,6 +33,9 @@ const products = JSON.parse(
 const categories = JSON.parse(
   fs.readFileSync(`${__dirname}/_data/category.json`, "utf-8")
 );
+const reviews = JSON.parse(
+  fs.readFileSync(`${__dirname}/_data/reviews.json`, "utf-8")
+);
 
 //Import into DB
 
@@ -40,6 +44,7 @@ const importData = async () => {
     await User.create(users);
     await Product.create(products);
     await Category.create(categories);
+    //await Review.create(reviews);
     console.log(`Data Imported`.green.inverse);
     process.exit();
   } catch (error) {
@@ -52,6 +57,7 @@ const deleteData = async () => {
     await User.deleteMany();
     await Product.deleteMany();
     await Category.deleteMany();
+    await Review.deleteMany();
     console.log("Data Destroy".red.inverse);
     process.exit();
   } catch (error) {

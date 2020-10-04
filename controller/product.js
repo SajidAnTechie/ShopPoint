@@ -15,8 +15,8 @@ const getProducts = asyncHandler(async (req, res, next) => {
 
     res.status(200).send({
       status: "success",
-      count: searchProduct.length,
-      data: searchProduct,
+
+      data: { results: searchProduct, count: searchProduct.length },
     });
   } else {
     res.status(200).send({ status: "success", data: res.advanceResults });

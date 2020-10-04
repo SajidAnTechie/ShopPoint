@@ -24,7 +24,7 @@ const errorHandler = (err, req, res, next) => {
   //Mongoose Dublicat key
   if (err.code === 11000) {
     return res
-      .status(400)
+      .status(409)
       .send({ status: "Error", error: "Dublicate value entered" });
   }
 
