@@ -11,7 +11,6 @@ const SearchBox = () => {
     if (searchKey !== "") {
       history.push(`/?search=${searchKey}`);
     } else {
-      setSearchKey("");
       history.push("/");
     }
   };
