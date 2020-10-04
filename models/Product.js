@@ -56,7 +56,7 @@ ProductSchema.pre("remove", async function (next) {
 ProductSchema.virtual("Reviews", {
   ref: "Review",
   localField: "_id",
-  foreignField: "productID",
+  foreignField: "productId",
   justOne: false,
 });
 

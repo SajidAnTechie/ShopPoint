@@ -20,7 +20,13 @@ const router = require("express").Router();
 
 router
   .route("/")
-  .get(advanceResults(Product), getProducts)
+  .get(
+    advanceResults(Product, {
+      path: "Reviews",
+      select: "title",
+    }),
+    getProducts
+  )
   .post(protect, permission("admin"), createProduct);
 
 router.use("/:productId/reviews", reviewRouter);
