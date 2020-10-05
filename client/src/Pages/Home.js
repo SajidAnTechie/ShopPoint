@@ -5,6 +5,7 @@ import { Row, Col } from "react-bootstrap";
 import * as productAction from "../Actions/productAction";
 import Product from "../Components/Product/Product";
 import Filter from "../Components/Filter/Filter";
+import ErrorMessage from "../Components/Message/errorMessage";
 
 const Home = () => {
   const [sort, setSort] = useState([]);
@@ -95,9 +96,8 @@ const Home = () => {
         <p>Loading...</p>
       ) : // <Loader />
       error ? (
-        <p>{error}</p>
+        <ErrorMessage message={error} />
       ) : (
-        // <Message variant='danger'>{error}</Message>
         <>
           {products.length === 0 && <h4>No Products</h4>}
           <Row>
