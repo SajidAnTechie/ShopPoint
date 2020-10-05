@@ -6,6 +6,7 @@ import * as productAction from "../Actions/productAction";
 import Product from "../Components/Product/Product";
 import Filter from "../Components/Filter/Filter";
 import ErrorMessage from "../Components/Message/errorMessage";
+import HomeLoader from "../Components/Loader/HomeLoader";
 
 const Home = () => {
   const [sort, setSort] = useState([]);
@@ -63,42 +64,40 @@ const Home = () => {
   };
   return (
     <>
-      {searchProductKey ? (
-        <>
-          <Link to="/" className="btn btn-light">
-            Go Back
-          </Link>
-          <h1>
-            Search Products for {searchProductKey}({count})
-          </h1>
-        </>
-      ) : (
-        <div class="clearfix">
-          <span class="float-left">
-            <h1>Latest Products({count})</h1>
-          </span>
-          <span class="float-right">
-            {" "}
-            <Filter
-              setCategory={setCategory}
-              sort={sort}
-              handleSort={handleSort}
-              setPriceRange={setPriceRange}
-              setLtORgt={setLtORgt}
-              ltORgt={ltORgt}
-              handlePriceRange={handlePriceRange}
-            />
-          </span>
-        </div>
-      )}
-
       {loading ? (
-        <p>Loading...</p>
-      ) : // <Loader />
-      error ? (
+        <HomeLoader />
+      ) : error ? (
         <ErrorMessage message={error} />
       ) : (
         <>
+          {searchProductKey ? (
+            <>
+              <Link to="/" className="btn btn-light">
+                Go Back
+              </Link>
+              <h1>
+                Search Products for {searchProductKey}({count})
+              </h1>
+            </>
+          ) : (
+            <div class="clearfix">
+              <span class="float-left">
+                <h1>Latest Products({count})</h1>
+              </span>
+              <span class="float-right">
+                {" "}
+                <Filter
+                  setCategory={setCategory}
+                  sort={sort}
+                  handleSort={handleSort}
+                  setPriceRange={setPriceRange}
+                  setLtORgt={setLtORgt}
+                  ltORgt={ltORgt}
+                  handlePriceRange={handlePriceRange}
+                />
+              </span>
+            </div>
+          )}
           {products.length === 0 && <h4>No Products</h4>}
           <Row>
             {products.map((product) => (
