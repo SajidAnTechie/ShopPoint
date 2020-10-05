@@ -19,6 +19,18 @@ h2 {
 .rating span {
   margin: 0.1rem;
 }
+/* button */
+
+.MuiButton-containedPrimary {
+  color: #fff;
+  background-color: #2b2b52 !important;
+  font-weight: bold !important;
+}
+.MuiButton-containedPrimary:hover {
+  color: #fff;
+  background-color: #303f9f !important;
+  font-weight: bold !important;
+}
 
 /* carousel */
 .carousel-item-next,

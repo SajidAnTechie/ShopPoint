@@ -2,10 +2,11 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { Card } from "react-bootstrap";
 import Rating from "../Rating/Rating";
+import "animate.css";
 
 const Product = ({ product }) => {
   return (
-    <Card className="my-3 p-3 rounded">
+    <Card className="my-3 p-3 rounded  animate__animated animate__fadeInUp">
       <Link to={`/product/${product._id}`}>
         <Card.Img
           src={`http://localhost:5000/${product.productImage}`}

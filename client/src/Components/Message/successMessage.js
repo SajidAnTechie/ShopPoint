@@ -1,34 +1,34 @@
-import React from "react";
-import { toast, ToastContainer } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
+import React, { useState, useEffect } from "react";
+import { Toast } from "react-bootstrap";
+import "animate.css";
 
-const successMessage = ({ message }) => {
-  const success = () => {
-    toast.success(message, {
-      position: "top-right",
-      autoClose: 7000,
-      hideProgressBar: false,
-      closeOnClick: true,
-      pauseOnHover: true,
-      draggable: true,
-    });
-  };
+const SuccessMessage = ({ header, message }) => {
+  const [show, setShow] = useState(true);
+
   return (
     <>
-      {success()}
-      <ToastContainer
-        position="top-right"
-        autoClose={5000}
-        hideProgressBar={false}
-        newestOnTop={false}
-        closeOnClick
-        rtl={false}
-        pauseOnVisibilityChange
-        draggable
-        pauseOnHover
-      />
+      <div style={{ position: "fixed", right: "0", zIndex: "20180210" }}>
+        <Toast
+          onClose={() => setShow(false)}
+          show={show}
+          delay={3000}
+          autohide
+          className="animate__animated animate__shakeX"
+        >
+          <Toast.Header
+            style={{
+              background: "#43BE31",
+              color: "white",
+              fontWeight: "bold",
+            }}
+          >
+            <strong className="mr-auto">{header}</strong>s
+          </Toast.Header>
+          <Toast.Body>{message}</Toast.Body>
+        </Toast>
+      </div>
     </>
   );
 };
 
-export default successMessage;
+export default SuccessMessage;

@@ -164,7 +164,7 @@ function Filtetr({
               color="primary"
               onClick={handlePriceRange}
             >
-              Filter
+              Done
             </Button>
           </div>
         </Typography>

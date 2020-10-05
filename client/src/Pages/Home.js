@@ -29,6 +29,7 @@ const Home = () => {
 
   useEffect(() => {
     fetchProductList();
+    // eslint-disable-next-line
   }, [dispatch, searchProductKey, sort, category]);
 
   const fetchProductList = () => {
@@ -48,6 +49,7 @@ const Home = () => {
     if (success && initialLoading) {
       setInitialLoading(false);
     }
+    // eslint-disable-next-line
   }, [dispatch, success]);
 
   const handleSort = (value) => {
@@ -67,7 +69,7 @@ const Home = () => {
       {loading ? (
         <HomeLoader />
       ) : error ? (
-        <ErrorMessage message={error} />
+        <ErrorMessage header="Something went wrong" message={error} />
       ) : (
         <>
           {searchProductKey ? (
