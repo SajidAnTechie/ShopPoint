@@ -18,7 +18,7 @@ export const listProducts = (
       sort.length > 0 ? `sort=${sort.join(",")}` : "",
       searchProductKey !== "" ? `&keyWord=${searchProductKey}` : "",
       category !== "" ? `&category=${category}` : "",
-      priceRange !== "" ? `&price[${ltORgt}]=${priceRange}` : "",
+      priceRange !== "" ? `&price[${ltORgt}]=${Number(priceRange)}` : "",
     ];
 
     await axios.get(`/api/v1/product/?${queryString.join("")}`).then((resp) => {

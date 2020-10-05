@@ -24,9 +24,9 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 function Filtetr({
+  setCategory,
   sort,
   handleSort,
-  setCategory,
   setPriceRange,
   setLtORgt,
   ltORgt,
@@ -76,9 +76,9 @@ function Filtetr({
             control={
               <Checkbox
                 checked={sort.includes("name") ? true : false}
-                value="name"
                 color="primary"
                 inputProps={{ "aria-label": "secondary checkbox" }}
+                value="name"
                 onChange={(e) => handleSort(e.target.value)}
               />
             }
@@ -108,6 +108,7 @@ function Filtetr({
             }
             label="Rating"
           />
+
           <FormControl className={classes.formControl}>
             <InputLabel id="demo-simple-select-label">Category</InputLabel>
             <Select
@@ -125,7 +126,7 @@ function Filtetr({
               autoComplete="priceRange"
               name="priceRange"
               variant="outlined"
-              type="text"
+              type="number"
               required
               id="priceRange"
               placeholder="Price Range"
@@ -147,14 +148,14 @@ function Filtetr({
             <FormControlLabel
               control={
                 <Checkbox
-                  checked={ltORgt === "gt" ? true : false}
+                  checked={ltORgt === "gte" ? true : false}
                   color="primary"
                   inputProps={{ "aria-label": "secondary checkbox" }}
-                  value="gt"
+                  value="gte"
                   onChange={(e) => setLtORgt(e.target.value)}
                 />
               }
-              label="Greater than"
+              label="Greater Or equal to"
             />
           </div>
           <div>

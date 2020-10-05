@@ -79,9 +79,9 @@ const Home = () => {
           <span class="float-right">
             {" "}
             <Filter
+              setCategory={setCategory}
               sort={sort}
               handleSort={handleSort}
-              setCategory={setCategory}
               setPriceRange={setPriceRange}
               setLtORgt={setLtORgt}
               ltORgt={ltORgt}
