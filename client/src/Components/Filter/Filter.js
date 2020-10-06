@@ -8,7 +8,6 @@ import InputLabel from "@material-ui/core/InputLabel";
 import MenuItem from "@material-ui/core/MenuItem";
 import FormControl from "@material-ui/core/FormControl";
 import Select from "@material-ui/core/Select";
-import "../style.css";
 
 const useStyles = makeStyles((theme) => ({
   typography: {
@@ -17,6 +16,7 @@ const useStyles = makeStyles((theme) => ({
   formControl: {
     margin: theme.spacing(1),
     minWidth: 120,
+    top: -24,
   },
   selectEmpty: {
     marginTop: theme.spacing(2),
@@ -109,13 +109,19 @@ function Filtetr({
             label="Rating"
           />
 
-          <FormControl className={classes.formControl}>
-            <InputLabel id="demo-simple-select-label">Category</InputLabel>
+          <FormControl variant="outlined" className={classes.formControl}>
+            <InputLabel id="demo-simple-select-outlined-label">
+              Category
+            </InputLabel>
             <Select
-              labelId="demo-simple-select-label"
-              id="demo-simple-select"
+              labelId="demo-simple-select-outlined-label"
+              id="demo-simple-select-outlined"
               onChange={(e) => setCategory(e.target.value)}
+              label="Category"
             >
+              <MenuItem value="">
+                <em>None</em>
+              </MenuItem>
               <MenuItem value="Shirt">T-shirt</MenuItem>
               <MenuItem value="Pants">Pant</MenuItem>
               <MenuItem value="Vest">Vest</MenuItem>

@@ -11,7 +11,7 @@ export const listProducts = (
 ) => async (dispatch) => {
   try {
     if (initialLoading) {
-      dispatch({ type: productConstants.PRODUCT_FETCH_START });
+      dispatch({ type: productConstants.PRODUCTLIST_FETCH_START });
     }
 
     const queryString = [
@@ -26,13 +26,38 @@ export const listProducts = (
       const totalProduct = resp.data.data.count;
 
       dispatch({
-        type: productConstants.PRODUCT_FETCH_SUCCESS,
+        type: productConstants.PRODUCTLIST_FETCH_SUCCESS,
         payload: { productList, totalProduct },
       });
     });
   } catch (error) {
     dispatch({
-      type: productConstants.PRODUCT_FETCH_ERROR,
+      type: productConstants.PRODUCTLIST_FETCH_ERROR,
+      payload:
+        error.response && error.response.data.error
+          ? error.response.data.error
+          : error.message,
+    });
+  }
+};
+
+export const Product = (id, initialLoading) => async (dispatch) => {
+  try {
+    if (initialLoading) {
+      dispatch({ type: productConstants.PRODUCT_FETCH_START });
+    }
+
+    await axios.get(`/api/v1/product/${id}`).then((resp) => {
+      const product = resp.data.data;
+
+      dispatch({
+        type: productConstants.PRODUCT_FETCH_SUCCESS,
+        payload: product,
+      });
+    });
+  } catch (error) {
+    dispatch({
+      type: productConstants.PRODUCT_FETCH_FAIL,
       payload:
         error.response && error.response.data.error
           ? error.response.data.error

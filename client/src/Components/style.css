@@ -40,14 +40,3 @@ input {
 input:focus {
   box-shadow: none !important;
 }
-
-/* Filter */
-.MuiOutlinedInput-input {
-  padding: 16px 14px;
-}
-
-.makeStyles-formControl-2 {
-  min-width: 120px;
-  margin-top: -24px !important;
-  margin-left: 20px !important;
-}
