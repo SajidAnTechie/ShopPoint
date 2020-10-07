@@ -65,3 +65,31 @@ export const Product = (id, initialLoading) => async (dispatch) => {
     });
   }
 };
+
+export const productReview = (id, initialLoading) => async (dispatch) => {
+  try {
+    if (initialLoading) {
+      dispatch({ type: productConstants.PRODUCTREVIEW_FETCH_START });
+    }
+    await axios.get(`/api/v1/product/${id}/reviews`).then((resp) => {
+      const productReviews = resp.data.data;
+      const totalReview = resp.data.count;
+
+      dispatch({
+        type: productConstants.PRODUCTREVIEW_FETCH_SUCCESS,
+        payload: {
+          productReviews,
+          totalReview,
+        },
+      });
+    });
+  } catch (error) {
+    dispatch({
+      type: productConstants.PRODUCTREVIEW_FETCH_FAIL,
+      payload:
+        error.response && error.response.data.error
+          ? error.response.data.error
+          : error.message,
+    });
+  }
+};

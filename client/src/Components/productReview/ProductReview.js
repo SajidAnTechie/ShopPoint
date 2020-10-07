@@ -1,23 +1,53 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Row, Col, ListGroup, Button, Form } from "react-bootstrap";
-const ProductReview = () => {
-  return (
+import { useDispatch, useSelector } from "react-redux";
+import * as productAction from "../../Actions/productAction";
+import ErrorMessage from "../Message/errorMessage";
+import Rating from "../Rating/Rating";
+
+const ProductReview = ({ productId }) => {
+  const [initialLoading, setInitialLoading] = useState(true);
+
+  const productReviewsData = useSelector((state) => state.productReview);
+
+  const { loading, productReviews, count, error, success } = productReviewsData;
+
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(productAction.productReview(productId, initialLoading));
+    // eslint-disable-next-line
+  }, [dispatch]);
+
+  useEffect(() => {
+    if (success && initialLoading) {
+      setInitialLoading(false);
+    }
+    // eslint-disable-next-line
+  }, [dispatch, success]);
+
+  return loading ? (
+    <p>Loding....</p>
+  ) : error ? (
+    <ErrorMessage header="Something went wrong" message={error} />
+  ) : (
     <Row>
       <Col md={6}>
-        <h2>Reviews</h2>
-        {product.reviews.length === 0 && <Message>No Reviews</Message>}
+        <h2>Reviews({count})</h2>
+        {productReviews.length === 0 && <h4>No Reviews</h4>}
         <ListGroup variant="flush">
-          {product.reviews.map((review) => (
+          {productReviews.map((review) => (
             <ListGroup.Item key={review._id}>
-              <strong>{review.name}</strong>
+              <strong>{review.userId.name}</strong>
+
               <Rating value={review.rating} />
               <p>{review.createdAt.substring(0, 10)}</p>
-              <p>{review.comment}</p>
+              <p>{review.text}</p>
             </ListGroup.Item>
           ))}
           <ListGroup.Item>
             <h2>Write a Customer Review</h2>
-            {errorProductReview && (
+            {/* {errorProductReview && (
               <Message variant="danger">{errorProductReview}</Message>
             )}
             {userInfo ? (
@@ -54,7 +84,7 @@ const ProductReview = () => {
               <Message>
                 Please <Link to="/login">sign in</Link> to write a review{" "}
               </Message>
-            )}
+            )} */}
           </ListGroup.Item>
         </ListGroup>
       </Col>

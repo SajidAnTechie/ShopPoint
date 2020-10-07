@@ -4,12 +4,12 @@ import { useDispatch, useSelector } from "react-redux";
 import { Row, Col, Image, ListGroup, Card } from "react-bootstrap";
 import * as productAction from "../Actions/productAction";
 import ErrorMessage from "../Components/Message/errorMessage";
+import ProductReview from "../Components/ProductReview/ProductReview";
 import Rating from "../Components/Rating/Rating";
 import {
   Select,
   Button,
   FormControl,
-  InputLabel,
   makeStyles,
   MenuItem,
 } from "@material-ui/core/";
@@ -159,6 +159,7 @@ const ProductDetails = ({ match, history }) => {
               </Card>
             </Col>
           </Row>
+          <ProductReview productId={match.params.productId} />
         </>
       )}
     </>

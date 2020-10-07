@@ -44,3 +44,26 @@ export const Product = (state = { product: {} }, action) => {
       return state;
   }
 };
+
+export const productReview = (state = { productReviews: [] }, action) => {
+  switch (action.type) {
+    case productConstants.PRODUCTREVIEW_FETCH_START:
+      return {
+        loading: true,
+        productReviews: [],
+      };
+    case productConstants.PRODUCTREVIEW_FETCH_SUCCESS:
+      return {
+        productReviews: action.payload.productReviews,
+        count: action.payload.totalReview,
+        success: true,
+      };
+    case productConstants.PRODUCT_FETCH_FAIL:
+      return {
+        error: action.payload,
+      };
+
+    default:
+      return state;
+  }
+};
