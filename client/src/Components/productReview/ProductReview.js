@@ -3,12 +3,17 @@ import { Row, Col, ListGroup, Button, Form } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import * as productAction from "../../Actions/productAction";
 import ErrorMessage from "../Message/errorMessage";
+import { Link } from "react-router-dom";
 import Rating from "../Rating/Rating";
 
 const ProductReview = ({ productId }) => {
   const [initialLoading, setInitialLoading] = useState(true);
 
   const productReviewsData = useSelector((state) => state.productReview);
+
+  const userAuthData = useSelector((state) => state.userLogin);
+
+  const { userInfo } = userAuthData;
 
   const { loading, productReviews, count, error, success } = productReviewsData;
 
@@ -49,15 +54,15 @@ const ProductReview = ({ productId }) => {
             <h2>Write a Customer Review</h2>
             {/* {errorProductReview && (
               <Message variant="danger">{errorProductReview}</Message>
-            )}
+            )} */}
             {userInfo ? (
-              <Form onSubmit={submitHandler}>
+              <Form>
                 <Form.Group controlId="rating">
                   <Form.Label>Rating</Form.Label>
                   <Form.Control
                     as="select"
-                    value={rating}
-                    onChange={(e) => setRating(e.target.value)}
+                    //value={rating}
+                    //onChange={(e) => setRating(e.target.value)}
                   >
                     <option value="">Select...</option>
                     <option value="1">1 - Poor</option>
@@ -72,8 +77,8 @@ const ProductReview = ({ productId }) => {
                   <Form.Control
                     as="textarea"
                     row="3"
-                    value={comment}
-                    onChange={(e) => setComment(e.target.value)}
+                    //value={comment}
+                    //onChange={(e) => setComment(e.target.value)}
                   ></Form.Control>
                 </Form.Group>
                 <Button type="submit" variant="primary">
@@ -81,10 +86,10 @@ const ProductReview = ({ productId }) => {
                 </Button>
               </Form>
             ) : (
-              <Message>
+              <>
                 Please <Link to="/login">sign in</Link> to write a review{" "}
-              </Message>
-            )} */}
+              </>
+            )}
           </ListGroup.Item>
         </ListGroup>
       </Col>

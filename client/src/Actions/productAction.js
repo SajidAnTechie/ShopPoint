@@ -41,7 +41,7 @@ export const listProducts = (
   }
 };
 
-export const Product = (id, initialLoading) => async (dispatch) => {
+export const product = (id, initialLoading) => async (dispatch) => {
   try {
     if (initialLoading) {
       dispatch({ type: productConstants.PRODUCT_FETCH_START });

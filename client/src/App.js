@@ -4,6 +4,7 @@ import { Container } from "react-bootstrap";
 import Header from "./Components/Header";
 import Home from "./Pages/Home";
 import Product from "./Pages/Product";
+import Login from "./Pages/Login";
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
               path="/product/:productId"
               component={Product}
             />
+            <Route exact={true} path="/login" component={Login} />
           </Switch>
         </Container>
       </main>

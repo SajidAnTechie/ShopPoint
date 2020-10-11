@@ -8,7 +8,9 @@ const User = require("../models/User");
 const RegisterUser = asyncHandler(async (req, res, next) => {
   var uid = "";
   var characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+
   var charactersLength = characters.length;
+
   for (var i = 0; i < 6; i++) {
     uid += characters.charAt(Math.floor(Math.random() * charactersLength));
   }

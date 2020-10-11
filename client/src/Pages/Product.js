@@ -43,7 +43,7 @@ const ProductDetails = ({ match, history }) => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(productAction.Product(match.params.productId, initialLoading));
+    dispatch(productAction.product(match.params.productId, initialLoading));
     // eslint-disable-next-line
   }, [dispatch, match]);
 
