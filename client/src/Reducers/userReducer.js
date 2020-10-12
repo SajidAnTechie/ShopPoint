@@ -15,6 +15,8 @@ export const userLogin = (state = {}, action) => {
       return {
         error: action.payload,
       };
+    case userConstants.RESET:
+        return {};
 
     default:
       return state;

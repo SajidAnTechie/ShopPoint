@@ -13,6 +13,7 @@ import {
   makeStyles,
   MenuItem,
 } from "@material-ui/core/";
+import * as productConstants from "../Constants/productConstants";
 
 const useStyles = makeStyles((theme) => ({
   typography: {
@@ -36,6 +37,9 @@ const ProductDetails = ({ match, history }) => {
   const [initialLoading, setInitialLoading] = useState(true);
 
   const productData = useSelector((state) => state.Product);
+  const reviewResponses = useSelector((state) => state.createReview);
+
+  const {error:createReviewError} = reviewResponses
 
   const { loading, product, error, success } = productData;
   const classes = useStyles();
@@ -60,6 +64,9 @@ const ProductDetails = ({ match, history }) => {
 
   return (
     <>
+     {createReviewError && (
+        <ErrorMessage header="Opps!!!" message={createReviewError} reset={productConstants.CREATE_REVIEW_RESET} />
+      )}
       <Link className="btn btn-light my-3" to="/">
         Go Back
       </Link>

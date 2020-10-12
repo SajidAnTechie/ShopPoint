@@ -1,15 +1,49 @@
 import React, { useEffect, useState } from "react";
-import { Row, Col, ListGroup, Button, Form } from "react-bootstrap";
+import { Row, Col, ListGroup,  Form } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import * as productAction from "../../Actions/productAction";
 import ErrorMessage from "../Message/errorMessage";
 import { Link } from "react-router-dom";
 import Rating from "../Rating/Rating";
+import {
+  Select,
+  Button,
+  FormControl,
+  makeStyles,
+  MenuItem,
+  InputLabel,
+  TextField,
+  CircularProgress
+
+} from "@material-ui/core/";
+
+import * as productConstants from "../../Constants/productConstants";
+
+const useStyles = makeStyles((theme) => ({
+  typography: {
+    padding: theme.spacing(2),
+  },
+  formControl: {
+    margin: theme.spacing(1),
+    minWidth: 200,
+  },
+  selectEmpty: {
+    marginTop: theme.spacing(2),
+  },
+}));
 
 const ProductReview = ({ productId }) => {
   const [initialLoading, setInitialLoading] = useState(true);
+  const [title, setTitle] = useState("");
+  const [text, setText] = useState("");
+  const [rating, setRating] = useState("");
+
+  const classes = useStyles();
 
   const productReviewsData = useSelector((state) => state.productReview);
+  const reviewResponses = useSelector((state) => state.createReview);
+
+  const {success:createReviewSuccess,loading:createReviewLoading} = reviewResponses
 
   const userAuthData = useSelector((state) => state.userLogin);
 
@@ -20,9 +54,15 @@ const ProductReview = ({ productId }) => {
   const dispatch = useDispatch();
 
   useEffect(() => {
+    if(createReviewSuccess){
+      setTitle("")
+      setText("")
+      setRating("")
+    dispatch({type:productConstants.CREATE_REVIEW_RESET})
+    }
     dispatch(productAction.productReview(productId, initialLoading));
     // eslint-disable-next-line
-  }, [dispatch]);
+  }, [dispatch,createReviewSuccess]);
 
   useEffect(() => {
     if (success && initialLoading) {
@@ -31,11 +71,20 @@ const ProductReview = ({ productId }) => {
     // eslint-disable-next-line
   }, [dispatch, success]);
 
+  const handleCreateReview = (e)=>{
+    e.preventDefault();
+
+    dispatch(productAction.createReview(productId,title,text,rating))
+
+  }
+
+
   return loading ? (
     <p>Loding....</p>
   ) : error ? (
     <ErrorMessage header="Something went wrong" message={error} />
   ) : (
+    <>
     <Row>
       <Col md={6}>
         <h2>Reviews({count})</h2>
@@ -52,48 +101,81 @@ const ProductReview = ({ productId }) => {
           ))}
           <ListGroup.Item>
             <h2>Write a Customer Review</h2>
-            {/* {errorProductReview && (
-              <Message variant="danger">{errorProductReview}</Message>
-            )} */}
+          
             {userInfo ? (
-              <Form>
-                <Form.Group controlId="rating">
-                  <Form.Label>Rating</Form.Label>
-                  <Form.Control
-                    as="select"
-                    //value={rating}
-                    //onChange={(e) => setRating(e.target.value)}
+              <Form onSubmit={handleCreateReview}>
+                <TextField
+                    variant="outlined"
+                    type="text"
+                    margin="normal"
+                    placeholder="Write a title"
+                    required
+                    fullWidth
+                    id="title"
+                    label="Write a title"
+                    name="title"
+                    autoComplete="title"
+                    value={title}
+                    onChange={(e) => setTitle(e.target.value)}
+                />
+                <TextField
+                    variant="outlined"
+                    type="text"
+                    margin="normal"
+                    placeholder="Write a comment"
+                    required
+                    fullWidth
+                    id="comment"
+                    label="Write a comment"
+                    name="comment"
+                    autoComplete="comment"
+                    value={text}
+                    onChange={(e) => setText(e.target.value)}
+                  />
+                  
+              <FormControl variant="outlined" className={classes.formControl}>
+                  <InputLabel id="demo-simple-select-outlined-label">
+                  Rating
+                  </InputLabel>
+                  <Select
+                    labelId="demo-simple-select-outlined-label"
+                    id="demo-simple-select-outlined"
+                    onChange={(e) => setRating(Number(e.target.value))}
+                    label="Rating"
+                    autoWidth
+                    value={rating}
                   >
-                    <option value="">Select...</option>
-                    <option value="1">1 - Poor</option>
-                    <option value="2">2 - Fair</option>
-                    <option value="3">3 - Good</option>
-                    <option value="4">4 - Very Good</option>
-                    <option value="5">5 - Excellent</option>
-                  </Form.Control>
-                </Form.Group>
-                <Form.Group controlId="comment">
-                  <Form.Label>Comment</Form.Label>
-                  <Form.Control
-                    as="textarea"
-                    row="3"
-                    //value={comment}
-                    //onChange={(e) => setComment(e.target.value)}
-                  ></Form.Control>
-                </Form.Group>
-                <Button type="submit" variant="primary">
-                  Submit
-                </Button>
+                    <MenuItem value="">
+                      <em>None</em>
+                    </MenuItem>
+                    <MenuItem value="1">1 - Poor</MenuItem>
+                    <MenuItem value="2">2 - Fair</MenuItem>
+                    <MenuItem value="3">3 - Good</MenuItem>
+                    <MenuItem value="4">4 - Very Good</MenuItem>
+                    <MenuItem value="5">5 - Excellent</MenuItem>
+                  </Select>
+              </FormControl>
+                <div className="my-3">
+                  <Button
+                      variant="contained"
+                      color="primary"
+                      type="submit" 
+                    >
+                      {createReviewLoading ? <CircularProgress color="inherit" /> : <>Submit</>}  
+                  </Button>
+                      
+                </div>
               </Form>
-            ) : (
-              <>
-                Please <Link to="/login">sign in</Link> to write a review{" "}
-              </>
-            )}
+                  ) : (
+                    <>
+                      Please <Link to="/login">sign in</Link> to write a review{" "}
+                    </>
+                  )}
           </ListGroup.Item>
         </ListGroup>
       </Col>
     </Row>
+    </>
   );
 };
 

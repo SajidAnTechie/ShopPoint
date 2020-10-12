@@ -67,3 +67,25 @@ export const productReview = (state = { productReviews: [] }, action) => {
       return state;
   }
 };
+
+export const createReview = (state = { }, action) => {
+  switch (action.type) {
+    case productConstants.CREATE_REVIEW_START:
+      return {
+        loading: true,
+      };
+    case productConstants.CREATE_REVIEW_SUCCESS:
+      return {
+        success: true,
+      };
+    case productConstants.CREATE_REVIEW_FAIL:
+      return {
+        error: action.payload,
+      };
+    case productConstants.CREATE_REVIEW_RESET:
+      return { };
+
+    default:
+      return state;
+  }
+};

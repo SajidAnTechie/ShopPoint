@@ -6,6 +6,7 @@ import ErrorMessage from "../Components/Message/errorMessage";
 import FormContainer from "../Components/FormContainer/FormContainer";
 import { TextField, Button, CircularProgress } from "@material-ui/core/";
 import * as userAction from "../Actions/userAction";
+import * as userConstants from "../Constants/userConstants";
 
 const Login = ({ location, history }) => {
   const [email, setEmail] = useState("");
@@ -23,7 +24,7 @@ const Login = ({ location, history }) => {
     if (userInfo) {
       history.push(redirect);
     }
-  }, [dispatch, userInfo, redirect]);
+  }, [dispatch, userInfo, redirect,history]);
 
   const submitHandler = (e) => {
     e.preventDefault();
@@ -32,7 +33,7 @@ const Login = ({ location, history }) => {
 
   return (
     <>
-     {error && <ErrorMessage header="Auth Error" message={error} />}
+     {error && <ErrorMessage header="Auth Error" message={error} reset={userConstants.RESET} />}
     <FormContainer>
       <h1>Sign In</h1>
      

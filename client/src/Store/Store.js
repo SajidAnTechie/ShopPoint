@@ -4,6 +4,7 @@ import {
   listProducts,
   Product,
   productReview,
+  createReview,
 } from "../Reducers/productReducer";
 
 import { userLogin } from "../Reducers/userReducer";
@@ -13,6 +14,7 @@ const rootReducer = combineReducers({
   Product: Product,
   productReview: productReview,
   userLogin: userLogin,
+  createReview:createReview
 });
 
 const userInfoFromStorage = localStorage.getItem("userInfo")
