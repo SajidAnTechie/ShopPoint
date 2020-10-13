@@ -14,6 +14,7 @@ import {
   MenuItem,
 } from "@material-ui/core/";
 import * as productConstants from "../Constants/productConstants";
+import { addToCart } from "../Actions/cartAction";
 
 const useStyles = makeStyles((theme) => ({
   typography: {
@@ -59,7 +60,9 @@ const ProductDetails = ({ match, history }) => {
   }, [dispatch, success]);
 
   const addToCartHandler = () => {
-    history.push(`/cart/${match.params.productId}?qty=${qty}`);
+    
+    dispatch(addToCart(match.params.productId,qty))
+    history.push("/cart");
   };
 
   return (

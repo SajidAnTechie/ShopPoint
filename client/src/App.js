@@ -5,6 +5,7 @@ import Header from "./Components/Header";
 import Home from "./Pages/Home";
 import Product from "./Pages/Product";
 import Login from "./Pages/Login";
+import Cart from "./Pages/Cart"
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
               component={Product}
             />
             <Route exact={true} path="/login" component={Login} />
+            <Route exact={true} path="/cart" component={Cart} />
           </Switch>
         </Container>
       </main>

@@ -69,7 +69,7 @@ const Login = ({ location, history }) => {
           onChange={(e) => setPassword(e.target.value)}
         />
 
-        <Button type="submit" variant="contained" color="primary" fullWidth>
+        <Button type="submit" variant="contained" color="primary" fullWidth disabled={loading}>
           {loading ? <CircularProgress color="inherit" /> : <>Sign In</>}
         </Button>
       </Form>
