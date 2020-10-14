@@ -22,3 +22,26 @@ export const userLogin = (state = {}, action) => {
       return state;
   }
 };
+
+export const userRegister = (state = {}, action) => {
+  switch (action.type) {
+    case userConstants.USER_REGISTER_START:
+      return {
+        loading: true,
+      };
+    case userConstants.USER_REGISTER_SUCCESS:
+      return {
+        message: action.payload,
+        success: true,
+      };
+    case userConstants.USER_REGISTER_FAIL:
+      return {
+        error: action.payload,
+      };
+    case userConstants.USER_REGISTER_RESET:
+        return {};
+
+    default:
+      return state;
+  }
+};

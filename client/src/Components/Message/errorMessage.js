@@ -7,14 +7,18 @@ const ErrorMessage = ({ header, message,reset }) => {
   const [show, setShow] = useState(true);
   const dispatch = useDispatch()
 
+  const action = ()=>{
+    if(reset){
+      dispatch({type:reset})
+    }
+    setShow(false)
+  }
+
   return (
     <>
       <div style={{ position: "fixed", right: "0", zIndex: "20180210" }}>
         <Toast
-          onClose={() => {
-            setShow(false)
-            dispatch({type:reset})
-          }}
+          onClose={action}
           show={show}
           delay={3000}
           autohide

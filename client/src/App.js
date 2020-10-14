@@ -8,6 +8,8 @@ import Login from "./Pages/Login";
 import Cart from "./Pages/Cart";
 import Shipping from "./Pages/Shipping";
 import Logout from "./Pages/Logout";
+import Register from "./Pages/Register";
+import EmailVerification from "./Pages/EmailVerification";
 
 function App() {
   return (
@@ -25,6 +27,8 @@ function App() {
             <Route exact={true} path="/login" component={Login} />
             <Route exact={true} path="/cart" component={Cart} />
             <Route exact={true} path="/shipping" component={Shipping} />
+            <Route exact={true} path="/register" component={Register} />
+            <Route exact={true} path="/EmailVerification" component={EmailVerification} />
             <Route exact={true} path="/logout" component={Logout} />
           </Switch>
         </Container>

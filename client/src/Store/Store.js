@@ -7,7 +7,7 @@ import {
   createReview,
 } from "../Reducers/productReducer";
 
-import { userLogin } from "../Reducers/userReducer";
+import { userLogin,userRegister } from "../Reducers/userReducer";
 import { cartReducer } from "../Reducers/cartReducer";
 
 
@@ -16,6 +16,7 @@ const rootReducer = combineReducers({
   Product: Product,
   productReview: productReview,
   userLogin: userLogin,
+  userRegister:userRegister,
   createReview:createReview,
   cart:cartReducer,
 });
