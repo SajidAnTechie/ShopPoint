@@ -69,17 +69,17 @@ const Login = ({ location, history }) => {
           onChange={(e) => setPassword(e.target.value)}
         />
 
-        <Button type="submit" variant="contained" color="primary" fullWidth disabled={loading}>
+        <Button type="submit" variant="contained" color="primary" fullWidth>
           {loading ? <CircularProgress color="inherit" /> : <>Sign In</>}
         </Button>
       </Form>
 
       <Row className="py-3">
         <Col>
-          New Customer? <Link to="/register">Register</Link>
-          {/* <Link to={redirect ? `/register?redirect=${redirect}` : "/register"}>
+          New Customer? 
+          <Link to={redirect ? `/register?redirect=${redirect}` : "/register"}>
             Register
-          </Link> */}
+          </Link>
         </Col>
       </Row>
     </FormContainer>

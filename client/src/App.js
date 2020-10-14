@@ -5,7 +5,9 @@ import Header from "./Components/Header";
 import Home from "./Pages/Home";
 import Product from "./Pages/Product";
 import Login from "./Pages/Login";
-import Cart from "./Pages/Cart"
+import Cart from "./Pages/Cart";
+import Shipping from "./Pages/Shipping";
+import Logout from "./Pages/Logout";
 
 function App() {
   return (
@@ -22,6 +24,8 @@ function App() {
             />
             <Route exact={true} path="/login" component={Login} />
             <Route exact={true} path="/cart" component={Cart} />
+            <Route exact={true} path="/shipping" component={Shipping} />
+            <Route exact={true} path="/logout" component={Logout} />
           </Switch>
         </Container>
       </main>

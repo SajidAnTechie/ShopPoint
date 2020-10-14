@@ -1,12 +1,12 @@
 import React from "react";
 import { Link } from 'react-router-dom'
 import {useDispatch,  useSelector } from 'react-redux'
-import { Row, Col, ListGroup, Image, Button, Card } from 'react-bootstrap'
+import { Row, Col, ListGroup, Image, Card } from 'react-bootstrap'
 //import Message from '../components/Message'
 import { addToCart,removeItemFromCart } from "../Actions/cartAction";
 import {
     Select,
-    //Button,
+    Button,
     FormControl,
     makeStyles,
     MenuItem,
@@ -25,7 +25,7 @@ selectEmpty: {
 },
 }));
 
-const Cart = ()=>{
+const Cart = ({history})=>{
 
     const cart = useSelector((state) => state.cart)
     const { cartItems } = cart   
@@ -34,6 +34,10 @@ const Cart = ()=>{
 
     const removeFromCartHandler = (id)=>{
         dispatch(removeItemFromCart(id))
+    }
+
+    const handleCheckout = ()=>{
+      history.push("/login?redirect=shipping")
     }
     
     return(
@@ -107,13 +111,9 @@ const Cart = ()=>{
                 .toFixed(2)}
             </ListGroup.Item>
             <ListGroup.Item>
-              <Button
-                type='button'
-                className='btn-block'
-                disabled={cartItems.length === 0}
-                //onClick={checkoutHandler}
-              >
-                Proceed To Checkout
+              <Button type="button" variant="contained" color="primary" onClick={handleCheckout} 
+              fullWidth disabled={cartItems.length === 0}>
+                    Proceed To Checkout
               </Button>
             </ListGroup.Item>
           </ListGroup>
