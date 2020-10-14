@@ -26,7 +26,9 @@ const Header = () => {
               <LinkContainer to="/cart">
                 <Nav.Link>
                   <i className="fas fa-shopping-cart"></i>{" "}
-                  <span className="cart">{cartItems.reduce((acc, item) => acc + item.qty, 0)}</span>
+                  {cartItems.length>0 &&
+                    <span className="cart">{ cartItems.reduce((acc, item) => acc + item.qty, 0)}</span>
+                  }
                 </Nav.Link>
               </LinkContainer>
 
