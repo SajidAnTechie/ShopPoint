@@ -1,5 +1,6 @@
 import axios from "axios";
 import * as orderConstants from "../Constants/orderConstants";
+import * as cartConstants from "../Constants/cartConstants";
 
 export const createOrder = (orderData) => async (dispatch,getState) => {
     try {
@@ -23,6 +24,13 @@ export const createOrder = (orderData) => async (dispatch,getState) => {
           type: orderConstants.CREATE_ORDER_SUCCESS,
           payload: data,
         });
+      });
+
+      localStorage.removeItem('cartItems')
+      localStorage.removeItem('shippingAddress')
+      localStorage.removeItem('paymentMethod')
+      dispatch({
+        type: cartConstants.CART_RESET,
       });
 
     } catch (error) {
@@ -152,6 +160,46 @@ export const deliverOrder = (orderId) => async (dispatch, getState) => {
   } catch (error) {
     dispatch({
       type: orderConstants.ORDER_DILIVERD_FAIL,
+      payload:
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message,
+    })
+  }
+}
+
+export const authOrder = () => async (dispatch, getState) => {
+  try {
+    dispatch({
+      type: orderConstants.AUTH_ORDER_FETCH_START,
+    })
+
+    const {
+      userLogin: { userInfo },
+    } = getState()
+
+    const config = {
+      headers: {
+        Authorization: `Bearer ${userInfo.token}`,
+      },
+    }
+
+    await axios.get(
+      `/api/v1/order/authOrders`,
+      config
+    ).then((resp)=>{
+
+      const data = resp.data.data;
+
+      dispatch({
+        type: orderConstants.AUTH_ORDER_FETCH_SUCCESS,
+        payload: data,
+      })
+    })
+ 
+  } catch (error) {
+    dispatch({
+      type: orderConstants.AUTH_ORDER_FETCH_FAIL,
       payload:
         error.response && error.response.data.message
           ? error.response.data.message

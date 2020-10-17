@@ -85,3 +85,23 @@ export const orderDeliverReducer = (state = {}, action) => {
       return state
   }
 }
+
+export const authOrders = (state = { orders:[] }, action) => {
+  switch (action.type) {
+    case orderConstants.AUTH_ORDER_FETCH_START:
+      return {
+        loading: true,
+      }
+    case orderConstants.AUTH_ORDER_FETCH_SUCCESS:
+      return {
+        success: true,
+        orders:action.payload
+      }
+    case orderConstants.AUTH_ORDER_FETCH_FAIL:
+      return {
+        error: action.payload,
+      }
+    default:
+      return state
+  }
+}

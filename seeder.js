@@ -11,6 +11,7 @@ const User = require("./models/User");
 const Product = require("./models/Product");
 const Category = require("./models/Category");
 const Review = require("./models/Review");
+const Order = require("./models/Order");
 
 // Connect to DB
 
@@ -58,6 +59,7 @@ const deleteData = async () => {
     await Product.deleteMany();
     await Category.deleteMany();
     await Review.deleteMany();
+    await Order.deleteMany();
     console.log("Data Destroy".red.inverse);
     process.exit();
   } catch (error) {
