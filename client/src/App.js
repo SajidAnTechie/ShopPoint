@@ -9,6 +9,8 @@ import Cart from "./Pages/Cart";
 import PrivateRoute from "./routes/PrivateRoute"
 import Shipping from "./Pages/Shipping";
 import Payment from "./Pages/Payment";
+import PlaceOrder from "./Pages/PlaceOrder";
+import Order from "./Pages/Order";
 import Logout from "./Pages/Logout";
 import Register from "./Pages/Register";
 import EmailVerification from "./Pages/EmailVerification";
@@ -30,6 +32,8 @@ function App() {
             <Route exact={true} path="/cart" component={Cart} />
             <PrivateRoute exact={true} path="/shipping" component={Shipping}/>
             <PrivateRoute exact={true} path="/payment" component={Payment}/>
+            <PrivateRoute exact={true} path="/placeOrder" component={PlaceOrder}/>
+            <PrivateRoute exact={true} path="/order/:orderId" component={Order}/>
             <Route exact={true} path="/register" component={Register} />
             <Route exact={true} path="/EmailVerification" component={EmailVerification} />
             <Route exact={true} path="/logout" component={Logout} />

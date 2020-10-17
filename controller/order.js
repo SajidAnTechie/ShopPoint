@@ -28,7 +28,6 @@ const getOrder = asyncHandler(async (req, res, next) => {
 
   res.status(200).send({
     status: "success",
-    count: findOrder.length,
     data: findOrder,
   });
 });
@@ -38,17 +37,6 @@ const createOrder = asyncHandler(async (req, res, next) => {
     ...req.body,
     userId: req.user._id,
   });
-
-  //   const newOrder = new Order({
-  //     orderItems: req.body.orderItems,
-  //     user: req.user._id,
-  //     shipping: req.body.shipping,
-  //     payment: req.body.payment,
-  //     itemsPrice: req.body.itemsPrice,
-  //     taxPrice: req.body.taxPrice,
-  //     shippingPrice: req.body.shippingPrice,
-  //     totalPrice: req.body.totalPrice,
-  //   });
 
   res
     .status(201)
@@ -65,14 +53,33 @@ const payment = asyncHandler(async (req, res, next) => {
     );
   order.isPaid = true;
   order.paidAt = Date.now();
-  // order.payment = {
-  //     paymentMethod: 'paypal',
-  //     paymentResult: {
-  //       payerID: req.body.payerID,
-  //       orderID: req.body.orderID,
-  //       paymentID: req.body.paymentID
-  //     }
-  //   }
+  order.paymentResult = {
+    id: req.body.id,
+    status: req.body.status,
+    update_time: req.body.update_time,
+    email_address: req.body.payer.email_address,
+  }
+  await order.save();
+
+  const updatedorder = await Order.findById(req.params.orderId);
+
+  res
+    .status(201)
+    .send({ status: "success", message: "Order Paid.", data: updatedorder });
+});
+
+const deliverOrder = asyncHandler(async (req, res, next) => {
+  const order = await Order.findById(req.params.orderId);
+
+  if (!order)
+    throw createError(
+      404,
+      `Order is not found with id of ${req.params.orderId}`
+    );
+    
+  order.isDelivered = true
+  order.deliveredAt = Date.now()
+
   await order.save();
 
   const updatedorder = await Order.findById(req.params.orderId);
@@ -143,4 +150,6 @@ module.exports = {
   updateOrder,
   deleteOrder,
   payment,
+  deliverOrder
 };
+

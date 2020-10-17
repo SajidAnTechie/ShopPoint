@@ -43,6 +43,7 @@ const orderItemSchema = new mongoose.Schema({
     type: String,
     required: [true, "Please add a product price"],
   },
+ 
   productId: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "Product",
@@ -80,6 +81,12 @@ const OrderSchema = new mongoose.Schema({
   isDelivered: {
     type: Boolean,
     default: false,
+  },
+  paymentResult: {
+    id: { type: String },
+    status: { type: String },
+    update_time: { type: String },
+    email_address: { type: String },
   },
   deliveredAt: {
     type: Date,

@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { Form } from 'react-bootstrap'
-import { useDispatch, useSelector } from 'react-redux'
+import { useDispatch } from 'react-redux'
 import FormContainer from "../Components/FormContainer/FormContainer"
 import CheckoutSteps from "../Components/CheckoutStep/CheckoutSteps"
 import { savePaymentMethod } from "../Actions/cartAction"
@@ -33,21 +33,7 @@ const PaymentMethod = ({history})=>{
                 <FormControlLabel value="PayPal" control={<Radio color="primary" />} label="PayPal or Credit Card" />
             </RadioGroup>
         </FormControl>
-          {/* <Form.Group>
-            <Form.Label as='legend'></Form.Label>
-            <Col>
-              <Form.Check
-                type='radio'
-                label=''
-                id='PayPal'
-                name='paymentMethod'
-                value='PayPal'
-                checked
-                onChange={(e) => setPaymentMethod(e.target.value)}
-              ></Form.Check>
-            </Col>
-          </Form.Group> */}
-  
+
         <Button type="submit" variant="contained" color="primary" fullWidth>
             Continue
         </Button>

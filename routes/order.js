@@ -6,6 +6,7 @@ const {
   updateOrder,
   deleteOrder,
   payment,
+  deliverOrder,
 } = require("../controller/order");
 
 //Invoked middleware.
@@ -25,5 +26,6 @@ router.route("/authOrders").get(authOrder);
 router.route("/:orderId").get(getOrder).put(updateOrder).delete(deleteOrder);
 
 router.route("/:orderId/pay").post(payment);
+router.route("/:orderId/deliver").post(deliverOrder);
 
 module.exports = router;
