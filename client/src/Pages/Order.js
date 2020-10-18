@@ -2,8 +2,9 @@ import React, { useState, useEffect } from 'react'
 import axios from 'axios'
 import { PayPalButton } from 'react-paypal-button-v2'
 import { Link } from 'react-router-dom'
-import { Row, Col, ListGroup, Image, Card, Button } from 'react-bootstrap'
+import { Row, Col, ListGroup, Image, Card } from 'react-bootstrap'
 import { useDispatch, useSelector } from 'react-redux'
+import { Button } from "@material-ui/core/";
 import ErrorMessage from "../Components/Message/errorMessage";
 import Message from "../Components/InfoMessage/Message";
 import Loader from "../Components/Loader/Loader";
@@ -17,7 +18,7 @@ import {
   ORDER_DELIVER_RESET,
 } from "../Constants/orderConstants"
 
-const Order = ({ match, history }) => {
+const Order = ({ match }) => {
     const orderId = match.params.orderId
   
     const [sdkReady, setSdkReady] = useState(false)
@@ -51,11 +52,7 @@ const Order = ({ match, history }) => {
         document.body.appendChild(script)
       }
 
-      if (!order || successPay || successDeliver) {
-        dispatch({ type: ORDER_PAY_RESET })
-        dispatch({ type: ORDER_DELIVER_RESET })
-        dispatch(getOrder(orderId,initialLoading))
-      } else if (!order.isPaid) {
+       if (order && !order.isPaid) {
         if (!window.paypal) {
           addPayPalScript()
         } else {
@@ -64,6 +61,14 @@ const Order = ({ match, history }) => {
       }
       // eslint-disable-next-line
     }, [dispatch, orderId, successPay, successDeliver,order])
+
+    useEffect(() => {
+      
+      dispatch({ type: ORDER_PAY_RESET })
+      dispatch({ type: ORDER_DELIVER_RESET })
+      dispatch(getOrder(orderId,initialLoading))       
+      // eslint-disable-next-line
+    }, [dispatch, successPay,successDeliver]);
 
     useEffect(() => {
         if (success && initialLoading) {
@@ -81,7 +86,7 @@ const Order = ({ match, history }) => {
     }
   
     return loading ? (
-      <h2>Loading...</h2>
+      <h4>Loading...</h4>
     ) : error ? (
          <ErrorMessage header="Something went wrong" message={error}/>
     ) : (
@@ -215,11 +220,9 @@ const Order = ({ match, history }) => {
                   order.isPaid &&
                   !order.isDelivered && (
                     <ListGroup.Item>
-                      <Button
-                        type='button'
-                        className='btn btn-block'
-                        onClick={deliverHandler}
-                      >
+                      <Button type="submit" variant="contained" color="primary" 
+                        fullWidth 
+                        onClick={deliverHandler}>
                         Mark As Delivered
                       </Button>
                     </ListGroup.Item>

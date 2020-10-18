@@ -7,10 +7,12 @@ import Product from "./Pages/Product";
 import Login from "./Pages/Login";
 import Cart from "./Pages/Cart";
 import PrivateRoute from "./routes/PrivateRoute"
+import AdminRoute from "./routes/AdminRoute"
 import Shipping from "./Pages/Shipping";
 import Payment from "./Pages/Payment";
 import Profile from "./Pages/Profile";
 import PlaceOrder from "./Pages/PlaceOrder";
+import OrderList from "./Pages/OrdersList";
 import Order from "./Pages/Order";
 import Logout from "./Pages/Logout";
 import Register from "./Pages/Register";
@@ -36,6 +38,7 @@ function App() {
             <PrivateRoute exact={true} path="/placeOrder" component={PlaceOrder}/>
             <PrivateRoute exact={true} path="/order/:orderId" component={Order}/>
             <PrivateRoute exact={true} path="/profile" component={Profile}/>
+            <AdminRoute exact={true} path="/admin/orderList" component={OrderList}/>
             <Route exact={true} path="/register" component={Register} />
             <Route exact={true} path="/EmailVerification" component={EmailVerification} />
             <Route exact={true} path="/logout" component={Logout} />

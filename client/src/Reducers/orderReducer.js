@@ -105,3 +105,24 @@ export const authOrders = (state = { orders:[] }, action) => {
       return state
   }
 }
+
+export const listOrders = (state = { orders:[] }, action) => {
+  switch (action.type) {
+    case orderConstants.ORDERLIST_FETCH_START:
+      return {
+        loading: true,
+      }
+    case orderConstants.ORDERLIST_FETCH_SUCCESS:
+      return {
+        success: true,
+        orders:action.payload.data,
+        count:action.payload.totalOrders
+      }
+    case orderConstants.ORDERLIST_FETCH_FAIL:
+      return {
+        error: action.payload,
+      }
+    default:
+      return state
+  }
+}

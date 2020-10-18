@@ -18,7 +18,6 @@ const { orders,loading,error } = authOrders
 
 useEffect(() => {
     dispatch(authOrder())
-
     // eslint-disable-next-line
 }, [dispatch, userInfo])
 
@@ -48,7 +47,7 @@ return(
                     <Row>
                         <Col>Account:</Col>
                         <Col>
-                            <strong>{userInfo.verify?"Verified":"Not Verified"}</strong>
+                            <strong>{userInfo.verify ? "Verified":"Not Verified"}</strong>
                         </Col>
                     </Row>
                 </ListGroup.Item>

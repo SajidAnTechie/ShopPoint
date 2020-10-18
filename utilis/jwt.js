@@ -6,7 +6,7 @@ const verifyToken = (token, secret) => {
     return jwt.verify(token, secret);
   } catch (error) {
     if (error.name === "TokenExpiredError")
-      throw createError(410, "Token is expired. Please Login");
+      throw createError(401, "Token is expired. Please Login");
 
     throw error;
   }

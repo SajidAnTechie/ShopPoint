@@ -207,3 +207,48 @@ export const authOrder = () => async (dispatch, getState) => {
     })
   }
 }
+
+
+export const listOrders = () => async (dispatch, getState) => {
+  try {
+    dispatch({
+      type: orderConstants.ORDERLIST_FETCH_START,
+    })
+
+    const {
+      userLogin: { userInfo },
+    } = getState()
+
+    const config = {
+      headers: {
+        Authorization: `Bearer ${userInfo.token}`,
+      },
+    }
+
+    await axios.get(
+      `/api/v1/order/`,
+      config
+    ).then((resp)=>{
+
+      const data = resp.data.results;
+      const totalOrders = resp.data.count;
+
+      dispatch({
+        type: orderConstants.ORDERLIST_FETCH_SUCCESS,
+        payload: {
+          data,
+          totalOrders
+        },
+      })
+    })
+ 
+  } catch (error) {
+    dispatch({
+      type: orderConstants.ORDERLIST_FETCH_FAIL,
+      payload:
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message,
+    })
+  }
+}
