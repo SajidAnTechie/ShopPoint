@@ -6,8 +6,8 @@ import Home from "./Pages/Home";
 import Product from "./Pages/Product";
 import Login from "./Pages/Login";
 import Cart from "./Pages/Cart";
-import PrivateRoute from "./routes/PrivateRoute"
-import AdminRoute from "./routes/AdminRoute"
+import PrivateRoute from "./routes/PrivateRoute";
+import AdminRoute from "./routes/AdminRoute";
 import Shipping from "./Pages/Shipping";
 import Payment from "./Pages/Payment";
 import Profile from "./Pages/Profile";
@@ -33,14 +33,30 @@ function App() {
             />
             <Route exact={true} path="/login" component={Login} />
             <Route exact={true} path="/cart" component={Cart} />
-            <PrivateRoute exact={true} path="/shipping" component={Shipping}/>
-            <PrivateRoute exact={true} path="/payment" component={Payment}/>
-            <PrivateRoute exact={true} path="/placeOrder" component={PlaceOrder}/>
-            <PrivateRoute exact={true} path="/order/:orderId" component={Order}/>
-            <PrivateRoute exact={true} path="/profile" component={Profile}/>
-            <AdminRoute exact={true} path="/admin/orderList" component={OrderList}/>
+            <PrivateRoute exact={true} path="/shipping" component={Shipping} />
+            <PrivateRoute exact={true} path="/payment" component={Payment} />
+            <PrivateRoute
+              exact={true}
+              path="/placeOrder"
+              component={PlaceOrder}
+            />
+            <PrivateRoute
+              exact={true}
+              path="/order/:orderId"
+              component={Order}
+            />
+            <PrivateRoute exact={true} path="/profile" component={Profile} />
+            <AdminRoute
+              exact={true}
+              path="/admin/orderList"
+              component={OrderList}
+            />
             <Route exact={true} path="/register" component={Register} />
-            <Route exact={true} path="/EmailVerification" component={EmailVerification} />
+            <Route
+              exact={true}
+              path="/EmailVerification"
+              component={EmailVerification}
+            />
             <Route exact={true} path="/logout" component={Logout} />
           </Switch>
         </Container>

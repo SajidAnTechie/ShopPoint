@@ -16,7 +16,7 @@ export const userLogin = (state = {}, action) => {
         error: action.payload,
       };
     case userConstants.RESET:
-        return {};
+      return {};
 
     default:
       return state;
@@ -39,7 +39,7 @@ export const userRegister = (state = {}, action) => {
         error: action.payload,
       };
     case userConstants.USER_REGISTER_RESET:
-        return {};
+      return {};
 
     default:
       return state;

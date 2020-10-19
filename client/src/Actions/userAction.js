@@ -36,12 +36,12 @@ export const auth = (email, password) => async (dispatch) => {
   }
 };
 
-export const Logout =()=> (dispatch)=>{
-  localStorage.removeItem("userInfo")
-  dispatch({type:userConstants.RESET}) 
-}
+export const Logout = () => (dispatch) => {
+  localStorage.removeItem("userInfo");
+  dispatch({ type: userConstants.RESET });
+};
 
-export const Register = (name,email, password) => async (dispatch) => {
+export const Register = (name, email, password) => async (dispatch) => {
   try {
     dispatch({ type: userConstants.USER_REGISTER_START });
 
@@ -56,7 +56,7 @@ export const Register = (name,email, password) => async (dispatch) => {
 
       dispatch({
         type: userConstants.USER_REGISTER_SUCCESS,
-        payload:consfirmMessage,
+        payload: consfirmMessage,
       });
     });
   } catch (error) {

@@ -9,48 +9,62 @@ import { TextField, Button, CircularProgress } from "@material-ui/core/";
 import * as userAction from "../Actions/userAction";
 import * as userConstants from "../Constants/userConstants";
 
-const Register = ({location,history})=>{
+const Register = ({ location, history }) => {
+  const [name, setName] = useState("");
+  const [verificationMessage, setVerificationMessage] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
 
-    const [name, setName] = useState("");
-    const [verificationMessage, setVerificationMessage] = useState("");
-    const [email, setEmail] = useState("");
-    const [password, setPassword] = useState("");
-    const [confirmPassword, setConfirmPassword] = useState("");
+  const userRegisterData = useSelector((state) => state.userRegister);
 
-    const userRegisterData = useSelector((state) => state.userRegister);
+  const { error, loading, message, success } = userRegisterData;
 
-    const { error, loading,message,success } = userRegisterData;
+  const dispatch = useDispatch();
 
-    const dispatch = useDispatch()
+  const redirect = location.search ? location.search.split("=")[1] : "/";
 
-    const redirect = location.search ? location.search.split("=")[1] : "/";
-
-    useEffect(()=>{
-      if(success){
-        setTimeout(()=>{
-          const redirectUrl = redirect ? `/EmailVerification?redirect=${redirect}` : '/EmailVerification'
-          history.push(redirectUrl)
-        },5000)
-        
-      }
-    },[success,history,redirect])
-
-    const handleSubmit= (e)=>{
-      e.preventDefault()
-      setVerificationMessage("")
-      if (password !== confirmPassword) {
-       return setVerificationMessage('Passwords do not match')
-      }
-      dispatch(userAction.Register(name,email,password))
+  useEffect(() => {
+    if (success) {
+      setTimeout(() => {
+        const redirectUrl = redirect
+          ? `/EmailVerification?redirect=${redirect}`
+          : "/EmailVerification";
+        history.push(redirectUrl);
+      }, 5000);
     }
+  }, [success, history, redirect]);
 
-return(
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    setVerificationMessage("");
+    if (password !== confirmPassword) {
+      return setVerificationMessage("Passwords do not match");
+    }
+    dispatch(userAction.Register(name, email, password));
+  };
+
+  return (
     <FormContainer>
-    <h1>Sign Up</h1>
-    {error && <ErrorMessage header="Auth Error" message={error} reset={userConstants.USER_REGISTER_RESET} />}
-    {verificationMessage !=="" && <ErrorMessage header="Auth Error" message={verificationMessage} />}
-    {success && <SuccessMessage header="Auth Error" message={message} reset={userConstants.USER_REGISTER_RESET} />}
-    <Form onSubmit={handleSubmit}>
+      <h1>Sign Up</h1>
+      {error && (
+        <ErrorMessage
+          header="Auth Error"
+          message={error}
+          reset={userConstants.USER_REGISTER_RESET}
+        />
+      )}
+      {verificationMessage !== "" && (
+        <ErrorMessage header="Auth Error" message={verificationMessage} />
+      )}
+      {success && (
+        <SuccessMessage
+          header="Auth Error"
+          message={message}
+          reset={userConstants.USER_REGISTER_RESET}
+        />
+      )}
+      <Form onSubmit={handleSubmit}>
         <TextField
           variant="outlined"
           type="text"
@@ -112,22 +126,27 @@ return(
           onChange={(e) => setConfirmPassword(e.target.value)}
         />
 
-        <Button type="submit" variant="contained" color="primary" fullWidth onClick={handleSubmit}>
+        <Button
+          type="submit"
+          variant="contained"
+          color="primary"
+          fullWidth
+          onClick={handleSubmit}
+        >
           {loading ? <CircularProgress color="inherit" /> : <>Register</>}
         </Button>
-    </Form>
+      </Form>
 
-    <Row className='py-3'>
-      <Col>
-        Have an Account?{' '}
-        <Link to={redirect ? `/login?redirect=${redirect}` : '/login'}>
-          Login
-        </Link>
-      </Col>
-    </Row>
-  </FormContainer>
-)
-
-}
+      <Row className="py-3">
+        <Col>
+          Have an Account?{" "}
+          <Link to={redirect ? `/login?redirect=${redirect}` : "/login"}>
+            Login
+          </Link>
+        </Col>
+      </Row>
+    </FormContainer>
+  );
+};
 
 export default Register;

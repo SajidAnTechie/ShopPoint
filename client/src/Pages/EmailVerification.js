@@ -7,8 +7,7 @@ import { TextField, Button, CircularProgress } from "@material-ui/core/";
 import * as userAction from "../Actions/userAction";
 import * as userConstants from "../Constants/userConstants";
 
-const EmailVerification = ({location, history})=>{
-
+const EmailVerification = ({ location, history }) => {
   const [verificationCode, setVerificationCode] = useState("");
 
   const userAuthData = useSelector((state) => state.userLogin);
@@ -23,41 +22,52 @@ const EmailVerification = ({location, history})=>{
     if (userInfo) {
       history.push(redirect);
     }
-  }, [dispatch, userInfo, redirect,history]);
+  }, [dispatch, userInfo, redirect, history]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
     dispatch(userAction.emailVerification(verificationCode));
   };
 
-  
-return(
-  <>
-   {error && <ErrorMessage header="Auth Error" message={error} reset={userConstants.RESET} />}
-    <FormContainer>
-    <h1>Email Verification</h1>
-    <Form>
-        <TextField
-          variant="outlined"
-          type="text"
-          margin="normal"
-          required
-          fullWidth
-          id="code"
-          label="Verification Code"
-          name="code"
-          autoComplete="code"
-          autoFocus
-          value={verificationCode}
-          onChange={(e) => setVerificationCode(e.target.value)}
+  return (
+    <>
+      {error && (
+        <ErrorMessage
+          header="Auth Error"
+          message={error}
+          reset={userConstants.RESET}
         />
-        <Button type="submit" variant="contained" color="primary" fullWidth onClick={handleSubmit}>
-          {loading ? <CircularProgress color="inherit" /> : <>Verify</>}
-        </Button>
-    </Form>
-  </FormContainer>
-  </>
-)
-}
+      )}
+      <FormContainer>
+        <h1>Email Verification</h1>
+        <Form>
+          <TextField
+            variant="outlined"
+            type="text"
+            margin="normal"
+            required
+            fullWidth
+            id="code"
+            label="Verification Code"
+            name="code"
+            autoComplete="code"
+            autoFocus
+            value={verificationCode}
+            onChange={(e) => setVerificationCode(e.target.value)}
+          />
+          <Button
+            type="submit"
+            variant="contained"
+            color="primary"
+            fullWidth
+            onClick={handleSubmit}
+          >
+            {loading ? <CircularProgress color="inherit" /> : <>Verify</>}
+          </Button>
+        </Form>
+      </FormContainer>
+    </>
+  );
+};
 
 export default EmailVerification;

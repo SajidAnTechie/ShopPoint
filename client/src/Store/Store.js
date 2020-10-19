@@ -7,55 +7,54 @@ import {
   createReview,
 } from "../Reducers/productReducer";
 
-import { userLogin,userRegister } from "../Reducers/userReducer";
+import { userLogin, userRegister } from "../Reducers/userReducer";
 import { cartReducer } from "../Reducers/cartReducer";
-import { 
+import {
   createOrderReducer,
   getOrder,
   orderPayReducer,
   orderDeliverReducer,
   authOrders,
-  listOrders 
+  listOrders,
 } from "../Reducers/orderReducer";
-
 
 const rootReducer = combineReducers({
   productList: listProducts,
   Product: Product,
   productReview: productReview,
   userLogin: userLogin,
-  userRegister:userRegister,
-  createReview:createReview,
-  cart:cartReducer,
-  createOrder:createOrderReducer,
-  orderDetails:getOrder,
+  userRegister: userRegister,
+  createReview: createReview,
+  cart: cartReducer,
+  createOrder: createOrderReducer,
+  orderDetails: getOrder,
   orderPay: orderPayReducer,
-  orderDeliver:orderDeliverReducer,
-  authOrders:authOrders,
-  orderList:listOrders,
+  orderDeliver: orderDeliverReducer,
+  authOrders: authOrders,
+  orderList: listOrders,
 });
 
-const cartItemsFromStorage = localStorage.getItem('cartItems')
-  ? JSON.parse(localStorage.getItem('cartItems'))
-  : []
+const cartItemsFromStorage = localStorage.getItem("cartItems")
+  ? JSON.parse(localStorage.getItem("cartItems"))
+  : [];
 
-const shippingAddressFromStorage = localStorage.getItem('shippingAddress')
-  ? JSON.parse(localStorage.getItem('shippingAddress'))
-  : {}
+const shippingAddressFromStorage = localStorage.getItem("shippingAddress")
+  ? JSON.parse(localStorage.getItem("shippingAddress"))
+  : {};
 
-const paymentMethodAddressFromStorage = localStorage.getItem('paymentMethod')
-  ? JSON.parse(localStorage.getItem('paymentMethod'))
-  : ""
+const paymentMethodAddressFromStorage = localStorage.getItem("paymentMethod")
+  ? JSON.parse(localStorage.getItem("paymentMethod"))
+  : "";
 
 const userInfoFromStorage = localStorage.getItem("userInfo")
   ? JSON.parse(localStorage.getItem("userInfo"))
   : null;
 
 const initialState = {
-  cart:{
-    cartItems:cartItemsFromStorage,
-    shippingAddress:shippingAddressFromStorage,
-    paymentMethod:paymentMethodAddressFromStorage
+  cart: {
+    cartItems: cartItemsFromStorage,
+    shippingAddress: shippingAddressFromStorage,
+    paymentMethod: paymentMethodAddressFromStorage,
   },
   userLogin: { userInfo: userInfoFromStorage },
 };

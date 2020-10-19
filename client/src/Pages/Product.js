@@ -40,7 +40,7 @@ const ProductDetails = ({ match, history }) => {
   const productData = useSelector((state) => state.Product);
   const reviewResponses = useSelector((state) => state.createReview);
 
-  const {error:createReviewError} = reviewResponses
+  const { error: createReviewError } = reviewResponses;
 
   const { loading, product, error, success } = productData;
   const classes = useStyles();
@@ -60,15 +60,18 @@ const ProductDetails = ({ match, history }) => {
   }, [dispatch, success]);
 
   const addToCartHandler = () => {
-    
-    dispatch(addToCart(match.params.productId,qty))
+    dispatch(addToCart(match.params.productId, qty));
     history.push("/cart");
   };
 
   return (
     <>
-     {createReviewError && (
-        <ErrorMessage header="Opps!!!" message={createReviewError} reset={productConstants.CREATE_REVIEW_RESET} />
+      {createReviewError && (
+        <ErrorMessage
+          header="Opps!!!"
+          message={createReviewError}
+          reset={productConstants.CREATE_REVIEW_RESET}
+        />
       )}
       <Link className="btn btn-light my-3" to="/">
         Go Back

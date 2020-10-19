@@ -24,7 +24,7 @@ const Login = ({ location, history }) => {
     if (userInfo) {
       history.push(redirect);
     }
-  }, [dispatch, userInfo, redirect,history]);
+  }, [dispatch, userInfo, redirect, history]);
 
   const submitHandler = (e) => {
     e.preventDefault();
@@ -33,56 +33,64 @@ const Login = ({ location, history }) => {
 
   return (
     <>
-     {error && <ErrorMessage header="Auth Error" message={error} reset={userConstants.RESET} />}
-    <FormContainer>
-      <h1>Sign In</h1>
-     
-      <Form onSubmit={submitHandler}>
-        <TextField
-          variant="outlined"
-          type="email"
-          margin="normal"
-          placeholder="ex:- JohnDoe@gmail.com"
-          required
-          fullWidth
-          id="email"
-          label="Email Address"
-          name="email"
-          autoComplete="email"
-          autoFocus
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
+      {error && (
+        <ErrorMessage
+          header="Auth Error"
+          message={error}
+          reset={userConstants.RESET}
         />
+      )}
+      <FormContainer>
+        <h1>Sign In</h1>
 
-        <TextField
-          variant="outlined"
-          margin="normal"
-          type="password"
-          placeholder="***********"
-          required
-          fullWidth
-          name="password"
-          label="Password"
-          id="password"
-          value={password}
-          autoComplete="current-password"
-          onChange={(e) => setPassword(e.target.value)}
-        />
+        <Form onSubmit={submitHandler}>
+          <TextField
+            variant="outlined"
+            type="email"
+            margin="normal"
+            placeholder="ex:- JohnDoe@gmail.com"
+            required
+            fullWidth
+            id="email"
+            label="Email Address"
+            name="email"
+            autoComplete="email"
+            autoFocus
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+          />
 
-        <Button type="submit" variant="contained" color="primary" fullWidth>
-          {loading ? <CircularProgress color="inherit" /> : <>Sign In</>}
-        </Button>
-      </Form>
+          <TextField
+            variant="outlined"
+            margin="normal"
+            type="password"
+            placeholder="***********"
+            required
+            fullWidth
+            name="password"
+            label="Password"
+            id="password"
+            value={password}
+            autoComplete="current-password"
+            onChange={(e) => setPassword(e.target.value)}
+          />
 
-      <Row className="py-3">
-        <Col>
-          New Customer? 
-          <Link to={redirect ? `/register?redirect=${redirect}` : "/register"}>
-            Register
-          </Link>
-        </Col>
-      </Row>
-    </FormContainer>
+          <Button type="submit" variant="contained" color="primary" fullWidth>
+            {loading ? <CircularProgress color="inherit" /> : <>Sign In</>}
+          </Button>
+        </Form>
+
+        <Row className="py-3">
+          <Col>
+            New Customer?
+            <Link
+              to={redirect ? `/register?redirect=${redirect}` : "/register"}
+            >
+              Register
+            </Link>
+          </Col>
+        </Row>
+      </FormContainer>
     </>
   );
 };

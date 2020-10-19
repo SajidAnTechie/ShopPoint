@@ -1,33 +1,30 @@
-import React, {useEffect } from 'react'
-import { Table, Button, } from 'react-bootstrap'
-import { LinkContainer } from 'react-router-bootstrap'
-import { useDispatch, useSelector } from 'react-redux'
+import React, { useEffect } from "react";
+import { Table, Button } from "react-bootstrap";
+import { LinkContainer } from "react-router-bootstrap";
+import { useDispatch, useSelector } from "react-redux";
 import ErrorMessage from "../Components/Message/errorMessage";
-import {
-    listOrders
-  } from "../Actions/orderAction"
+import { listOrders } from "../Actions/orderAction";
 
-const OrderList = ()=>{
+const OrderList = () => {
+  const orderList = useSelector((state) => state.orderList);
+  const { orders, loading, error, count } = orderList;
 
-    const orderList = useSelector((state) => state.orderList)
-    const { orders, loading, error } = orderList
+  const dispatch = useDispatch();
 
-    const dispatch = useDispatch()
+  useEffect(() => {
+    dispatch(listOrders());
+    // eslint-disable-next-line
+  }, [dispatch]);
 
-    useEffect(() => {
-        dispatch(listOrders())
-        // eslint-disable-next-line
-      }, [dispatch]);
-
-    return(
-        <>
-        <h1>Orders</h1>
+  return (
+    <>
+      <h1>Orders({count})</h1>
       {loading ? (
-          <h4>Loading...</h4>
+        <h4>Loading...</h4>
       ) : error ? (
-        <ErrorMessage header="Something went wrong" message={error}/>
+        <ErrorMessage header="Something went wrong" message={error} />
       ) : (
-        <Table striped bordered hover responsive className='table-sm'>
+        <Table striped bordered hover responsive className="table-sm">
           <thead>
             <tr>
               <th>ID</th>
@@ -50,19 +47,19 @@ const OrderList = ()=>{
                   {order.isPaid ? (
                     order.paidAt.substring(0, 10)
                   ) : (
-                    <i className='fas fa-times' style={{ color: 'red' }}></i>
+                    <i className="fas fa-times" style={{ color: "red" }}></i>
                   )}
                 </td>
                 <td>
                   {order.isDelivered ? (
                     order.deliveredAt.substring(0, 10)
                   ) : (
-                    <i className='fas fa-times' style={{ color: 'red' }}></i>
+                    <i className="fas fa-times" style={{ color: "red" }}></i>
                   )}
                 </td>
                 <td>
                   <LinkContainer to={`/order/${order._id}`}>
-                    <Button variant='light' className='btn-sm'>
+                    <Button variant="light" className="btn-sm">
                       Details
                     </Button>
                   </LinkContainer>
@@ -73,7 +70,7 @@ const OrderList = ()=>{
         </Table>
       )}
     </>
-    )
-}
+  );
+};
 
-export default OrderList
+export default OrderList;

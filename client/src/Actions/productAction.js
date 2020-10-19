@@ -94,30 +94,35 @@ export const productReview = (id, initialLoading) => async (dispatch) => {
   }
 };
 
-export const createReview = (id,title,text,rating) => async (dispatch,getState) => {
+export const createReview = (id, title, text, rating) => async (
+  dispatch,
+  getState
+) => {
   try {
-   
-      dispatch({ type: productConstants.CREATE_REVIEW_START });
+    dispatch({ type: productConstants.CREATE_REVIEW_START });
 
-      const {
-        userLogin: { userInfo },
-      } = getState()
+    const {
+      userLogin: { userInfo },
+    } = getState();
 
-      const config = {
-        headers: {
-          Authorization: `Bearer ${userInfo.token}`,
-        },
-      }
-    
-      const data = {
-        title,text,rating
-      }
-    await axios.post(`/api/v1/product/${id}/reviews`,data,config).then((resp) => {
-    
-      dispatch({
-        type: productConstants.CREATE_REVIEW_SUCCESS,
+    const config = {
+      headers: {
+        Authorization: `Bearer ${userInfo.token}`,
+      },
+    };
+
+    const data = {
+      title,
+      text,
+      rating,
+    };
+    await axios
+      .post(`/api/v1/product/${id}/reviews`, data, config)
+      .then((resp) => {
+        dispatch({
+          type: productConstants.CREATE_REVIEW_SUCCESS,
+        });
       });
-    });
   } catch (error) {
     dispatch({
       type: productConstants.CREATE_REVIEW_FAIL,

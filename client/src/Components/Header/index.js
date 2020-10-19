@@ -1,14 +1,14 @@
 import React from "react";
 import { Navbar, Nav, Container, NavDropdown } from "react-bootstrap";
 import { LinkContainer } from "react-router-bootstrap";
-import { useSelector } from 'react-redux'
+import { useSelector } from "react-redux";
 import SearchBox from "../SearchBox/SearchBox";
 import "../style.css";
 const Header = () => {
   const userAuthData = useSelector((state) => state.userLogin);
-  const cart = useSelector((state) => state.cart)
+  const cart = useSelector((state) => state.cart);
 
-  const { cartItems } = cart  
+  const { cartItems } = cart;
 
   const { userInfo } = userAuthData;
 
@@ -26,9 +26,11 @@ const Header = () => {
               <LinkContainer to="/cart">
                 <Nav.Link>
                   <i className="fas fa-shopping-cart"></i>{" "}
-                  {cartItems.length>0 &&
-                    <span className="cart">{ cartItems.reduce((acc, item) => acc + item.qty, 0)}</span>
-                  }
+                  {cartItems.length > 0 && (
+                    <span className="cart">
+                      {cartItems.reduce((acc, item) => acc + item.qty, 0)}
+                    </span>
+                  )}
                 </Nav.Link>
               </LinkContainer>
 
@@ -40,7 +42,6 @@ const Header = () => {
                   <LinkContainer to="/logout">
                     <NavDropdown.Item>Logout</NavDropdown.Item>
                   </LinkContainer>
-                 
                 </NavDropdown>
               ) : (
                 <LinkContainer to="/login">

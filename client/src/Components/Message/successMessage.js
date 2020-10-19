@@ -1,19 +1,19 @@
 import React, { useState } from "react";
 import { Toast } from "react-bootstrap";
-import {useDispatch} from "react-redux"
+import { useDispatch } from "react-redux";
 import "animate.css";
 
-const SuccessMessage = ({ header, message,reset }) => {
+const SuccessMessage = ({ header, message, reset }) => {
   const [show, setShow] = useState(true);
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
 
   return (
     <>
       <div style={{ position: "fixed", right: "0", zIndex: "20180210" }}>
         <Toast
           onClose={() => {
-            setShow(false)
-            dispatch({type:reset})
+            setShow(false);
+            dispatch({ type: reset });
           }}
           show={show}
           delay={3000}
