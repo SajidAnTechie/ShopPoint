@@ -41,6 +41,30 @@ export const listProducts = (
   }
 };
 
+export const listProductsForAdmin = () => async (dispatch) => {
+  try {
+    dispatch({ type: productConstants.PRODUCTLIST_FETCH_START });
+
+    await axios.get(`/api/v1/product/`).then((resp) => {
+      const productList = resp.data.data.results;
+      const totalProduct = resp.data.data.count;
+
+      dispatch({
+        type: productConstants.PRODUCTLIST_FETCH_SUCCESS,
+        payload: { productList, totalProduct },
+      });
+    });
+  } catch (error) {
+    dispatch({
+      type: productConstants.PRODUCTLIST_FETCH_ERROR,
+      payload:
+        error.response && error.response.data.error
+          ? error.response.data.error
+          : error.message,
+    });
+  }
+};
+
 export const product = (id, initialLoading) => async (dispatch) => {
   try {
     if (initialLoading) {
@@ -126,6 +150,29 @@ export const createReview = (id, title, text, rating) => async (
   } catch (error) {
     dispatch({
       type: productConstants.CREATE_REVIEW_FAIL,
+      payload:
+        error.response && error.response.data.error
+          ? error.response.data.error
+          : error.message,
+    });
+  }
+};
+
+export const deleteProduct = (id) => async (dispatch) => {
+  try {
+    dispatch({ type: productConstants.DELETE_PRODUCT_START });
+
+    await axios.delete(`/api/v1/product/${id}`).then((resp) => {
+      const message = resp.data.message;
+
+      dispatch({
+        type: productConstants.DELETE_PRODUCT_SUCCESS,
+        payload: message,
+      });
+    });
+  } catch (error) {
+    dispatch({
+      type: productConstants.DELETE_PRODUCT_FAIL,
       payload:
         error.response && error.response.data.error
           ? error.response.data.error

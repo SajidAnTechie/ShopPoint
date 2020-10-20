@@ -59,7 +59,7 @@ const Register = ({ location, history }) => {
       )}
       {success && (
         <SuccessMessage
-          header="Auth Error"
+          header="Register SuccessFully"
           message={message}
           reset={userConstants.USER_REGISTER_RESET}
         />

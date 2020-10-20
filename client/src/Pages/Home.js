@@ -16,9 +16,9 @@ const Home = () => {
 
   const [initialLoading, setInitialLoading] = useState(true);
 
-  const productData = useSelector((state) => state.productList);
+  const productList = useSelector((state) => state.productList);
 
-  const { loading, products, count, error, success } = productData;
+  const { loading, products, count, error, success } = productList;
 
   const queryParams = new URLSearchParams(window.location.search);
   const searchProductKey = queryParams.get("search")

@@ -13,6 +13,7 @@ import Payment from "./Pages/Payment";
 import Profile from "./Pages/Profile";
 import PlaceOrder from "./Pages/PlaceOrder";
 import OrderList from "./Pages/OrdersList";
+import ProductList from "./Pages/ProductList";
 import Order from "./Pages/Order";
 import Logout from "./Pages/Logout";
 import Register from "./Pages/Register";
@@ -50,6 +51,11 @@ function App() {
               exact={true}
               path="/admin/orderList"
               component={OrderList}
+            />
+            <AdminRoute
+              exact={true}
+              path="/admin/productList"
+              component={ProductList}
             />
             <Route exact={true} path="/register" component={Register} />
             <Route

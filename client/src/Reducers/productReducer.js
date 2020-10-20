@@ -89,3 +89,27 @@ export const createReview = (state = {}, action) => {
       return state;
   }
 };
+
+export const deleteProduct = (state = {}, action) => {
+  switch (action.type) {
+    case productConstants.DELETE_PRODUCT_START:
+      return {
+        loading: true,
+      };
+    case productConstants.DELETE_PRODUCT_SUCCESS:
+      return {
+        success: true,
+        message: action.payload,
+      };
+    case productConstants.DELETE_PRODUCT_FAIL:
+      return {
+        error: action.payload,
+      };
+
+    case productConstants.DELETE_PRODUCT_RESET:
+      return {};
+
+    default:
+      return state;
+  }
+};
