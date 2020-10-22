@@ -27,7 +27,7 @@ const SuccessMessage = ({ header, message, reset }) => {
               fontWeight: "bold",
             }}
           >
-            <strong className="mr-auto">{header}</strong>s
+            <strong className="mr-auto">{header}</strong>
           </Toast.Header>
           <Toast.Body>{message}</Toast.Body>
         </Toast>

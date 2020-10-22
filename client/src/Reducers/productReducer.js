@@ -99,7 +99,6 @@ export const deleteProduct = (state = {}, action) => {
     case productConstants.DELETE_PRODUCT_SUCCESS:
       return {
         success: true,
-        message: action.payload,
       };
     case productConstants.DELETE_PRODUCT_FAIL:
       return {
@@ -107,6 +106,29 @@ export const deleteProduct = (state = {}, action) => {
       };
 
     case productConstants.DELETE_PRODUCT_RESET:
+      return {};
+
+    default:
+      return state;
+  }
+};
+
+export const createProduct = (state = {}, action) => {
+  switch (action.type) {
+    case productConstants.CREATE_PRODUCT_START:
+      return {
+        loading: true,
+      };
+    case productConstants.CREATE_PRODUCT_SUCCESS:
+      return {
+        success: true,
+      };
+    case productConstants.CREATE_PRODUCT_FAIL:
+      return {
+        error: action.payload,
+      };
+
+    case productConstants.CREATE_PRODUCT_RESET:
       return {};
 
     default:

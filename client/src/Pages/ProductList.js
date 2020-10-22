@@ -1,32 +1,315 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { LinkContainer } from "react-router-bootstrap";
-import { Table, Button, Row, Col } from "react-bootstrap";
+import {
+  Table,
+  Button,
+  Row,
+  Col,
+  Modal,
+  Form,
+  Container,
+} from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import ErrorMessage from "../Components/Message/errorMessage";
 import SuccessMessage from "../Components/Message/successMessage";
-import { Button as MaterialButton } from "@material-ui/core/";
-import { listProductsForAdmin, deleteProduct } from "../Actions/productAction";
+import {
+  Button as MaterialButton,
+  TextField,
+  CircularProgress,
+  FormControl,
+  InputLabel,
+  Select,
+  MenuItem,
+  makeStyles,
+} from "@material-ui/core/";
+import {
+  listProductsForAdmin,
+  deleteProduct,
+  createProduct,
+} from "../Actions/productAction";
 import * as productConstants from "../Constants/productConstants";
 import { confirmAlert } from "react-confirm-alert"; // Import
 import "react-confirm-alert/src/react-confirm-alert.css";
+
+const useStyles = makeStyles((theme) => ({
+  typography: {
+    padding: theme.spacing(2),
+  },
+  formControl: {
+    margin: theme.spacing(1),
+    minWidth: 120,
+  },
+  selectEmpty: {
+    marginTop: theme.spacing(2),
+  },
+}));
 
 const ProductList = () => {
   const dispatch = useDispatch();
 
   const productList = useSelector((state) => state.productList);
-  const { loading, products, count, error } = productList;
+  const { loading, products, count, error, success } = productList;
 
   const deleteProductData = useSelector((state) => state.deleteProduct);
+  const { success: deleteSuccess, error: deleteFail } = deleteProductData;
+
+  const createProductDetails = useSelector(
+    (state) => state.createProductDetails
+  );
   const {
-    success: deleteSuccess,
-    error: deleteFail,
-    message,
-  } = deleteProductData;
+    success: createSuccess,
+    error: createFail,
+    loading: createLoading,
+  } = createProductDetails;
+
+  const classes = useStyles();
+
+  const [name, setName] = useState("");
+  const [productImage, setProductImage] = useState("");
+  const [brand, setBrand] = useState("");
+  const [price, setPrice] = useState("");
+  const [category, setCategory] = useState("");
+  const [countInStock, setCountInStock] = useState(0);
+  const [description, setDescription] = useState("");
+  const [openForm, setOpenForm] = useState(false);
+  const [initialLoading, setInitialLoading] = useState(true);
 
   useEffect(() => {
-    dispatch(listProductsForAdmin());
+    if (createSuccess) {
+      setOpenForm(false);
+      setName("");
+      setProductImage("");
+      setBrand("");
+      setPrice("");
+      setCategory("");
+      setCountInStock("");
+      setDescription("");
+
+      dispatch({ type: productConstants.CREATE_PRODUCT_RESET });
+    }
+    dispatch(listProductsForAdmin(initialLoading));
     // eslint-disable-next-line
-  }, [dispatch, deleteSuccess]);
+  }, [dispatch, deleteSuccess, createSuccess]);
+
+  useEffect(() => {
+    if (success && initialLoading) {
+      setInitialLoading(false);
+    }
+    // eslint-disable-next-line
+  }, [dispatch, success]);
+
+  const cancelCreateProduct = () => {
+    setOpenForm(false);
+  };
+
+  const submitHandler = () => {
+    if (
+      name === "" ||
+      category === "" ||
+      productImage === "" ||
+      description === "" ||
+      brand === "" ||
+      price === "" ||
+      countInStock === ""
+    ) {
+      return;
+    }
+
+    const formData = new FormData();
+
+    formData.append("name", name);
+    formData.append("productImage", productImage);
+    formData.append("brand", brand);
+    formData.append("price", price);
+    formData.append("category", category);
+    formData.append("countInStock", countInStock);
+    formData.append("description", description);
+    dispatch(createProduct(formData));
+  };
+
+  const openNewProductForm = () => {
+    if (openForm) {
+      return (
+        <>
+          <Modal
+            show={openForm}
+            size="lg"
+            aria-labelledby="contained-modal-title-vcenter"
+            centered
+          >
+            <Modal.Header>
+              <Modal.Title id="contained-modal-title-vcenter">
+                Add Product
+              </Modal.Title>
+            </Modal.Header>
+            {createFail && (
+              <ErrorMessage
+                header="Something went wrong"
+                message={createFail}
+                reset={productConstants.CREATE_PRODUCT_RESET}
+              />
+            )}
+            <Modal.Body className="show-grid">
+              <Container>
+                <Form>
+                  <Row>
+                    <Col xs={12} md={6}>
+                      <TextField
+                        variant="outlined"
+                        type="text"
+                        margin="normal"
+                        required
+                        fullWidth
+                        id="name"
+                        label="Name"
+                        name="name"
+                        autoComplete="name"
+                        autoFocus
+                        value={name}
+                        onChange={(e) => setName(e.target.value)}
+                      />
+                    </Col>
+                    <Col xs={6} md={6}>
+                      <TextField
+                        variant="outlined"
+                        type="text"
+                        margin="normal"
+                        required
+                        fullWidth
+                        id="brand"
+                        label="Brand"
+                        name="brand"
+                        autoComplete="brand"
+                        autoFocus
+                        value={brand}
+                        onChange={(e) => setBrand(e.target.value)}
+                      />
+                    </Col>
+                  </Row>
+
+                  <Row>
+                    <Col xs={6} md={6}>
+                      <TextField
+                        variant="outlined"
+                        type="number"
+                        margin="normal"
+                        required
+                        fullWidth
+                        id="price"
+                        label="Price"
+                        name="price"
+                        autoComplete="price"
+                        autoFocus
+                        value={price}
+                        onChange={(e) => setPrice(Number(e.target.value))}
+                      />
+                    </Col>
+                    <Col xs={6} md={6}>
+                      <TextField
+                        variant="outlined"
+                        type="number"
+                        margin="countInStock"
+                        required
+                        fullWidth
+                        id="countInStock"
+                        label="CountInStock"
+                        name="countInStock"
+                        autoComplete="countInStock"
+                        autoFocus
+                        value={countInStock}
+                        onChange={(e) =>
+                          setCountInStock(Number(e.target.value))
+                        }
+                      />
+                    </Col>
+                  </Row>
+                  <Row>
+                    <Col xs={6} md={6}>
+                      <TextField
+                        variant="outlined"
+                        type="textarea"
+                        margin="normal"
+                        required
+                        fullWidth
+                        id="description"
+                        label="Description"
+                        name="description"
+                        autoComplete="description"
+                        autoFocus
+                        value={description}
+                        onChange={(e) => setDescription(e.target.value)}
+                      />
+                    </Col>
+                    <Col xs={6} md={6}>
+                      <TextField
+                        variant="outlined"
+                        type="file"
+                        margin="file"
+                        required
+                        fullWidth
+                        id="file"
+                        name="file"
+                        autoComplete="file"
+                        autoFocus
+                        onChange={(e) => setProductImage(e.target.files[0])}
+                      />
+                    </Col>
+                  </Row>
+                  <Row>
+                    <Col xs={6} md={6}>
+                      <FormControl
+                        variant="outlined"
+                        className={classes.formControl}
+                      >
+                        <InputLabel id="demo-simple-select-outlined-label">
+                          Category
+                        </InputLabel>
+                        <Select
+                          labelId="demo-simple-select-outlined-label"
+                          id="demo-simple-select-outlined"
+                          onChange={(e) => setCategory(e.target.value)}
+                          label="Category"
+                          value={category}
+                        >
+                          <MenuItem value="">
+                            <em>None</em>
+                          </MenuItem>
+                          <MenuItem value="Shirt">T-shirt</MenuItem>
+                          <MenuItem value="Pants">Pant</MenuItem>
+                          <MenuItem value="Vest">Vest</MenuItem>
+                        </Select>
+                      </FormControl>
+                    </Col>
+                  </Row>
+                </Form>
+              </Container>
+            </Modal.Body>
+            <Modal.Footer>
+              <MaterialButton
+                variant="contained"
+                color="primary"
+                onClick={submitHandler}
+                className="mr-2"
+              >
+                {createLoading ? (
+                  <CircularProgress color="inherit" />
+                ) : (
+                  <>Submit</>
+                )}
+              </MaterialButton>{" "}
+              <MaterialButton
+                variant="contained"
+                color="primary"
+                onClick={cancelCreateProduct}
+              >
+                Close
+              </MaterialButton>
+            </Modal.Footer>
+          </Modal>
+        </>
+      );
+    }
+  };
 
   const deleteHandler = (id, e) => {
     e.preventDefault();
@@ -34,17 +317,25 @@ const ProductList = () => {
       customUI: ({ onClose }) => {
         return (
           <div className="custom-ui">
-            <h1>Are you sure?</h1>
+            <h1 className="font-weight-bold text-white">Are you sure?</h1>
             <p>You want to delete this product?</p>
-            <button
+            <MaterialButton
+              variant="contained"
+              color="primary"
               onClick={() => {
                 dispatch(deleteProduct(id));
                 onClose();
               }}
             >
               Yes, Delete it!
-            </button>
-            <button onClick={onClose}>No</button>
+            </MaterialButton>
+            <MaterialButton
+              variant="contained"
+              color="primary"
+              onClick={onClose}
+            >
+              No
+            </MaterialButton>
           </div>
         );
       },
@@ -56,7 +347,7 @@ const ProductList = () => {
       {deleteSuccess && (
         <SuccessMessage
           header="Done"
-          message={message}
+          message="Product Deleted Successfully"
           reset={productConstants.DELETE_PRODUCT_RESET}
         />
       )}
@@ -72,11 +363,13 @@ const ProductList = () => {
           <h1>Products({count})</h1>
         </Col>
         <Col className="text-right">
-          <LinkContainer to="/createProduct">
-            <MaterialButton variant="contained" color="primary">
-              <i className="fas fa-plus"></i> Create Product
-            </MaterialButton>
-          </LinkContainer>
+          <MaterialButton
+            variant="contained"
+            color="primary"
+            onClick={() => setOpenForm(true)}
+          >
+            <i className="fas fa-plus"></i> Create Product
+          </MaterialButton>
         </Col>
       </Row>
       {loading ? (
@@ -113,7 +406,7 @@ const ProductList = () => {
                     <Button
                       variant="danger"
                       className="btn-sm"
-                      onClick={() => deleteHandler(product._id, e)}
+                      onClick={(e) => deleteHandler(product._id, e)}
                     >
                       <i className="fas fa-trash"></i>
                     </Button>
@@ -124,6 +417,7 @@ const ProductList = () => {
           </Table>
         </>
       )}
+      {openNewProductForm()}
     </>
   );
 };

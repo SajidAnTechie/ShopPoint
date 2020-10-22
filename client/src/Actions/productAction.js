@@ -41,9 +41,11 @@ export const listProducts = (
   }
 };
 
-export const listProductsForAdmin = () => async (dispatch) => {
+export const listProductsForAdmin = (initialLoading) => async (dispatch) => {
   try {
-    dispatch({ type: productConstants.PRODUCTLIST_FETCH_START });
+    if (initialLoading) {
+      dispatch({ type: productConstants.PRODUCTLIST_FETCH_START });
+    }
 
     await axios.get(`/api/v1/product/`).then((resp) => {
       const productList = resp.data.data.results;
@@ -158,21 +160,58 @@ export const createReview = (id, title, text, rating) => async (
   }
 };
 
-export const deleteProduct = (id) => async (dispatch) => {
+export const deleteProduct = (id) => async (dispatch, getState) => {
   try {
     dispatch({ type: productConstants.DELETE_PRODUCT_START });
 
-    await axios.delete(`/api/v1/product/${id}`).then((resp) => {
-      const message = resp.data.message;
+    const {
+      userLogin: { userInfo },
+    } = getState();
 
+    const config = {
+      headers: {
+        Authorization: `Bearer ${userInfo.token}`,
+      },
+    };
+
+    await axios.delete(`/api/v1/product/${id}`, config).then((resp) => {
       dispatch({
         type: productConstants.DELETE_PRODUCT_SUCCESS,
-        payload: message,
       });
     });
   } catch (error) {
     dispatch({
       type: productConstants.DELETE_PRODUCT_FAIL,
+      payload:
+        error.response && error.response.data.error
+          ? error.response.data.error
+          : error.message,
+    });
+  }
+};
+
+export const createProduct = (formData) => async (dispatch, getState) => {
+  try {
+    dispatch({ type: productConstants.CREATE_PRODUCT_START });
+
+    const {
+      userLogin: { userInfo },
+    } = getState();
+
+    const config = {
+      headers: {
+        Authorization: `Bearer ${userInfo.token}`,
+      },
+    };
+
+    await axios.post("/api/v1/product/", formData, config).then((resp) => {
+      dispatch({
+        type: productConstants.CREATE_PRODUCT_SUCCESS,
+      });
+    });
+  } catch (error) {
+    dispatch({
+      type: productConstants.CREATE_PRODUCT_FAIL,
       payload:
         error.response && error.response.data.error
           ? error.response.data.error

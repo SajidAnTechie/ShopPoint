@@ -32,6 +32,27 @@ h2 {
   font-weight: bold !important;
 }
 
+/* ConfrimAlert */
+
+.custom-ui {
+  background-color: #2b2b52;
+  text-align: center;
+  width: 500px;
+  padding: 40px;
+  box-shadow: 0 20px 75px rgba(0, 0, 0, 0.23);
+  color: #fff;
+}
+
+.custom-ui button {
+  width: 160px;
+  padding: 10px;
+  border: 1px solid #fff;
+  margin: 10px;
+  cursor: pointer;
+  background: none;
+  color: #fff;
+  font-size: 14px;
+}
 /* carousel */
 .carousel-item-next,
 .carousel-item-prev,
