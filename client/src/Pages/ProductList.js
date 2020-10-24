@@ -38,6 +38,7 @@ const useStyles = makeStyles((theme) => ({
   formControl: {
     margin: theme.spacing(1),
     minWidth: 120,
+    top: -8,
   },
   selectEmpty: {
     marginTop: theme.spacing(2),
@@ -151,7 +152,7 @@ const ProductList = () => {
             )}
             <Modal.Body className="show-grid">
               <Container>
-                <Form>
+                <Form onSubmit={submitHandler}>
                   <Row>
                     <Col xs={12} md={6}>
                       <TextField
@@ -224,10 +225,10 @@ const ProductList = () => {
                     </Col>
                   </Row>
                   <Row>
-                    <Col xs={6} md={6}>
+                    <Col xs={6} md={12}>
                       <TextField
                         variant="outlined"
-                        type="textarea"
+                        type="text"
                         margin="normal"
                         required
                         fullWidth
@@ -237,9 +238,13 @@ const ProductList = () => {
                         autoComplete="description"
                         autoFocus
                         value={description}
+                        multiline
+                        rows={5}
                         onChange={(e) => setDescription(e.target.value)}
                       />
                     </Col>
+                  </Row>
+                  <Row>
                     <Col xs={6} md={6}>
                       <TextField
                         variant="outlined"
@@ -254,8 +259,6 @@ const ProductList = () => {
                         onChange={(e) => setProductImage(e.target.files[0])}
                       />
                     </Col>
-                  </Row>
-                  <Row>
                     <Col xs={6} md={6}>
                       <FormControl
                         variant="outlined"
@@ -286,9 +289,9 @@ const ProductList = () => {
             </Modal.Body>
             <Modal.Footer>
               <MaterialButton
+                type="submit"
                 variant="contained"
                 color="primary"
-                onClick={submitHandler}
                 className="mr-2"
               >
                 {createLoading ? (

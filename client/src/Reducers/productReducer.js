@@ -28,7 +28,7 @@ export const Product = (state = { product: {} }, action) => {
     case productConstants.PRODUCT_FETCH_START:
       return {
         loading: true,
-        product: [],
+        product: {},
       };
     case productConstants.PRODUCT_FETCH_SUCCESS:
       return {
@@ -131,6 +131,27 @@ export const createProduct = (state = {}, action) => {
     case productConstants.CREATE_PRODUCT_RESET:
       return {};
 
+    default:
+      return state;
+  }
+};
+
+export const EditProduct = (state = {}, action) => {
+  switch (action.type) {
+    case productConstants.EDIT_PRODUCT_START:
+      return {
+        loading: true,
+      };
+    case productConstants.EDIT_PRODUCT_SUCCESS:
+      return {
+        success: true,
+      };
+    case productConstants.EDIT_PRODUCT_FAIL:
+      return {
+        error: action.payload,
+      };
+    case productConstants.EDIT_PRODUCT_RESET:
+      return {};
     default:
       return state;
   }

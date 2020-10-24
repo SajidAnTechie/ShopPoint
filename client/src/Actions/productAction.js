@@ -67,11 +67,9 @@ export const listProductsForAdmin = (initialLoading) => async (dispatch) => {
   }
 };
 
-export const product = (id, initialLoading) => async (dispatch) => {
+export const product = (id) => async (dispatch) => {
   try {
-    if (initialLoading) {
-      dispatch({ type: productConstants.PRODUCT_FETCH_START });
-    }
+    dispatch({ type: productConstants.PRODUCT_FETCH_START });
 
     await axios.get(`/api/v1/product/${id}`).then((resp) => {
       const product = resp.data.data;
@@ -212,6 +210,39 @@ export const createProduct = (formData) => async (dispatch, getState) => {
   } catch (error) {
     dispatch({
       type: productConstants.CREATE_PRODUCT_FAIL,
+      payload:
+        error.response && error.response.data.error
+          ? error.response.data.error
+          : error.message,
+    });
+  }
+};
+
+export const EditProduct = (id, UpdatedData) => async (dispatch, getState) => {
+  try {
+    dispatch({ type: productConstants.EDIT_PRODUCT_START });
+
+    const {
+      userLogin: { userInfo },
+    } = getState();
+
+    const config = {
+      headers: {
+        Authorization: `Bearer ${userInfo.token}`,
+      },
+    };
+
+    await axios
+      .put(`/api/v1/product/${id}`, UpdatedData, config)
+      .then((resp) => {
+        dispatch({
+          type: productConstants.EDIT_PRODUCT_SUCCESS,
+          payload: "Product updated successfully",
+        });
+      });
+  } catch (error) {
+    dispatch({
+      type: productConstants.EDIT_PRODUCT_FAIL,
       payload:
         error.response && error.response.data.error
           ? error.response.data.error

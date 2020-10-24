@@ -53,6 +53,23 @@ h2 {
   color: #fff;
   font-size: 14px;
 }
+
+.custom-ui-alert {
+  text-align: center;
+  width: 500px;
+  padding: 40px;
+  background-color: #fff;
+  box-shadow: 0 20px 75px rgba(0, 0, 0, 0.23);
+  color: black;
+}
+
+.custom-ui-alert img {
+  width: 100px;
+}
+
+.custom-ui-alert .text {
+  color: #2b2b52;
+}
 /* carousel */
 .carousel-item-next,
 .carousel-item-prev,

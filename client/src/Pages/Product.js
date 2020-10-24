@@ -35,29 +35,21 @@ const useStyles = makeStyles((theme) => ({
 
 const ProductDetails = ({ match, history }) => {
   const [qty, setQty] = useState(1);
-  const [initialLoading, setInitialLoading] = useState(true);
 
   const productData = useSelector((state) => state.Product);
   const reviewResponses = useSelector((state) => state.createReview);
 
   const { error: createReviewError } = reviewResponses;
 
-  const { loading, product, error, success } = productData;
+  const { loading, product, error } = productData;
   const classes = useStyles();
 
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(productAction.product(match.params.productId, initialLoading));
+    dispatch(productAction.product(match.params.productId));
     // eslint-disable-next-line
   }, [dispatch, match]);
-
-  useEffect(() => {
-    if (success && initialLoading) {
-      setInitialLoading(false);
-    }
-    // eslint-disable-next-line
-  }, [dispatch, success]);
 
   const addToCartHandler = () => {
     dispatch(addToCart(match.params.productId, qty));
