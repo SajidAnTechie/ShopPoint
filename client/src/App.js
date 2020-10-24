@@ -14,6 +14,7 @@ import Profile from "./Pages/Profile";
 import PlaceOrder from "./Pages/PlaceOrder";
 import OrderList from "./Pages/OrdersList";
 import ProductList from "./Pages/ProductList";
+import UserList from "./Pages/UserList";
 import EditProduct from "./Pages/EditProduct";
 import Order from "./Pages/Order";
 import Logout from "./Pages/Logout";
@@ -62,6 +63,11 @@ function App() {
               exact={true}
               path="/admin/product/:productId/edit"
               component={EditProduct}
+            />
+            <AdminRoute
+              exact={true}
+              path="/admin/userList"
+              component={UserList}
             />
             <Route exact={true} path="/register" component={Register} />
             <Route

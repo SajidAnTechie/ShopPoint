@@ -189,7 +189,7 @@ const EditProduct = ({ match }) => {
               <TextField
                 variant="outlined"
                 type="number"
-                margin="countInStock"
+                margin="normal"
                 required
                 fullWidth
                 id="countInStock"

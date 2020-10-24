@@ -37,8 +37,9 @@ const useStyles = makeStyles((theme) => ({
   },
   formControl: {
     margin: theme.spacing(1),
-    minWidth: 120,
-    top: -8,
+    minWidth: 330,
+    top: 6,
+    left: -4,
   },
   selectEmpty: {
     marginTop: theme.spacing(2),
@@ -170,7 +171,7 @@ const ProductList = () => {
                         onChange={(e) => setName(e.target.value)}
                       />
                     </Col>
-                    <Col xs={6} md={6}>
+                    <Col xs={12} md={6}>
                       <TextField
                         variant="outlined"
                         type="text"
@@ -189,7 +190,7 @@ const ProductList = () => {
                   </Row>
 
                   <Row>
-                    <Col xs={6} md={6}>
+                    <Col xs={12} md={6}>
                       <TextField
                         variant="outlined"
                         type="number"
@@ -205,11 +206,11 @@ const ProductList = () => {
                         onChange={(e) => setPrice(Number(e.target.value))}
                       />
                     </Col>
-                    <Col xs={6} md={6}>
+                    <Col xs={12} md={6}>
                       <TextField
                         variant="outlined"
                         type="number"
-                        margin="countInStock"
+                        margin="normal"
                         required
                         fullWidth
                         id="countInStock"
@@ -224,32 +225,13 @@ const ProductList = () => {
                       />
                     </Col>
                   </Row>
+
                   <Row>
-                    <Col xs={6} md={12}>
-                      <TextField
-                        variant="outlined"
-                        type="text"
-                        margin="normal"
-                        required
-                        fullWidth
-                        id="description"
-                        label="Description"
-                        name="description"
-                        autoComplete="description"
-                        autoFocus
-                        value={description}
-                        multiline
-                        rows={5}
-                        onChange={(e) => setDescription(e.target.value)}
-                      />
-                    </Col>
-                  </Row>
-                  <Row>
-                    <Col xs={6} md={6}>
+                    <Col xs={12} md={6}>
                       <TextField
                         variant="outlined"
                         type="file"
-                        margin="file"
+                        margin="normal"
                         required
                         fullWidth
                         id="file"
@@ -259,7 +241,7 @@ const ProductList = () => {
                         onChange={(e) => setProductImage(e.target.files[0])}
                       />
                     </Col>
-                    <Col xs={6} md={6}>
+                    <Col xs={12} md={6}>
                       <FormControl
                         variant="outlined"
                         className={classes.formControl}
@@ -282,6 +264,26 @@ const ProductList = () => {
                           <MenuItem value="Vest">Vest</MenuItem>
                         </Select>
                       </FormControl>
+                    </Col>
+                  </Row>
+                  <Row>
+                    <Col xs={12} md={12}>
+                      <TextField
+                        variant="outlined"
+                        type="text"
+                        margin="normal"
+                        required
+                        fullWidth
+                        id="description"
+                        label="Description"
+                        name="description"
+                        autoComplete="description"
+                        autoFocus
+                        value={description}
+                        multiline
+                        rows={5}
+                        onChange={(e) => setDescription(e.target.value)}
+                      />
                     </Col>
                   </Row>
                 </Form>
@@ -330,7 +332,7 @@ const ProductList = () => {
                 onClose();
               }}
             >
-              Yes, Delete it!
+              Yes, Delete it !
             </MaterialButton>
             <MaterialButton
               variant="contained"

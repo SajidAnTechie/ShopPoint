@@ -103,3 +103,41 @@ export const emailVerification = (verificationCode) => async (dispatch) => {
     });
   }
 };
+
+export const userList = (initialLoading) => async (dispatch, getState) => {
+  try {
+    if (initialLoading) {
+      dispatch({ type: userConstants.USERLIST_FETCH_START });
+    }
+
+    const {
+      userLogin: { userInfo },
+    } = getState();
+
+    const config = {
+      headers: {
+        Authorization: `Bearer ${userInfo.token}`,
+      },
+    };
+
+    await axios.get(`/api/v1/user`, config).then((resp) => {
+      const userList = resp.data.data.results;
+      const totalUser = resp.data.data.count;
+      dispatch({
+        type: userConstants.USERLIST_FETCH_SUCCESS,
+        payload: {
+          userList,
+          totalUser,
+        },
+      });
+    });
+  } catch (error) {
+    dispatch({
+      type: userConstants.USERLIST_FETCH_FAIL,
+      payload:
+        error.response && error.response.data.error
+          ? error.response.data.error
+          : error.message,
+    });
+  }
+};

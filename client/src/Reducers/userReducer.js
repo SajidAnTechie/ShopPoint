@@ -45,3 +45,25 @@ export const userRegister = (state = {}, action) => {
       return state;
   }
 };
+
+export const userList = (state = { users: [] }, action) => {
+  switch (action.type) {
+    case userConstants.USERLIST_FETCH_START:
+      return {
+        loading: true,
+      };
+    case userConstants.USERLIST_FETCH_SUCCESS:
+      return {
+        users: action.payload.userList,
+        count: action.payload.totalUser,
+        success: true,
+      };
+    case userConstants.USERLIST_FETCH_FAIL:
+      return {
+        error: action.payload,
+      };
+
+    default:
+      return state;
+  }
+};
