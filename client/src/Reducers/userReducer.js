@@ -67,3 +67,24 @@ export const userList = (state = { users: [] }, action) => {
       return state;
   }
 };
+export const userDelete = (state = {}, action) => {
+  switch (action.type) {
+    case userConstants.USER_DELETE_START:
+      return {
+        loading: true,
+      };
+    case userConstants.USER_DELETE_SUCCESS:
+      return {
+        success: true,
+      };
+    case userConstants.USER_DELETE_FAIL:
+      return {
+        error: action.payload,
+      };
+    case userConstants.USER_DELETE_RESET:
+      return {};
+
+    default:
+      return state;
+  }
+};

@@ -3,7 +3,9 @@ import { LinkContainer } from "react-router-bootstrap";
 import { Table, Button } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import ErrorMessage from "../Components/Message/errorMessage";
-import { userList } from "../Actions/userAction";
+import SuccessMessage from "../Components/Message/successMessage";
+import { userList, userDelete } from "../Actions/userAction";
+import * as userConstants from "../Constants/userConstants";
 import { Button as MaterialButton } from "@material-ui/core/";
 import { confirmAlert } from "react-confirm-alert"; // Import
 import "react-confirm-alert/src/react-confirm-alert.css";
@@ -15,13 +17,13 @@ const UserList = () => {
   const userListDetails = useSelector((state) => state.userList);
   const { loading, users, count, error, success } = userListDetails;
 
-  //   const deleteProductData = useSelector((state) => state.deleteProduct);
-  //   const { success: deleteSuccess, error: deleteFail } = deleteProductData;
+  const userDeleteDetails = useSelector((state) => state.userDeleteDetails);
+  const { success: deleteSuccess, error: deleteFail } = userDeleteDetails;
 
   useEffect(() => {
     dispatch(userList(initialLoading));
     // eslint-disable-next-line
-  }, [dispatch]);
+  }, [dispatch, deleteSuccess]);
 
   useEffect(() => {
     if (success && initialLoading) {
@@ -42,7 +44,7 @@ const UserList = () => {
               variant="contained"
               color="primary"
               onClick={() => {
-                //dispatch(deleteProduct(id));
+                dispatch(userDelete(id));
                 onClose();
               }}
             >
@@ -63,20 +65,20 @@ const UserList = () => {
 
   return (
     <>
-      {/* {deleteSuccess && (
+      {deleteSuccess && (
         <SuccessMessage
           header="Done"
-          message="Product Deleted Successfully"
-          reset={productConstants.DELETE_PRODUCT_RESET}
+          message="User Deleted Successfully"
+          reset={userConstants.USER_DELETE_RESET}
         />
-      )} */}
-      {/* {deleteFail && (
+      )}
+      {deleteFail && (
         <ErrorMessage
           header="Something went wrong"
           message={deleteFail}
-          reset={productConstants.DELETE_PRODUCT_RESET}
+          reset={userConstants.USER_DELETE_RESET}
         />
-      )} */}
+      )}
 
       <h1>Users({count})</h1>
 
@@ -107,7 +109,7 @@ const UserList = () => {
                   <td>{user.role}</td>
 
                   <td>
-                    <LinkContainer to={`/admin/product/${user._id}/edit`}>
+                    <LinkContainer to={`/admin/user/${user._id}/edit`}>
                       <Button variant="light" className="btn-sm">
                         <i className="fas fa-edit"></i>
                       </Button>
