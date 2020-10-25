@@ -2,8 +2,8 @@ import React, { useState, useEffect } from "react";
 import { Form } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import FormContainer from "../Components/FormContainer/FormContainer";
-import * as productAction from "../Actions/productAction";
-import * as productConstants from "../Constants/productConstants";
+import * as userAction from "../Actions/userAction";
+import * as userConstants from "../Constants/userConstants";
 import ErrorMessage from "../Components/Message/errorMessage";
 import {
   TextField,
@@ -33,26 +33,21 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const EditProduct = ({ match }) => {
-  const productId = match.params.productId;
-  const productData = useSelector((state) => state.Product);
-  const { loading, product, error, success } = productData;
-
-  const updateProductDetails = useSelector(
-    (state) => state.updateProductDetails
-  );
+const UpdateUser = ({ match }) => {
+  const userId = match.params.userId;
+  const userUpdateDetails = useSelector((state) => state.userUpdateDetails);
   const {
-    loading: EditProductLoading,
-    error: EditProductError,
-    success: EditProductSuccess,
-  } = updateProductDetails;
+    loading: updateLoading,
+    error: updateError,
+    success: updateSuccess,
+  } = userUpdateDetails;
+
+  const userDetails = useSelector((state) => state.userDetails);
+  const { loading, user, error, success } = userDetails;
 
   const [name, setName] = useState("");
-  const [brand, setBrand] = useState("");
-  const [price, setPrice] = useState(0);
-  const [category, setCategory] = useState("");
-  const [countInStock, setCountInStock] = useState(0);
-  const [description, setDescription] = useState("");
+  const [email, setEmail] = useState("");
+  const [role, setRole] = useState("");
   const [Success, setSuccess] = useState(false);
 
   const classes = useStyles();
@@ -60,38 +55,33 @@ const EditProduct = ({ match }) => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(productAction.product(productId));
+    dispatch(userAction.getUser(userId));
 
     // eslint-disable-next-line
-  }, [dispatch, productId]);
+  }, [dispatch, userId]);
 
   useEffect(() => {
     if (success) {
-      setName(product.name);
-      setPrice(product.price);
-      setBrand(product.brand);
-      setCategory(product.category);
-      setCountInStock(product.countInStock);
-      setDescription(product.description);
+      setName(user.name);
+      setEmail(user.email);
+      setRole(user.role);
     }
 
     // eslint-disable-next-line
   }, [dispatch, success]);
+
   const submitHandler = (e) => {
     e.preventDefault();
     const UpdateData = {
       name,
-      brand,
-      price,
-      category,
-      countInStock,
-      description,
+      email,
+      role,
     };
-    dispatch(productAction.EditProduct(productId, UpdateData));
+    dispatch(userAction.userUpdate(userId, UpdateData));
   };
 
   const ConfirmedAlert = () => {
-    if (EditProductSuccess) {
+    if (updateSuccess) {
       return confirmAlert({
         customUI: ({ onClose }) => {
           return (
@@ -100,7 +90,7 @@ const EditProduct = ({ match }) => {
                 <img src={confirmationImg} alt="confirmationImg" />
               </div>
               <h3 className="font-weight-bold text">
-                Product updated successfully
+                User updated successfully
               </h3>
               <Button
                 type="submit"
@@ -108,7 +98,7 @@ const EditProduct = ({ match }) => {
                 color="primary"
                 onClick={() => {
                   onClose();
-                  dispatch({ type: productConstants.EDIT_PRODUCT_RESET });
+                  dispatch({ type: userConstants.USER_EDIT_RESET });
                   setSuccess(true);
                 }}
               >
@@ -120,17 +110,18 @@ const EditProduct = ({ match }) => {
       });
     }
   };
+
   return (
     <>
-      {Success && <Redirect to="/admin/productList" />}
-      {EditProductError && (
+      {Success && <Redirect to="/admin/userList" />}
+      {updateError && (
         <ErrorMessage
           header="Something went wrong"
-          message={EditProductError}
-          reset={productConstants.EDIT_PRODUCT_RESET}
+          message={updateError}
+          reset={userConstants.USER_EDIT_RESET}
         />
       )}
-      <Link to="/admin/productlist" className="btn btn-light my-3">
+      <Link to="/admin/userList" className="btn btn-light my-3">
         Go Back
       </Link>
       {loading ? (
@@ -140,7 +131,7 @@ const EditProduct = ({ match }) => {
       ) : (
         <>
           <FormContainer>
-            <h1>Edit Product</h1>
+            <h1>Edit User</h1>
             <Form onSubmit={submitHandler}>
               <TextField
                 variant="outlined"
@@ -159,80 +150,35 @@ const EditProduct = ({ match }) => {
 
               <TextField
                 variant="outlined"
-                type="text"
+                type="email"
                 margin="normal"
                 required
                 fullWidth
-                id="brand"
-                label="Brand"
-                name="brand"
+                id="email"
+                label="Email"
+                name="email"
                 autoComplete="brand"
                 autoFocus
-                value={brand}
-                onChange={(e) => setBrand(e.target.value)}
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
               />
 
-              <TextField
-                variant="outlined"
-                type="number"
-                margin="normal"
-                required
-                fullWidth
-                id="price"
-                label="Price"
-                name="price"
-                autoComplete="price"
-                autoFocus
-                value={price}
-                onChange={(e) => setPrice(Number(e.target.value))}
-              />
-              <TextField
-                variant="outlined"
-                type="number"
-                margin="normal"
-                required
-                fullWidth
-                id="countInStock"
-                label="CountInStock"
-                name="countInStock"
-                autoComplete="countInStock"
-                autoFocus
-                value={countInStock}
-                onChange={(e) => setCountInStock(Number(e.target.value))}
-              />
-              <TextField
-                variant="outlined"
-                type="text"
-                margin="normal"
-                required
-                fullWidth
-                id="description"
-                label="Description"
-                name="description"
-                autoComplete="description"
-                autoFocus
-                value={description}
-                multiline
-                rows={5}
-                onChange={(e) => setDescription(e.target.value)}
-              />
               <FormControl variant="outlined" className={classes.formControl}>
                 <InputLabel id="demo-simple-select-outlined-label">
-                  Category
+                  Role
                 </InputLabel>
                 <Select
                   labelId="demo-simple-select-outlined-label"
                   id="demo-simple-select-outlined"
-                  onChange={(e) => setCategory(e.target.value)}
-                  label="Category"
-                  value={category}
+                  onChange={(e) => setRole(e.target.value)}
+                  label="Role"
+                  value={role}
                 >
                   <MenuItem value="">
                     <em>None</em>
                   </MenuItem>
-                  <MenuItem value="Shirt">T-shirt</MenuItem>
-                  <MenuItem value="Pants">Pant</MenuItem>
-                  <MenuItem value="Vest">Vest</MenuItem>
+                  <MenuItem value="user">User</MenuItem>
+                  <MenuItem value="admin">Admin</MenuItem>
                 </Select>
               </FormControl>
 
@@ -242,7 +188,7 @@ const EditProduct = ({ match }) => {
                 color="primary"
                 fullWidth
               >
-                {EditProductLoading ? (
+                {updateLoading ? (
                   <CircularProgress color="inherit" />
                 ) : (
                   <>Update</>
@@ -257,4 +203,4 @@ const EditProduct = ({ match }) => {
   );
 };
 
-export default EditProduct;
+export default UpdateUser;

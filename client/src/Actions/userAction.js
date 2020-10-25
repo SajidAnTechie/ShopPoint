@@ -171,3 +171,65 @@ export const userDelete = (id) => async (dispatch, getState) => {
     });
   }
 };
+
+export const userUpdate = (id, updatedData) => async (dispatch, getState) => {
+  try {
+    dispatch({ type: userConstants.USER_EDIT_START });
+
+    const {
+      userLogin: { userInfo },
+    } = getState();
+
+    const config = {
+      headers: {
+        Authorization: `Bearer ${userInfo.token}`,
+      },
+    };
+
+    await axios.put(`/api/v1/user/${id}`, updatedData, config).then((resp) => {
+      dispatch({
+        type: userConstants.USER_EDIT_SUCCESS,
+      });
+    });
+  } catch (error) {
+    dispatch({
+      type: userConstants.USER_EDIT_FAIL,
+      payload:
+        error.response && error.response.data.error
+          ? error.response.data.error
+          : error.message,
+    });
+  }
+};
+
+export const getUser = (id) => async (dispatch, getState) => {
+  try {
+    dispatch({ type: userConstants.USER_FETCH_START });
+
+    const {
+      userLogin: { userInfo },
+    } = getState();
+
+    const config = {
+      headers: {
+        Authorization: `Bearer ${userInfo.token}`,
+      },
+    };
+
+    await axios.get(`/api/v1/user/${id}`, config).then((resp) => {
+      const userDetails = resp.data.data;
+      dispatch({
+        type: userConstants.USER_FETCH_SUCCESS,
+        payload: userDetails,
+      });
+    });
+  } catch (error) {
+    dispatch({
+      type: userConstants.USER_FETCH_FAIL,
+      payload:
+        error.response && error.response.data.error
+          ? error.response.data.error
+          : error.message,
+    });
+  }
+};

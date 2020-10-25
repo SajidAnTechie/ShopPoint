@@ -67,6 +67,7 @@ export const userList = (state = { users: [] }, action) => {
       return state;
   }
 };
+
 export const userDelete = (state = {}, action) => {
   switch (action.type) {
     case userConstants.USER_DELETE_START:
@@ -82,6 +83,51 @@ export const userDelete = (state = {}, action) => {
         error: action.payload,
       };
     case userConstants.USER_DELETE_RESET:
+      return {};
+
+    default:
+      return state;
+  }
+};
+
+export const userUpdate = (state = {}, action) => {
+  switch (action.type) {
+    case userConstants.USER_EDIT_START:
+      return {
+        loading: true,
+      };
+    case userConstants.USER_EDIT_SUCCESS:
+      return {
+        success: true,
+      };
+    case userConstants.USER_EDIT_FAIL:
+      return {
+        error: action.payload,
+      };
+    case userConstants.USER_EDIT_RESET:
+      return {};
+
+    default:
+      return state;
+  }
+};
+
+export const getUser = (state = { user: {} }, action) => {
+  switch (action.type) {
+    case userConstants.USER_FETCH_START:
+      return {
+        loading: true,
+      };
+    case userConstants.USER_FETCH_SUCCESS:
+      return {
+        success: true,
+        user: action.payload,
+      };
+    case userConstants.USER_FETCH_FAIL:
+      return {
+        error: action.payload,
+      };
+    case userConstants.USER_FETCH_RESET:
       return {};
 
     default:
