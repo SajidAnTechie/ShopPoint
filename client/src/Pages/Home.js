@@ -7,6 +7,7 @@ import Product from "../Components/Product/Product";
 import Filter from "../Components/Filter/Filter";
 import ErrorMessage from "../Components/Message/errorMessage";
 import HomeLoader from "../Components/Loader/HomeLoader";
+import Meta from "../Components/Meta/Meta";
 
 const Home = () => {
   const [sort, setSort] = useState([]);
@@ -66,6 +67,7 @@ const Home = () => {
   };
   return (
     <>
+      <Meta />
       {loading ? (
         <HomeLoader />
       ) : error ? (
