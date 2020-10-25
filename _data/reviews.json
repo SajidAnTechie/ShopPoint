@@ -1,0 +1,50 @@
+[
+  {
+    "_id": "5d7a514b5d2c12c7449be020",
+    "title": "Learned a ton!",
+    "text": "Awesom Shirt",
+    "rating": 4,
+    "productId": "5d713995b721c3bb38c1f5d0",
+    "userId": "5d7a514b5d2c12c7449be042"
+  },
+  {
+    "_id": "5d7a514b5d2c12c7449be021",
+    "title": "Great bootcamp",
+    "text": "Nice Shirt!",
+    "rating": 4,
+    "productId": "5d713995b721c3bb38c1f5d0",
+    "userId": "5d7a514b5d2c12c7449be043"
+  },
+  {
+    "_id": "5d7a514b5d2c12c7449be022",
+    "title": "Got me a developer job",
+    "text": "Greate Product",
+    "rating": 3,
+    "productId": "5d713a66ec8f2b88b8f830b8",
+    "userId": "5d7a514b5d2c12c7449be042"
+  },
+  {
+    "_id": "5d7a514b5d2c12c7449be023",
+    "title": "Not that great",
+    "text": "Great One!!!",
+    "rating": 2,
+    "productId": "5d713a66ec8f2b88b8f830b8",
+    "userId": "5d7a514b5d2c12c7449be045"
+  },
+  {
+    "_id": "5d7a514b5d2c12c7449be024",
+    "title": "Great overall experience",
+    "text": "Awesome Pants",
+    "rating": 5,
+    "productId": "5d725a037b292f5f8ceff787",
+    "userId": "5d7a514b5d2c12c7449be044"
+  },
+  {
+    "_id": "5d7a514b5d2c12c7449be025",
+    "title": "Not worth the money",
+    "text": "Nice One",
+    "rating": 3,
+    "productId": "5d725a1b7b292f5f8ceff788",
+    "userId": "5d7a514b5d2c12c7449be044"
+  }
+]
