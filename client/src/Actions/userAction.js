@@ -233,3 +233,49 @@ export const getUser = (id) => async (dispatch, getState) => {
     });
   }
 };
+
+export const forgotPassword = (email) => async (dispatch) => {
+  try {
+    dispatch({ type: userConstants.FORGOT_PASSWORD_SEND_START });
+
+    await axios.post(`/api/v1/auth/forgotPassword`, email).then((resp) => {
+      const confirmMessage = resp.data.message;
+      dispatch({
+        type: userConstants.FORGOT_PASSWORD_SEND_SUCCESS,
+        payload: confirmMessage,
+      });
+    });
+  } catch (error) {
+    dispatch({
+      type: userConstants.FORGOT_PASSWORD_SEND_FAIL,
+      payload:
+        error.response && error.response.data.error
+          ? error.response.data.error
+          : error.message,
+    });
+  }
+};
+
+export const resetPassword = (resetPasswordData) => async (dispatch) => {
+  try {
+    dispatch({ type: userConstants.RESET_PASSWORD_START });
+
+    await axios
+      .post(`/api/v1/auth/resetPassword`, resetPasswordData)
+      .then((resp) => {
+        const confirmMessage = resp.data.message;
+        dispatch({
+          type: userConstants.RESET_PASSWORD_SUCCESS,
+          payload: confirmMessage,
+        });
+      });
+  } catch (error) {
+    dispatch({
+      type: userConstants.RESET_PASSWORD_FAIL,
+      payload:
+        error.response && error.response.data.error
+          ? error.response.data.error
+          : error.message,
+    });
+  }
+};

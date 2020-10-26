@@ -134,3 +134,49 @@ export const getUser = (state = { user: {} }, action) => {
       return state;
   }
 };
+
+export const forgotPassword = (state = { message: "" }, action) => {
+  switch (action.type) {
+    case userConstants.FORGOT_PASSWORD_SEND_START:
+      return {
+        loading: true,
+      };
+    case userConstants.FORGOT_PASSWORD_SEND_SUCCESS:
+      return {
+        success: true,
+        message: action.payload,
+      };
+    case userConstants.FORGOT_PASSWORD_SEND_FAIL:
+      return {
+        error: action.payload,
+      };
+    case userConstants.FORGOT_PASSWORD_SEND_RSET:
+      return {};
+
+    default:
+      return state;
+  }
+};
+
+export const resetPassword = (state = { message: "" }, action) => {
+  switch (action.type) {
+    case userConstants.RESET_PASSWORD_START:
+      return {
+        loading: true,
+      };
+    case userConstants.RESET_PASSWORD_SUCCESS:
+      return {
+        success: true,
+        message: action.payload,
+      };
+    case userConstants.RESET_PASSWORD_FAIL:
+      return {
+        error: action.payload,
+      };
+    case userConstants.RESET_PASSWORD_RESET:
+      return {};
+
+    default:
+      return state;
+  }
+};

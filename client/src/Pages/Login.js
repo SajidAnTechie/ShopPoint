@@ -89,6 +89,9 @@ const Login = ({ location, history }) => {
               Register
             </Link>
           </Col>
+          <Col className="text-right">
+            <Link to={"/forgotPasssword"}>Forgot Password</Link>
+          </Col>
         </Row>
       </FormContainer>
     </>

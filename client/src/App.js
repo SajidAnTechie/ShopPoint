@@ -20,6 +20,8 @@ import EditProduct from "./Pages/EditProduct";
 import Order from "./Pages/Order";
 import Logout from "./Pages/Logout";
 import Register from "./Pages/Register";
+import ForgotPassword from "./Pages/ForgotPassword";
+import ResetPassword from "./Pages/ResetPassword";
 import EmailVerification from "./Pages/EmailVerification";
 
 function App() {
@@ -37,6 +39,16 @@ function App() {
             />
             <Route exact={true} path="/login" component={Login} />
             <Route exact={true} path="/cart" component={Cart} />
+            <Route
+              exact={true}
+              path="/forgotPasssword"
+              component={ForgotPassword}
+            />
+            <Route
+              exact={true}
+              path="/resetPassword"
+              component={ResetPassword}
+            />
             <PrivateRoute exact={true} path="/shipping" component={Shipping} />
             <PrivateRoute exact={true} path="/payment" component={Payment} />
             <PrivateRoute

@@ -1,7 +1,8 @@
 const crypto = require("crypto");
 const createError = require("../utilis/createError");
 const asyncHandler = require("../middleware/async");
-const verifyEmail = require("../utilis/verifyEmail.js");
+const verifyEmail = require("../utilis/verifyEmail");
+const sendEmail = require("../utilis/sendEmail");
 const cron = require("node-cron");
 const User = require("../models/User");
 
@@ -145,9 +146,7 @@ const forgotPassword = asyncHandler(async (req, res, next) => {
   await user.save({ validateBeforeSave: false });
 
   try {
-    const resetUrl = `${req.protocol}://${req.get(
-      "host"
-    )}/api/v1/auth/resetPassword/?token=${resetToken}`;
+    const resetUrl = `http://localhost:3000/resetPassword/?token=${resetToken}`;
 
     const message = `You are receiving this email because you (or someone else ) has
     requested the reset of a password.`;
