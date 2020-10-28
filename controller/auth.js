@@ -56,7 +56,7 @@ const RegisterUser = asyncHandler(async (req, res, next) => {
 
     res.status(200).send({
       status: "success",
-      message: "Email Verification Code sent to your email.",
+      message: "Verification Code sent to your email.",
     });
   } catch (error) {
     throw createError(500, "Verification email cound't be sent");
@@ -146,7 +146,7 @@ const forgotPassword = asyncHandler(async (req, res, next) => {
   await user.save({ validateBeforeSave: false });
 
   try {
-    const resetUrl = `https://shoppingpoint.herokuapp.com/?token=${resetToken}`;
+    const resetUrl = `https://shoppingpoint.herokuapp.com/resetPassword/?token=${resetToken}`;
 
     const message = `You are receiving this email because you (or someone else ) has
     requested the reset of a password.`;
