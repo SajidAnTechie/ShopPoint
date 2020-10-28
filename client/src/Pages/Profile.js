@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import ErrorMessage from "../Components/Message/errorMessage";
 import { Button as MeterialButton } from "@material-ui/core/";
 import { authOrder } from "../Actions/orderAction";
+import TableLoader from "../Components/Loader/TableLoader";
 
 const Profile = () => {
   const dispatch = useDispatch();
@@ -69,7 +70,7 @@ const Profile = () => {
       <Col md={9}>
         <h2>My Orders</h2>
         {loading ? (
-          <h2>Loading...</h2>
+          <TableLoader />
         ) : error ? (
           <ErrorMessage header="Something went wrong" message={error} />
         ) : (

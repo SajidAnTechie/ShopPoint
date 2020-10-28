@@ -4,6 +4,7 @@ import { LinkContainer } from "react-router-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import ErrorMessage from "../Components/Message/errorMessage";
 import { listOrders } from "../Actions/orderAction";
+import TableLoader from "../Components/Loader/TableLoader";
 
 const OrderList = () => {
   const orderList = useSelector((state) => state.orderList);
@@ -20,7 +21,7 @@ const OrderList = () => {
     <>
       <h1>Orders({count})</h1>
       {loading ? (
-        <h4>Loading...</h4>
+        <TableLoader />
       ) : error ? (
         <ErrorMessage header="Something went wrong" message={error} />
       ) : (

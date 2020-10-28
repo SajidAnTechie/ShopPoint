@@ -12,6 +12,7 @@ import {
 import { useDispatch, useSelector } from "react-redux";
 import ErrorMessage from "../Components/Message/errorMessage";
 import SuccessMessage from "../Components/Message/successMessage";
+import TableLoader from "../Components/Loader/TableLoader";
 import {
   Button as MaterialButton,
   TextField,
@@ -378,7 +379,7 @@ const ProductList = () => {
         </Col>
       </Row>
       {loading ? (
-        <h4>Loading...</h4>
+        <TableLoader />
       ) : error ? (
         <ErrorMessage header="Something went wrong" message={error} />
       ) : (

@@ -14,6 +14,7 @@ import {
   MenuItem,
 } from "@material-ui/core/";
 import * as productConstants from "../Constants/productConstants";
+import SinglePageLoader from "../Components/Loader/SinglePageLoader";
 import { addToCart } from "../Actions/cartAction";
 
 const useStyles = makeStyles((theme) => ({
@@ -69,7 +70,7 @@ const ProductDetails = ({ match, history }) => {
         Go Back
       </Link>
       {loading ? (
-        <p>Loadiong...</p>
+        <SinglePageLoader />
       ) : error ? (
         <ErrorMessage header="Something went wrong" message={error} />
       ) : (

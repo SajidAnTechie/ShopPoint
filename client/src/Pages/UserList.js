@@ -7,6 +7,7 @@ import SuccessMessage from "../Components/Message/successMessage";
 import { userList, userDelete } from "../Actions/userAction";
 import * as userConstants from "../Constants/userConstants";
 import { Button as MaterialButton } from "@material-ui/core/";
+import TableLoader from "../Components/Loader/TableLoader";
 import { confirmAlert } from "react-confirm-alert"; // Import
 import "react-confirm-alert/src/react-confirm-alert.css";
 
@@ -83,7 +84,7 @@ const UserList = () => {
       <h1>Users({count})</h1>
 
       {loading ? (
-        <h4>Loading...</h4>
+        <TableLoader />
       ) : error ? (
         <ErrorMessage header="Something went wrong" message={error} />
       ) : (
