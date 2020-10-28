@@ -19,7 +19,6 @@
     "express-fileupload": "^1.2.0",
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^5.10.6",
-    "node-cron": "^2.0.3",
-    "nodemailer": "^6.4.11"
+    "node-cron": "^2.0.3"
   }
 }

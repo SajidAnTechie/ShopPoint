@@ -13,9 +13,9 @@ const verifyEmail = async (options) => {
       "><h1 style=" +
       "font-weight:500>Hey, " +
       options.name +
-      "<br>Welcome to my e-commerce site</h1><h1>Thanks for Signing up on our app</h1><h3>Your Code for verification is : " +
+      "<br>Welcome to ShoppingPonit</h1><h1>Thanks for Signing up on our app</h1><h3>Your Code for verification is : " +
       options.code +
-      " </h3></div><p>If this request is not made by you kindly ignore this mail.</p><p>Regards, <strong>Sajid Ansari</strong></p>",
+      " </h3></div><p>If this request is not made by you kindly ignore this mail.</p><p>Regards, <strong>Sajid Ansari(Owner)</strong></p>",
   };
   await sgMail.send(message);
 };
