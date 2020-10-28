@@ -1,14 +1,7 @@
-const nodemailer = require("nodemailer");
+const sgMail = require("@sendgrid/mail");
 
 const verifyEmail = async (options) => {
-  let transporter = nodemailer.createTransport({
-    host: process.env.SMTP_HOST,
-    port: process.env.SMTP_PORT,
-    auth: {
-      user: process.env.SMTP_EMAIL,
-      pass: process.env.SMTP_PASSWORD,
-    },
-  });
+  sgMail.setApiKey(process.env.SEND_GRID_KEY);
 
   const message = {
     from: `${process.env.FROM_NAME} <${process.env.FROM_EMAIL}>`,
@@ -24,7 +17,6 @@ const verifyEmail = async (options) => {
       options.code +
       " </h3></div><p>If this request is not made by you kindly ignore this mail.</p><p>Regards, <strong>Sajid Ansari</strong></p>",
   };
-
-  let info = await transporter.sendMail(message);
+  await sgMail.send(message);
 };
 module.exports = verifyEmail;

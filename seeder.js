@@ -58,7 +58,7 @@ const deleteData = async () => {
     await User.deleteMany();
     await Product.deleteMany();
     await Category.deleteMany();
-    await Review.deleteMany();
+    //await Review.deleteMany();
     await Order.deleteMany();
     console.log("Data Destroy".red.inverse);
     process.exit();

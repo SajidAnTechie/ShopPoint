@@ -20,7 +20,7 @@ const RegisterUser = asyncHandler(async (req, res, next) => {
   try {
     const options = {
       email: newUser.email,
-      subject: "Email Verification",
+      subject: "Account Verification",
       code: uid,
       name: newUser.name,
     };
