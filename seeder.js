@@ -43,8 +43,8 @@ const reviews = JSON.parse(
 const importData = async () => {
   try {
     await User.create(users);
-    //await Product.create(products);
-    //await Category.create(categories);
+    await Product.create(products);
+    await Category.create(categories);
     //await Review.create(reviews);
     console.log(`Data Imported`.green.inverse);
     process.exit();
@@ -56,10 +56,10 @@ const importData = async () => {
 const deleteData = async () => {
   try {
     await User.deleteMany();
-    //await Product.deleteMany();
-    //await Category.deleteMany();
+    await Product.deleteMany();
+    await Category.deleteMany();
     //await Review.deleteMany();
-    //await Order.deleteMany();
+    await Order.deleteMany();
     console.log("Data Destroy".red.inverse);
     process.exit();
   } catch (error) {
