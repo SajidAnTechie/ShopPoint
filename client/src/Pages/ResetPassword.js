@@ -91,6 +91,7 @@ const ForgotPassword = ({ history }) => {
             color="primary"
             fullWidth
             onClick={handleSubmit}
+            disabled={loading}
           >
             {loading ? <CircularProgress color="inherit" /> : <>Reset</>}
           </Button>

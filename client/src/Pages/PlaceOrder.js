@@ -155,6 +155,7 @@ const PlaceOrder = ({ history }) => {
                   fullWidth
                   disabled={cart.cartItems === 0}
                   onClick={placeOrderHandler}
+                  disabled={loading}
                 >
                   {loading ? (
                     <CircularProgress color="inherit" />

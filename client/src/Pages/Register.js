@@ -132,6 +132,7 @@ const Register = ({ location, history }) => {
           color="primary"
           fullWidth
           onClick={handleSubmit}
+          disabled={loading}
         >
           {loading ? <CircularProgress color="inherit" /> : <>Register</>}
         </Button>
