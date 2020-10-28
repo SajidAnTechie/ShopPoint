@@ -31,6 +31,9 @@ const useStyles = makeStyles((theme) => ({
   selectEmpty: {
     marginTop: theme.spacing(2),
   },
+  prgressColor: {
+    color: "#fff",
+  },
 }));
 
 const UpdateUser = ({ match }) => {
@@ -188,6 +191,7 @@ const UpdateUser = ({ match }) => {
                 color="primary"
                 fullWidth
                 disabled={updateLoading}
+                className={classes.prgressColor}
               >
                 {updateLoading ? (
                   <CircularProgress color="inherit" />

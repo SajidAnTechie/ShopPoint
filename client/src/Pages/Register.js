@@ -5,9 +5,20 @@ import { useDispatch, useSelector } from "react-redux";
 import ErrorMessage from "../Components/Message/errorMessage";
 import SuccessMessage from "../Components/Message/successMessage";
 import FormContainer from "../Components/FormContainer/FormContainer";
-import { TextField, Button, CircularProgress } from "@material-ui/core/";
+import {
+  TextField,
+  Button,
+  CircularProgress,
+  makeStyles,
+} from "@material-ui/core/";
 import * as userAction from "../Actions/userAction";
 import * as userConstants from "../Constants/userConstants";
+
+const useStyles = makeStyles((theme) => ({
+  prgressColor: {
+    color: "#fff",
+  },
+}));
 
 const Register = ({ location, history }) => {
   const [name, setName] = useState("");
@@ -15,6 +26,8 @@ const Register = ({ location, history }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
+
+  const classes = useStyles();
 
   const userRegisterData = useSelector((state) => state.userRegister);
 
@@ -134,7 +147,14 @@ const Register = ({ location, history }) => {
           onClick={handleSubmit}
           disabled={loading}
         >
-          {loading ? <CircularProgress color="inherit" /> : <>Register</>}
+          {loading ? (
+            <CircularProgress
+              color="inherit"
+              className={classes.prgressColor}
+            />
+          ) : (
+            <>Register</>
+          )}
         </Button>
       </Form>
 

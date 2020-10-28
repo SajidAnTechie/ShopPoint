@@ -4,13 +4,25 @@ import { Form, Row, Col } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import ErrorMessage from "../Components/Message/errorMessage";
 import FormContainer from "../Components/FormContainer/FormContainer";
-import { TextField, Button, CircularProgress } from "@material-ui/core/";
+import {
+  TextField,
+  Button,
+  CircularProgress,
+  makeStyles,
+} from "@material-ui/core/";
 import * as userAction from "../Actions/userAction";
 import * as userConstants from "../Constants/userConstants";
+
+const useStyles = makeStyles((theme) => ({
+  prgressColor: {
+    color: "#fff",
+  },
+}));
 
 const Login = ({ location, history }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const classes = useStyles();
 
   const userAuthData = useSelector((state) => state.userLogin);
 
@@ -82,7 +94,14 @@ const Login = ({ location, history }) => {
             fullWidth
             disabled={loading}
           >
-            {loading ? <CircularProgress color="inherit" /> : <>Sign In</>}
+            {loading ? (
+              <CircularProgress
+                color="inherit"
+                className={classes.prgressColor}
+              />
+            ) : (
+              <>Sign In</>
+            )}
           </Button>
         </Form>
 

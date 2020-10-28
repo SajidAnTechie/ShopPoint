@@ -31,6 +31,9 @@ const useStyles = makeStyles((theme) => ({
   selectEmpty: {
     marginTop: theme.spacing(2),
   },
+  prgressColor: {
+    color: "#fff",
+  },
 }));
 
 const EditProduct = ({ match }) => {
@@ -244,7 +247,10 @@ const EditProduct = ({ match }) => {
                 disabled={EditProductLoading}
               >
                 {EditProductLoading ? (
-                  <CircularProgress color="inherit" />
+                  <CircularProgress
+                    color="inherit"
+                    className={classes.prgressColor}
+                  />
                 ) : (
                   <>Update</>
                 )}

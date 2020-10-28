@@ -4,12 +4,24 @@ import { useDispatch, useSelector } from "react-redux";
 import ErrorMessage from "../Components/Message/errorMessage";
 import SuccessMessage from "../Components/Message/successMessage";
 import FormContainer from "../Components/FormContainer/FormContainer";
-import { TextField, Button, CircularProgress } from "@material-ui/core/";
+import {
+  TextField,
+  Button,
+  CircularProgress,
+  makeStyles,
+} from "@material-ui/core/";
 import * as userAction from "../Actions/userAction";
 import * as userConstants from "../Constants/userConstants";
 
+const useStyles = makeStyles((theme) => ({
+  prgressColor: {
+    color: "#fff",
+  },
+}));
+
 const ForgotPassword = () => {
   const [email, setEmail] = useState("");
+  const classes = useStyles();
 
   const forgotPasswordDetails = useSelector(
     (state) => state.forgotPasswordDetails
@@ -65,7 +77,14 @@ const ForgotPassword = () => {
             onClick={handleSubmit}
             disabled={loading}
           >
-            {loading ? <CircularProgress color="inherit" /> : <>Send Request</>}
+            {loading ? (
+              <CircularProgress
+                color="inherit"
+                className={classes.prgressColor}
+              />
+            ) : (
+              <>Send Request</>
+            )}
           </Button>
         </Form>
       </FormContainer>

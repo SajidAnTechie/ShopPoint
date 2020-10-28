@@ -6,10 +6,17 @@ import ErrorMessage from "../Components/Message/errorMessage";
 import CheckoutSteps from "../Components/CheckoutStep/CheckoutSteps";
 import { createOrder } from "../Actions/orderAction";
 import * as orderConstants from "../Constants/orderConstants";
-import { Button, CircularProgress } from "@material-ui/core/";
+import { Button, CircularProgress, makeStyles } from "@material-ui/core/";
+
+const useStyles = makeStyles((theme) => ({
+  prgressColor: {
+    color: "#fff",
+  },
+}));
 
 const PlaceOrder = ({ history }) => {
   const dispatch = useDispatch();
+  const classes = useStyles();
 
   const cart = useSelector((state) => state.cart);
 
@@ -153,12 +160,14 @@ const PlaceOrder = ({ history }) => {
                   variant="contained"
                   color="primary"
                   fullWidth
-                  disabled={cart.cartItems === 0}
+                  disabled={cart.cartItems === 0 || loading}
                   onClick={placeOrderHandler}
-                  disabled={loading}
                 >
                   {loading ? (
-                    <CircularProgress color="inherit" />
+                    <CircularProgress
+                      color="inherit"
+                      className={classes.prgressColor}
+                    />
                   ) : (
                     <>Place Order</>
                   )}

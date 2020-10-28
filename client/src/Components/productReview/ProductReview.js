@@ -29,6 +29,9 @@ const useStyles = makeStyles((theme) => ({
   selectEmpty: {
     marginTop: theme.spacing(2),
   },
+  prgressColor: {
+    color: "#fff",
+  },
 }));
 
 const ProductReview = ({ productId }) => {
@@ -159,9 +162,17 @@ const ProductReview = ({ productId }) => {
                     </Select>
                   </FormControl>
                   <div className="my-3">
-                    <Button variant="contained" color="primary" type="submit">
+                    <Button
+                      variant="contained"
+                      color="primary"
+                      type="submit"
+                      disabled={createReviewLoading}
+                    >
                       {createReviewLoading ? (
-                        <CircularProgress color="inherit" />
+                        <CircularProgress
+                          color="inherit"
+                          className={classes.prgressColor}
+                        />
                       ) : (
                         <>Submit</>
                       )}

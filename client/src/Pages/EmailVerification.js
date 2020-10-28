@@ -3,12 +3,24 @@ import { Form } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import ErrorMessage from "../Components/Message/errorMessage";
 import FormContainer from "../Components/FormContainer/FormContainer";
-import { TextField, Button, CircularProgress } from "@material-ui/core/";
+import {
+  TextField,
+  Button,
+  CircularProgress,
+  makeStyles,
+} from "@material-ui/core/";
 import * as userAction from "../Actions/userAction";
 import * as userConstants from "../Constants/userConstants";
 
+const useStyles = makeStyles((theme) => ({
+  prgressColor: {
+    color: "#fff",
+  },
+}));
+
 const EmailVerification = ({ location, history }) => {
   const [verificationCode, setVerificationCode] = useState("");
+  const classes = useStyles();
 
   const userAuthData = useSelector((state) => state.userLogin);
 
@@ -63,7 +75,14 @@ const EmailVerification = ({ location, history }) => {
             onClick={handleSubmit}
             disabled={loading}
           >
-            {loading ? <CircularProgress color="inherit" /> : <>Verify</>}
+            {loading ? (
+              <CircularProgress
+                color="inherit"
+                className={classes.prgressColor}
+              />
+            ) : (
+              <>Verify</>
+            )}
           </Button>
         </Form>
       </FormContainer>
