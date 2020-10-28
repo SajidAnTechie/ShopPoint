@@ -187,6 +187,7 @@ const UpdateUser = ({ match }) => {
                 variant="contained"
                 color="primary"
                 fullWidth
+                disabled={updateLoading}
               >
                 {updateLoading ? (
                   <CircularProgress color="inherit" />

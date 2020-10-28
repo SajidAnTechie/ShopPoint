@@ -61,6 +61,7 @@ const EmailVerification = ({ location, history }) => {
             color="primary"
             fullWidth
             onClick={handleSubmit}
+            disabled={loading}
           >
             {loading ? <CircularProgress color="inherit" /> : <>Verify</>}
           </Button>

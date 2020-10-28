@@ -13,6 +13,7 @@ import {
   ORDER_PAY_RESET,
   ORDER_DELIVER_RESET,
 } from "../Constants/orderConstants";
+import OrderLoader from "../Components/Loader/OrderLoader";
 
 const Order = ({ match }) => {
   const orderId = match.params.orderId;
@@ -80,7 +81,7 @@ const Order = ({ match }) => {
   };
 
   return loading ? (
-    <h4>Loading...</h4>
+    <OrderLoader />
   ) : error ? (
     <ErrorMessage header="Something went wrong" message={error} />
   ) : (

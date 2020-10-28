@@ -241,6 +241,7 @@ const EditProduct = ({ match }) => {
                 variant="contained"
                 color="primary"
                 fullWidth
+                disabled={EditProductLoading}
               >
                 {EditProductLoading ? (
                   <CircularProgress color="inherit" />

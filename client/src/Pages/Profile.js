@@ -62,6 +62,7 @@ const Profile = () => {
             variant="contained"
             color="primary"
             fullWidth
+            disabled={true}
           >
             Update
           </MeterialButton>
