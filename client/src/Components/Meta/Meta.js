@@ -12,7 +12,7 @@ const Meta = ({ title, description, keywords }) => {
 };
 
 Meta.defaultProps = {
-  title: "Welcome To ShoppingPoint",
+  title: "Welcome To ShopPoint",
   description: "We sell the best products for cheap",
   keywords: "clothes, buy readyMadeClothes, cheap latest clothes",
 };
