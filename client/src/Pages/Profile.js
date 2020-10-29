@@ -3,7 +3,7 @@ import { Table, Button, Row, Col, ListGroup, Card } from "react-bootstrap";
 import { LinkContainer } from "react-router-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import ErrorMessage from "../Components/Message/errorMessage";
-import { Button as MeterialButton } from "@material-ui/core/";
+//import { Button as MeterialButton } from "@material-ui/core/";
 import { authOrder } from "../Actions/orderAction";
 import TableLoader from "../Components/Loader/TableLoader";
 
@@ -53,20 +53,21 @@ const Profile = () => {
                 </Col>
               </Row>
             </ListGroup.Item>
+            {/* <ListGroup.Item>
+              <LinkContainer to="/updateUserDetails">
+                <MeterialButton
+                  type="button"
+                  variant="contained"
+                  color="primary"
+                  fullWidth
+                  disabled={true}
+                >
+                  Update
+                </MeterialButton>
+              </LinkContainer>
+            </ListGroup.Item> */}
           </ListGroup>
         </Card>
-
-        <LinkContainer to="/updateUserDetails">
-          <MeterialButton
-            type="button"
-            variant="contained"
-            color="primary"
-            fullWidth
-            disabled={true}
-          >
-            Update
-          </MeterialButton>
-        </LinkContainer>
       </Col>
       <Col md={9}>
         <h2>My Orders</h2>

@@ -2,6 +2,7 @@ import React from "react";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 import { Container } from "react-bootstrap";
 import Header from "./Components/Header";
+import Footer from "./Components/Footer/Footer";
 import Home from "./Pages/Home";
 import Product from "./Pages/Product";
 import Login from "./Pages/Login";
@@ -97,6 +98,7 @@ function App() {
           </Switch>
         </Container>
       </main>
+      <Footer />
     </BrowserRouter>
   );
 }
