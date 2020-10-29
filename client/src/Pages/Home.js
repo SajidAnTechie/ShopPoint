@@ -84,11 +84,11 @@ const Home = () => {
               </h1>
             </>
           ) : (
-            <div class="clearfix">
-              <span class="float-left">
+            <div className="clearfix">
+              <span className="float-left">
                 <h1>Latest Products({count})</h1>
               </span>
-              <span class="float-right">
+              <span className="float-right">
                 {" "}
                 <Filter
                   setCategory={setCategory}

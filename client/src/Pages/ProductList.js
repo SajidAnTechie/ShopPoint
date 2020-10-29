@@ -45,6 +45,9 @@ const useStyles = makeStyles((theme) => ({
   selectEmpty: {
     marginTop: theme.spacing(2),
   },
+  prgressColor: {
+    color: "#fff",
+  },
 }));
 
 const ProductList = () => {
@@ -105,7 +108,8 @@ const ProductList = () => {
     setOpenForm(false);
   };
 
-  const submitHandler = () => {
+  const submitHandler = (e) => {
+    e.preventDefault();
     if (
       name === "" ||
       category === "" ||
@@ -152,9 +156,9 @@ const ProductList = () => {
                 reset={productConstants.CREATE_PRODUCT_RESET}
               />
             )}
-            <Modal.Body className="show-grid">
-              <Container>
-                <Form onSubmit={submitHandler}>
+            <Form onSubmit={submitHandler}>
+              <Modal.Body className="show-grid">
+                <Container>
                   <Row>
                     <Col xs={12} md={6}>
                       <TextField
@@ -287,30 +291,34 @@ const ProductList = () => {
                       />
                     </Col>
                   </Row>
-                </Form>
-              </Container>
-            </Modal.Body>
-            <Modal.Footer>
-              <MaterialButton
-                type="submit"
-                variant="contained"
-                color="primary"
-                className="mr-2"
-              >
-                {createLoading ? (
-                  <CircularProgress color="inherit" />
-                ) : (
-                  <>Submit</>
-                )}
-              </MaterialButton>{" "}
-              <MaterialButton
-                variant="contained"
-                color="primary"
-                onClick={cancelCreateProduct}
-              >
-                Close
-              </MaterialButton>
-            </Modal.Footer>
+                </Container>
+              </Modal.Body>
+              <Modal.Footer>
+                <MaterialButton
+                  type="submit"
+                  variant="contained"
+                  color="primary"
+                  className="mr-2"
+                  disabled={createLoading}
+                >
+                  {createLoading ? (
+                    <CircularProgress
+                      color="inherit"
+                      className={classes.prgressColor}
+                    />
+                  ) : (
+                    <>Submit</>
+                  )}
+                </MaterialButton>{" "}
+                <MaterialButton
+                  variant="contained"
+                  color="primary"
+                  onClick={cancelCreateProduct}
+                >
+                  Close
+                </MaterialButton>
+              </Modal.Footer>
+            </Form>
           </Modal>
         </>
       );

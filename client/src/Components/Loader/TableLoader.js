@@ -10,8 +10,8 @@ const TableLoader = () => {
           {Array(7)
             .fill()
             .map((data, index) => (
-              <th>
-                <SkeletonTheme color="lightGray" key={index}>
+              <th key={index}>
+                <SkeletonTheme color="lightGray">
                   <Skeleton height={25} />
                 </SkeletonTheme>
               </th>

@@ -1,13 +1,13 @@
 {
-  "name": "E-commerce",
+  "name": "e-commerce",
   "version": "1.0.0",
-  "description": "E-commerce site",
+  "description": "A mern stack e-commerce app",
   "main": "app.js",
   "author": "Sajid Ansari",
   "license": "MIT",
   "scripts": {
     "start": "node app.js",
-    "dev": "nodemon app"
+    "dev": "node app"
   },
   "dependencies": {
     "@sendgrid/mail": "^7.3.0",
