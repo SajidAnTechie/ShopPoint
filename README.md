@@ -30,7 +30,7 @@
 - User management
 - Order management
 - Order details page
-- Orders as delivered option
+- Mark orders as delivered option
 
 ## Tech Stack 💻
 
