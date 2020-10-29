@@ -8,7 +8,7 @@
   "scripts": {
     "start": "node app.js",
     "dev": "node app",
-    "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false yarn add --prefix client && yarn run build --prefix client"
+    "heroku-postbuild": "YARN_PRODUCTION=false yarn add --prefix client && yarn run build --prefix client"
   },
   "dependencies": {
     "@sendgrid/mail": "^7.3.0",
