@@ -102,7 +102,7 @@ const PlaceOrder = ({ history }) => {
                       <Row>
                         <Col md={1}>
                           <Image
-                            src={`http://localhost:5000/${item.productImage}`}
+                            src={`${item.productImage}`}
                             alt={item.productName}
                             fluid
                             rounded

@@ -53,7 +53,7 @@ const Cart = ({ history }) => {
                 <Row>
                   <Col md={2}>
                     <Image
-                      src={item.productImage}
+                      src={`${item.productImage}`}
                       alt={item.name}
                       fluid
                       rounded

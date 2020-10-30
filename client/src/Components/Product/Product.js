@@ -9,7 +9,7 @@ const Product = ({ product }) => {
     <Card className="my-3 p-3 rounded  animate__animated animate__fadeInUp">
       <Link to={`/product/${product._id}`}>
         <Card.Img
-          src={`http://localhost:5000/${product.productImage}`}
+          src={`https://shoppoint.herokuapp.com/${product.productImage}`}
           variant="top"
         />
       </Link>
