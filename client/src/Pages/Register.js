@@ -2,17 +2,17 @@ import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { Form, Row, Col } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
-import ErrorMessage from "../Components/Message/errorMessage";
-import SuccessMessage from "../Components/Message/successMessage";
-import FormContainer from "../Components/FormContainer/FormContainer";
+import ErrorMessage from "../components/Message/errorMessage";
+import SuccessMessage from "../components/Message/successMessage";
+import FormContainer from "../components/FormContainer/FormContainer";
 import {
   TextField,
   Button,
   CircularProgress,
   makeStyles,
 } from "@material-ui/core/";
-import * as userAction from "../Actions/userAction";
-import * as userConstants from "../Constants/userConstants";
+import * as userAction from "../actions/userAction";
+import * as userConstants from "../constants/userConstants";
 
 const useStyles = makeStyles((theme) => ({
   prgressColor: {

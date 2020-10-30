@@ -1,5 +1,5 @@
 import axios from "axios";
-import * as productConstants from "../Constants/productConstants";
+import * as productConstants from "../constants/productConstants";
 
 export const listProducts = (
   searchProductKey,

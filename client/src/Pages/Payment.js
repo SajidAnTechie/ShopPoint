@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import { Form } from "react-bootstrap";
 import { useDispatch } from "react-redux";
-import FormContainer from "../Components/FormContainer/FormContainer";
-import CheckoutSteps from "../Components/CheckoutStep/CheckoutSteps";
-import { savePaymentMethod } from "../Actions/cartAction";
+import FormContainer from "../components/FormContainer/FormContainer";
+import CheckoutSteps from "../components/CheckoutStep/CheckoutSteps";
+import { savePaymentMethod } from "../actions/cartAction";
 import {
   Button,
   Radio,

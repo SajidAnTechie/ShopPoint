@@ -2,10 +2,10 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { Row, Col, Image, ListGroup, Card } from "react-bootstrap";
-import * as productAction from "../Actions/productAction";
-import ErrorMessage from "../Components/Message/errorMessage";
-import ProductReview from "../Components/ProductReview/ProductReview";
-import Rating from "../Components/Rating/Rating";
+import * as productAction from "../actions/productAction";
+import ErrorMessage from "../components/Message/errorMessage";
+import ProductReview from "../components/ProductReview/ProductReview";
+import Rating from "../components/Rating/Rating";
 import {
   Select,
   Button,
@@ -13,9 +13,9 @@ import {
   makeStyles,
   MenuItem,
 } from "@material-ui/core/";
-import * as productConstants from "../Constants/productConstants";
-import SinglePageLoader from "../Components/Loader/SinglePageLoader";
-import { addToCart } from "../Actions/cartAction";
+import * as productConstants from "../constants/productConstants";
+import SinglePageLoader from "../components/Loader/SinglePageLoader";
+import { addToCart } from "../actions/cartAction";
 
 const useStyles = makeStyles((theme) => ({
   typography: {

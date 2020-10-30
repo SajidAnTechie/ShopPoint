@@ -1,4 +1,4 @@
-import * as cartConstants from "../Constants/cartConstants";
+import * as cartConstants from "../constants/cartConstants";
 
 export const cartReducer = (
   state = { cartItems: [], shippingAddress: {}, paymentMethod: "" },

@@ -2,9 +2,9 @@ import React, { useEffect } from "react";
 import { Table, Button } from "react-bootstrap";
 import { LinkContainer } from "react-router-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
-import ErrorMessage from "../Components/Message/errorMessage";
-import { listOrders } from "../Actions/orderAction";
-import TableLoader from "../Components/Loader/TableLoader";
+import ErrorMessage from "../components/Message/errorMessage";
+import { listOrders } from "../actions/orderAction";
+import TableLoader from "../components/Loader/TableLoader";
 
 const OrderList = () => {
   const orderList = useSelector((state) => state.orderList);

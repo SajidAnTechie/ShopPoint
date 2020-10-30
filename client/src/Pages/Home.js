@@ -2,12 +2,12 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { Row, Col } from "react-bootstrap";
-import * as productAction from "../Actions/productAction";
-import Product from "../Components/Product/Product";
-import Filter from "../Components/Filter/Filter";
-import ErrorMessage from "../Components/Message/errorMessage";
-import HomeLoader from "../Components/Loader/HomeLoader";
-import Meta from "../Components/Meta/Meta";
+import * as productAction from "../actions/productAction";
+import Product from "../components/Product/Product";
+import Filter from "../components/Filter/Filter";
+import ErrorMessage from "../components/Message/errorMessage";
+import HomeLoader from "../components/Loader/HomeLoader";
+import Meta from "../components/Meta/Meta";
 
 const Home = () => {
   const [sort, setSort] = useState([]);

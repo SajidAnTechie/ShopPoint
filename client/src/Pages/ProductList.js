@@ -10,9 +10,9 @@ import {
   Container,
 } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
-import ErrorMessage from "../Components/Message/errorMessage";
-import SuccessMessage from "../Components/Message/successMessage";
-import TableLoader from "../Components/Loader/TableLoader";
+import ErrorMessage from "../components/Message/errorMessage";
+import SuccessMessage from "../components/Message/successMessage";
+import TableLoader from "../components/Loader/TableLoader";
 import {
   Button as MaterialButton,
   TextField,
@@ -27,8 +27,8 @@ import {
   listProductsForAdmin,
   deleteProduct,
   createProduct,
-} from "../Actions/productAction";
-import * as productConstants from "../Constants/productConstants";
+} from "../actions/productAction";
+import * as productConstants from "../constants/productConstants";
 import { confirmAlert } from "react-confirm-alert"; // Import
 import "react-confirm-alert/src/react-confirm-alert.css";
 

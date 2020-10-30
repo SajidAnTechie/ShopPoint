@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { Form } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
-import FormContainer from "../Components/FormContainer/FormContainer";
-import * as userAction from "../Actions/userAction";
-import * as userConstants from "../Constants/userConstants";
-import ErrorMessage from "../Components/Message/errorMessage";
+import FormContainer from "../components/FormContainer/FormContainer";
+import * as userAction from "../actions/userAction";
+import * as userConstants from "../constants/userConstants";
+import ErrorMessage from "../components/Message/errorMessage";
 import {
   TextField,
   Button,
@@ -16,7 +16,7 @@ import {
   makeStyles,
 } from "@material-ui/core/";
 import { Link, Redirect } from "react-router-dom";
-import confirmationImg from "../Assests/confirmation.png";
+import confirmationImg from "../assests/confirmation.png";
 import { confirmAlert } from "react-confirm-alert"; // Import
 import "react-confirm-alert/src/react-confirm-alert.css";
 

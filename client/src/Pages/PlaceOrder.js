@@ -2,10 +2,10 @@ import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { Row, Col, ListGroup, Image, Card } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
-import ErrorMessage from "../Components/Message/errorMessage";
-import CheckoutSteps from "../Components/CheckoutStep/CheckoutSteps";
-import { createOrder } from "../Actions/orderAction";
-import * as orderConstants from "../Constants/orderConstants";
+import ErrorMessage from "../components/Message/errorMessage";
+import CheckoutSteps from "../components/CheckoutStep/CheckoutSteps";
+import { createOrder } from "../actions/orderAction";
+import * as orderConstants from "../constants/orderConstants";
 import { Button, CircularProgress, makeStyles } from "@material-ui/core/";
 
 const useStyles = makeStyles((theme) => ({

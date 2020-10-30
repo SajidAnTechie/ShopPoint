@@ -2,10 +2,10 @@ import React, { useEffect } from "react";
 import { Table, Button, Row, Col, ListGroup, Card } from "react-bootstrap";
 import { LinkContainer } from "react-router-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
-import ErrorMessage from "../Components/Message/errorMessage";
+import ErrorMessage from "../components/Message/errorMessage";
 //import { Button as MeterialButton } from "@material-ui/core/";
-import { authOrder } from "../Actions/orderAction";
-import TableLoader from "../Components/Loader/TableLoader";
+import { authOrder } from "../actions/orderAction";
+import TableLoader from "../components/Loader/TableLoader";
 
 const Profile = () => {
   const dispatch = useDispatch();

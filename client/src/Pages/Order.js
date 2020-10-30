@@ -5,15 +5,15 @@ import { Link } from "react-router-dom";
 import { Row, Col, ListGroup, Image, Card } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { Button } from "@material-ui/core/";
-import ErrorMessage from "../Components/Message/errorMessage";
-import Message from "../Components/InfoMessage/Message";
-import Loader from "../Components/Loader/Loader";
-import { getOrder, payOrder, deliverOrder } from "../Actions/orderAction";
+import ErrorMessage from "../components/Message/errorMessage";
+import Message from "../components/InfoMessage/Message";
+import Loader from "../components/Loader/Loader";
+import { getOrder, payOrder, deliverOrder } from "../actions/orderAction";
 import {
   ORDER_PAY_RESET,
   ORDER_DELIVER_RESET,
-} from "../Constants/orderConstants";
-import OrderLoader from "../Components/Loader/OrderLoader";
+} from "../constants/orderConstants";
+import OrderLoader from "../components/Loader/OrderLoader";
 
 const Order = ({ match }) => {
   const orderId = match.params.orderId;

@@ -1,5 +1,5 @@
 import axios from "axios";
-import * as userConstants from "../Constants/userConstants";
+import * as userConstants from "../constants/userConstants";
 
 export const auth = (email, password) => async (dispatch) => {
   try {

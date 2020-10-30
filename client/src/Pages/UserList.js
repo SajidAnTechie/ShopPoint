@@ -2,12 +2,12 @@ import React, { useEffect, useState } from "react";
 import { LinkContainer } from "react-router-bootstrap";
 import { Table, Button } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
-import ErrorMessage from "../Components/Message/errorMessage";
-import SuccessMessage from "../Components/Message/successMessage";
-import { userList, userDelete } from "../Actions/userAction";
-import * as userConstants from "../Constants/userConstants";
+import ErrorMessage from "../components/Message/errorMessage";
+import SuccessMessage from "../components/Message/successMessage";
+import { userList, userDelete } from "../actions/userAction";
+import * as userConstants from "../constants/userConstants";
 import { Button as MaterialButton } from "@material-ui/core/";
-import TableLoader from "../Components/Loader/TableLoader";
+import TableLoader from "../components/Loader/TableLoader";
 import { confirmAlert } from "react-confirm-alert"; // Import
 import "react-confirm-alert/src/react-confirm-alert.css";
 
