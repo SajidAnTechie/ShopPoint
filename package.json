@@ -8,7 +8,7 @@
   "scripts": {
     "start": "NODE_ENV=production node app.js",
     "dev": "node app",
-    "heroku-postbuild": "YARN_PRODUCTION=false cd client && yarn install && yarn build"
+    "heroku-postbuild": "YARN_PRODUCTION=false cd client && yarn install"
   },
   "dependencies": {
     "@sendgrid/mail": "^7.3.0",
