@@ -8,7 +8,7 @@ import {
   deleteProduct,
   createProduct,
   EditProduct,
-} from "./reducers/productReducer";
+} from "./reducers/productReducers";
 
 import {
   userLogin,
@@ -19,8 +19,8 @@ import {
   getUser,
   forgotPassword,
   resetPassword,
-} from "./reducers/userReducer";
-import { cartReducer } from "./reducers/cartReducer";
+} from "./reducers/userReducers";
+import { cartReducer } from "./reducers/cartReducers";
 import {
   createOrderReducer,
   getOrder,
@@ -28,7 +28,7 @@ import {
   orderDeliverReducer,
   authOrders,
   listOrders,
-} from "./reducers/orderReducer";
+} from "./reducers/orderReducers";
 
 const rootReducer = combineReducers({
   productList: listProducts,
