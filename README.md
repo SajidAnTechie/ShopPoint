@@ -54,7 +54,7 @@
 **1. Clone this repo by running the following command :-**
 
 ```bash
- git clone https://github.com/SajidAnTechie/ShopingPoint
+ git clone https://github.com/SajidAnTechie/ShopPoint
  cd ShoppingPoint
 ```
 
