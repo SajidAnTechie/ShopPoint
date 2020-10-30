@@ -77,7 +77,11 @@ const ProductDetails = ({ match, history }) => {
         <>
           <Row>
             <Col md={6}>
-              <Image src={`${product.productImage}`} alt={product.name} fluid />
+              <Image
+                src={`https://shoppoint.herokuapp.com/${product.productImage}`}
+                alt={product.name}
+                fluid
+              />
             </Col>
             <Col md={3}>
               <ListGroup variant="flush">
