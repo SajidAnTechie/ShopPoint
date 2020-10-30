@@ -13,7 +13,7 @@ const verifyEmail = async (options) => {
       "><h1 style=" +
       "font-weight:500>Hey, " +
       options.name +
-      "<br>Welcome to ShoppingPonit</h1><h1>Thanks for Signing up on our app</h1><h3>Your Code for verification is : " +
+      "<br>Welcome to ShopPonit</h1><h1>Thanks for Signing up on our app</h1><h3>Your Code for verification is : " +
       options.code +
       " </h3></div><p>If this request is not made by you kindly ignore this mail.</p><p>Regards, <strong>Sajid Ansari(Owner)</strong></p>",
   };

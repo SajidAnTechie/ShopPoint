@@ -6,9 +6,9 @@
   "author": "Sajid Ansari",
   "license": "MIT",
   "scripts": {
-    "start": "node app.js",
+    "start": "NODE_ENV=production node app.js",
     "dev": "node app",
-    "heroku-postbuild": "YARN_PRODUCTION=false yarn install --prefix client && yarn build --prefix client"
+    "heroku-postbuild": "YARN_PRODUCTION=false cd client && yarn install && yarn build"
   },
   "dependencies": {
     "@sendgrid/mail": "^7.3.0",
