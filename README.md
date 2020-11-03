@@ -26,6 +26,10 @@
 - PayPal / credit card integration
 - Database seeder (products, users, reviews, & orders)
 
+**New features (Added)**
+
+- Print User orders as pdf
+
 **Admin features**
 
 - Product management
