@@ -95,6 +95,7 @@ const UserList = () => {
                 <th>ID</th>
                 <th>NAME</th>
                 <th>EMAIL</th>
+                <th>Verified</th>
                 <th>Role</th>
                 <th>Action</th>
               </tr>
@@ -106,6 +107,13 @@ const UserList = () => {
                   <td>{user.name}</td>
                   <td>
                     <a href={`mailto:${user.email}`}>{user.email}</a>
+                  </td>
+                  <td>
+                    {user.verify ? (
+                      <i class="fas fa-check" style={{ color: "#43BE31" }}></i>
+                    ) : (
+                      <i className="fas fa-times" style={{ color: "red" }}></i>
+                    )}
                   </td>
                   <td>{user.role}</td>
 
