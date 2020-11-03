@@ -31,9 +31,9 @@ h2 {
   background-color: #303f9f !important;
   font-weight: bold !important;
 }
-/* .MuiButton-contained.Mui-disabled {
+.MuiButton-contained.Mui-disabled {
   color: white !important;
-} */
+}
 
 /* ConfrimAlert */
 
