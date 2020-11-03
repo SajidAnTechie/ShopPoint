@@ -86,7 +86,7 @@ const Home = () => {
           ) : (
             <div className="clearfix">
               <span className="float-left">
-                <h1>Latest Products({count})</h1>
+                <h1>Latest Products ({count})</h1>
               </span>
               <span className="float-right">
                 {" "}

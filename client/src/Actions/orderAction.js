@@ -175,10 +175,12 @@ export const authOrder = () => async (dispatch, getState) => {
 
     await axios.get(`/api/v1/order/authOrders`, config).then((resp) => {
       const data = resp.data.data;
+      const count = resp.data.count;
 
       dispatch({
         type: orderConstants.AUTH_ORDER_FETCH_SUCCESS,
         payload: data,
+        total: count,
       });
     });
   } catch (error) {

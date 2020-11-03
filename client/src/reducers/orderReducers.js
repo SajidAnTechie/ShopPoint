@@ -96,6 +96,7 @@ export const authOrders = (state = { orders: [] }, action) => {
       return {
         success: true,
         orders: action.payload,
+        count: action.total,
       };
     case orderConstants.AUTH_ORDER_FETCH_FAIL:
       return {

@@ -81,7 +81,7 @@ const UserList = () => {
         />
       )}
 
-      <h1>Users({count})</h1>
+      <h1>Users ({count})</h1>
 
       {loading ? (
         <TableLoader />
