@@ -156,7 +156,7 @@ const OrderList = () => {
                       ...orders.map((o, i) => [
                         i + 1,
                         o._id,
-                        order.userId && order.userId.name,
+                        o.userId && o.userId.name,
                         o.createdAt.substring(0, 10),
                         o.totalPrice,
                         o.isPaid ? o.paidAt.substring(0, 10) : "Not paid",
@@ -167,7 +167,7 @@ const OrderList = () => {
                     ],
                   },
 
-                  fontSize: 10,
+                  fontSize: 9,
                   alignment: "center",
                 }
               : null,

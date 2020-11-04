@@ -10,6 +10,10 @@ import { Button as MaterialButton } from "@material-ui/core/";
 import TableLoader from "../components/Loader/TableLoader";
 import { confirmAlert } from "react-confirm-alert"; // Import
 import "react-confirm-alert/src/react-confirm-alert.css";
+import Print from "../components/Print/Print";
+import pdfMake from "pdfmake/build/pdfmake";
+import pdfFonts from "pdfmake/build/vfs_fonts";
+pdfMake.vfs = pdfFonts.pdfMake.vfs;
 
 const UserList = () => {
   const dispatch = useDispatch();
@@ -20,6 +24,9 @@ const UserList = () => {
 
   const userDeleteDetails = useSelector((state) => state.userDeleteDetails);
   const { success: deleteSuccess, error: deleteFail } = userDeleteDetails;
+
+  const userLogin = useSelector((state) => state.userLogin);
+  const { userInfo } = userLogin;
 
   useEffect(() => {
     dispatch(userList(initialLoading));
@@ -64,6 +71,184 @@ const UserList = () => {
     });
   };
 
+  const printAs = (e) => {
+    const downloadAs = e.target.value;
+
+    switch (downloadAs) {
+      case "pdf":
+        var docDefinition = {
+          content: [
+            //Header
+            {
+              table: {
+                widths: ["auto", "*"],
+
+                body: [
+                  [
+                    {
+                      text: "SHOPPOINT",
+                      style: "mainheader",
+                      bold: true,
+                      marginTop: 10,
+                    },
+
+                    {
+                      width: "*",
+                      style: "usersOrders",
+                      marginBottom: 30,
+                      stack: [
+                        {
+                          style: "h2",
+                          text: `Name: ${userInfo.name}`,
+                        },
+                        {
+                          style: "h2",
+                          text: `Email: ${userInfo.email}`,
+                        },
+                      ],
+                    },
+                  ],
+                ],
+              },
+              layout: {
+                hLineWidth: function (line) {
+                  return line === 1;
+                },
+                vLineWidth: function () {
+                  return 0;
+                },
+                paddingBottom: function () {
+                  return 5;
+                },
+              },
+            },
+
+            //Vitals Details
+            {
+              style: "header",
+              table: {
+                widths: "*",
+                body: [
+                  [
+                    {
+                      border: ["#5bc0de", false, false, false],
+                      text: "Users List",
+                    },
+                  ],
+                ],
+              },
+            },
+
+            users.length > 0
+              ? {
+                  layout: {
+                    hLineWidth: function () {
+                      return 0;
+                    },
+                    vLineWidth: function () {
+                      return 0;
+                    },
+                    paddingBottom: function () {
+                      return 5;
+                    },
+                  },
+                  table: {
+                    headerRows: 1,
+                    body: [
+                      [
+                        {
+                          text: "S.No",
+                          bold: true,
+                          fillColor: "#2B2B52",
+                          color: "white",
+                        },
+                        {
+                          text: "ID",
+                          bold: true,
+                          fillColor: "#2B2B52",
+                          color: "white",
+                        },
+                        {
+                          text: "NAME",
+                          bold: true,
+                          fillColor: "#2B2B52",
+                          color: "white",
+                        },
+                        {
+                          text: "EMAIL",
+                          bold: true,
+                          fillColor: "#2B2B52",
+                          color: "white",
+                        },
+                        {
+                          text: "VERIFIED",
+                          bold: true,
+                          fillColor: "#2B2B52",
+                          color: "white",
+                        },
+                        {
+                          text: "ROLE",
+                          bold: true,
+                          fillColor: "#2B2B52",
+                          color: "white",
+                        },
+                        {
+                          text: "DATE",
+                          bold: true,
+                          fillColor: "#2B2B52",
+                          color: "white",
+                        },
+                      ],
+
+                      ...users.map((u, i) => [
+                        i + 1,
+                        u._id,
+                        u.name,
+                        u.email,
+                        u.verify ? "Verified" : "Not paid",
+                        u.role,
+                        u.createdAt.substring(0, 10),
+                      ]),
+                    ],
+                  },
+
+                  fontSize: 8,
+                  alignment: "center",
+                }
+              : null,
+          ],
+          styles: {
+            header: {
+              fontSize: 12,
+              marginBottom: 20,
+              marginTop: 20,
+              bold: true,
+            },
+            mainheader: {
+              fontSize: 15,
+            },
+
+            usersOrders: {
+              marginLeft: 315,
+            },
+
+            h2: {
+              marginTop: 5,
+              fontSize: 7,
+            },
+          },
+        };
+        pdfMake.createPdf(docDefinition).download("usersList.pdf");
+
+        break;
+      case "excel":
+        break;
+
+      default:
+        break;
+    }
+  };
+
   return (
     <>
       {deleteSuccess && (
@@ -80,8 +265,16 @@ const UserList = () => {
           reset={userConstants.USER_DELETE_RESET}
         />
       )}
+      <div className="clearfix">
+        <span className="float-left">
+          <h1>Users ({count})</h1>
+        </span>
 
-      <h1>Users ({count})</h1>
+        <span className="float-right">
+          {" "}
+          <Print printAs={printAs} />
+        </span>
+      </div>
 
       {loading ? (
         <TableLoader />
@@ -95,9 +288,10 @@ const UserList = () => {
                 <th>ID</th>
                 <th>NAME</th>
                 <th>EMAIL</th>
-                <th>Verified</th>
-                <th>Role</th>
-                <th>Action</th>
+                <th>VERIFIED</th>
+                <th>ROLE</th>
+                <th>DATE</th>
+                <th>ACTION</th>
               </tr>
             </thead>
             <tbody>
@@ -119,6 +313,7 @@ const UserList = () => {
                     )}
                   </td>
                   <td>{user.role}</td>
+                  <td>{user.createdAt.substring(0, 10)}</td>
 
                   <td>
                     <LinkContainer to={`/admin/user/${user._id}/edit`}>
