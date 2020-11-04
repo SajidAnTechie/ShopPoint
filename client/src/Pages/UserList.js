@@ -110,7 +110,10 @@ const UserList = () => {
                   </td>
                   <td>
                     {user.verify ? (
-                      <i class="fas fa-check" style={{ color: "#43BE31" }}></i>
+                      <i
+                        className="fas fa-check"
+                        style={{ color: "#43BE31" }}
+                      ></i>
                     ) : (
                       <i className="fas fa-times" style={{ color: "red" }}></i>
                     )}

@@ -86,7 +86,6 @@ const Profile = () => {
                   [
                     {
                       border: ["#5bc0de", false, false, false],
-                      fillColor: "#D3CBFD",
                       text: "Order Details",
                     },
                   ],
@@ -114,26 +113,38 @@ const Profile = () => {
                         {
                           text: "S.No",
                           bold: true,
+                          fillColor: "#2B2B52",
+                          color: "white",
                         },
                         {
                           text: "ID",
                           bold: true,
+                          fillColor: "#2B2B52",
+                          color: "white",
                         },
                         {
                           text: "DATE",
                           bold: true,
+                          fillColor: "#2B2B52",
+                          color: "white",
                         },
                         {
                           text: "TOTAL PRICE",
                           bold: true,
+                          fillColor: "#2B2B52",
+                          color: "white",
                         },
                         {
                           text: "PAID",
                           bold: true,
+                          fillColor: "#2B2B52",
+                          color: "white",
                         },
                         {
                           text: "DELIVERED",
                           bold: true,
+                          fillColor: "#2B2B52",
+                          color: "white",
                         },
                       ],
 
@@ -151,7 +162,7 @@ const Profile = () => {
                   },
 
                   fontSize: 10,
-                  textAlign: "center",
+                  alignment: "center",
                 }
               : null,
           ],
@@ -240,6 +251,7 @@ const Profile = () => {
           <span className="float-left">
             <h1>My Orders ({count})</h1>
           </span>
+
           <span className="float-right">
             {" "}
             <Print printAs={printAs} />
