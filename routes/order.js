@@ -19,15 +19,17 @@ const Order = require("../models/Order");
 const router = require("express").Router();
 
 router.use(protect);
+const { permission } = require("../middleware/auth");
 
 router
   .route("/")
   .get(
-    advanceResults(Order),
-    {
+    permission("admin"),
+    advanceResults(Order, {
       path: "userId",
       select: "name email",
-    },
+    }),
+
     getOrders
   )
   .post(createOrder);

@@ -29,6 +29,8 @@
 **New features (Added)**
 
 - Print User orders as pdf
+- Print UserList as pdf
+- Print OrderList as pdf
 
 **Admin features**
 
