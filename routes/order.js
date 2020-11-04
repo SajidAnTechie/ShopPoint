@@ -20,7 +20,17 @@ const router = require("express").Router();
 
 router.use(protect);
 
-router.route("/").get(advanceResults(Order), getOrders).post(createOrder);
+router
+  .route("/")
+  .get(
+    advanceResults(Order),
+    {
+      path: "userId",
+      select: "name email",
+    },
+    getOrders
+  )
+  .post(createOrder);
 router.route("/authOrders").get(authOrder);
 
 router.route("/:orderId").get(getOrder).put(updateOrder).delete(deleteOrder);
