@@ -1,2 +1,4 @@
 node_modules/
-data/
+client/build/
+data/reviews.json
+data/users.json
