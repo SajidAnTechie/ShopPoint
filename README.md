@@ -89,6 +89,10 @@ FILE_UPLOAD_SIZE=1000000
 JWT_SECRET=your key
 JWT_EXPIREIN=30d
 
+CLOUD_NAME=your cloudinary name
+API_KEY=your cloudinary api key
+API_SECRET=your cloudinary api secret key
+
 SEND_GRID_KEY=your sendgrid api key
 
 FROM_EMAIL=your sender email
