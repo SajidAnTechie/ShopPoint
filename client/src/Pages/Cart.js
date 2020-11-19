@@ -53,7 +53,7 @@ const Cart = ({ history }) => {
                 <Row>
                   <Col md={2}>
                     <Image
-                      src={`https://shoppoint.herokuapp.com/${item.productImage}`}
+                      src={item.productImage}
                       alt={item.name}
                       fluid
                       rounded

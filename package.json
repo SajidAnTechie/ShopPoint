@@ -13,6 +13,7 @@
   "dependencies": {
     "@sendgrid/mail": "^7.3.0",
     "bcrypt": "^5.0.0",
+    "cloudinary": "^1.23.0",
     "colors": "^1.4.0",
     "cors": "^2.8.5",
     "dotenv": "^8.2.0",

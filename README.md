@@ -54,6 +54,7 @@
 
 - [PayPal API](https://developer.paypal.com/)
 - [Send Grid API](https://sendgrid.com/)
+- [Cloudinary API](https://cloudinary.com/)
 
 ## Installation :zap:
 

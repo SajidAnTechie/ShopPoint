@@ -2,6 +2,13 @@ const asyncHandler = require("../middleware/async");
 const createError = require("../utilis/createError");
 const path = require("path");
 const Product = require("../models/Product");
+const cloudinary = require("cloudinary").v2;
+
+cloudinary.config({
+  cloud_name: process.env.CLOUD_NAME,
+  api_key: process.env.API_KEY,
+  api_secret: process.env.API_SECRET,
+});
 
 const getProducts = asyncHandler(async (req, res, next) => {
   const keyWord = req.query.keyWord;
@@ -41,6 +48,8 @@ const getProduct = asyncHandler(async (req, res, next) => {
 const createProduct = asyncHandler(async (req, res, next) => {
   if (!req.files) throw createError(400, "Please add a photo");
 
+  console.log(req.files);
+
   const file = req.files.productImage;
 
   //Check file type
@@ -54,20 +63,18 @@ const createProduct = asyncHandler(async (req, res, next) => {
       `Please upload a image of size less than ${process.env.FILE_UPLOAD_SIZE}`
     );
 
-  const uniqueSuffix = Date.now() + "-" + Math.round(Math.random() * 1e9);
-
-  const fileName = `photo${uniqueSuffix}${path.parse(file.name).ext}`;
-
-  const product = await Product.create({
-    ...req.body,
-    productImage: `uploads/product/${fileName}`,
-  });
-  //Upload file to path public/uploads/product
-  file.mv(`${process.env.FILE_UPLOAD_PATH}/${fileName}`, async (err) => {
-    if (err) throw err;
-
-    res.status(200).send({ status: "success", data: product });
-  });
+  cloudinary.uploader.upload(
+    file.tempFilePath,
+    { use_filename: true, folder: "products" },
+    async function (error, result) {
+      if (error) throw createError(409, `failed to create product`);
+      const product = await Product.create({
+        ...req.body,
+        productImage: result.url,
+      });
+      res.status(200).send({ status: "success", data: product });
+    }
+  );
 });
 
 const updateProduct = asyncHandler(async (req, res, next) => {

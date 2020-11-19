@@ -142,7 +142,7 @@ const Order = ({ match }) => {
                             <Row>
                               <Col md={1}>
                                 <Image
-                                  src={`https://shoppoint.herokuapp.com/${item.productImage}`}
+                                  src={item.productImage}
                                   alt={item.productName}
                                   fluid
                                   rounded
