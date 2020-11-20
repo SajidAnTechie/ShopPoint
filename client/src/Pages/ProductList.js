@@ -93,16 +93,15 @@ const ProductList = () => {
 
       dispatch({ type: productConstants.CREATE_PRODUCT_RESET });
     }
-    dispatch(listProductsForAdmin(initialLoading));
-    // eslint-disable-next-line
-  }, [dispatch, deleteSuccess, createSuccess]);
 
-  useEffect(() => {
     if (success && initialLoading) {
       setInitialLoading(false);
+    } else {
+      dispatch(listProductsForAdmin(initialLoading));
     }
+
     // eslint-disable-next-line
-  }, [dispatch, success]);
+  }, [dispatch, deleteSuccess, success, createSuccess]);
 
   const cancelCreateProduct = () => {
     setOpenForm(false);

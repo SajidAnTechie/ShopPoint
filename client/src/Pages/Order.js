@@ -59,18 +59,15 @@ const Order = ({ match }) => {
   }, [dispatch, orderId, successPay, successDeliver, order]);
 
   useEffect(() => {
-    dispatch({ type: ORDER_PAY_RESET });
-    dispatch({ type: ORDER_DELIVER_RESET });
-    dispatch(getOrder(orderId, initialLoading));
-    // eslint-disable-next-line
-  }, [dispatch, successPay, successDeliver]);
-
-  useEffect(() => {
     if (success && initialLoading) {
       setInitialLoading(false);
+    } else {
+      dispatch({ type: ORDER_PAY_RESET });
+      dispatch({ type: ORDER_DELIVER_RESET });
+      dispatch(getOrder(orderId, initialLoading));
     }
     // eslint-disable-next-line
-  }, [dispatch, success]);
+  }, [dispatch, successPay, success, successDeliver]);
 
   const successPaymentHandler = (paymentResult) => {
     dispatch(payOrder(orderId, paymentResult));
