@@ -13,7 +13,7 @@
 - Full featured shopping cart
 - Product reviews and ratings
 - Filtering (short by, category, & price range)
-- Account Verification
+- Account Verification (2 factor authentication using email)
 - Password Reset (Forget Password)
 - Token based authentication
 - Product search feature
@@ -62,7 +62,7 @@
 
 ```bash
  git clone https://github.com/SajidAnTechie/ShopPoint
- cd ShoppingPoint
+ cd ShopPoint
 ```
 
 **2. Now install all the required packages(frontend & backend) by running the following commands :-**
