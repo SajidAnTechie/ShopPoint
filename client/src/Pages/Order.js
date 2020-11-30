@@ -27,13 +27,19 @@ const Order = ({ match }) => {
   const { order, loading, error, success } = orderDetails;
 
   const orderPay = useSelector((state) => state.orderPay);
-  const { loading: loadingPay, success: successPay } = orderPay;
+  const { loading: loadingPay, success: successPayMessage } = orderPay;
 
   const orderDeliver = useSelector((state) => state.orderDeliver);
   const { loading: loadingDeliver, success: successDeliver } = orderDeliver;
 
   const userLogin = useSelector((state) => state.userLogin);
   const { userInfo } = userLogin;
+
+  const queryParams = new URLSearchParams(window.location.search);
+
+  const refId = queryParams.get("refId")
+    ? queryParams.get("refId").trim()
+    : null;
 
   useEffect(() => {
     const addPayPalScript = async () => {
@@ -56,7 +62,7 @@ const Order = ({ match }) => {
       }
     }
     // eslint-disable-next-line
-  }, [dispatch, orderId, successPay, successDeliver, order]);
+  }, [dispatch, orderId, successPayMessage, successDeliver, order]);
 
   useEffect(() => {
     if (success && initialLoading) {
@@ -67,7 +73,14 @@ const Order = ({ match }) => {
       dispatch(getOrder(orderId, initialLoading));
     }
     // eslint-disable-next-line
-  }, [dispatch, successPay, success, successDeliver]);
+  }, [dispatch, successPayMessage, success, successDeliver, refId]);
+
+  useEffect(() => {
+    if (refId) {
+      dispatch(payOrder(orderId));
+    }
+    // eslint-disable-next-line
+  }, [refId]);
 
   const successPaymentHandler = (paymentResult) => {
     dispatch(payOrder(orderId, paymentResult));
@@ -75,6 +88,35 @@ const Order = ({ match }) => {
 
   const deliverHandler = () => {
     dispatch(deliverOrder(order._id));
+  };
+
+  const payWithEsewa = () => {
+    var path = "https://uat.esewa.com.np/epay/main";
+    var params = {
+      amt: order.itemsPrice,
+      psc: order.shippingPrice,
+      pdc: 0,
+      txAmt: order.taxPrice,
+      tAmt: order.totalPrice,
+      pid: "ee2c3ca1-696b-4cc5-a6be-2c40d929d4535",
+      scd: "EPAYTEST",
+      su: `http://localhost:3000/order/${orderId}`,
+      fu: `http://localhost:3000/order/${orderId}`,
+    };
+    var form = document.createElement("form");
+    form.setAttribute("method", "POST");
+    form.setAttribute("action", path);
+
+    for (var key in params) {
+      var hiddenField = document.createElement("input");
+      hiddenField.setAttribute("type", "hidden");
+      hiddenField.setAttribute("name", key);
+      hiddenField.setAttribute("value", params[key]);
+      form.appendChild(hiddenField);
+    }
+
+    document.body.appendChild(form);
+    form.submit();
   };
 
   return loading ? (
@@ -208,6 +250,19 @@ const Order = ({ match }) => {
                       )}
                     </ListGroup.Item>
                   )}
+                  {!order.isPaid && (
+                    <ListGroup.Item>
+                      <Button
+                        variant="outlined"
+                        color="primary"
+                        fullWidth
+                        onClick={payWithEsewa}
+                      >
+                        Esewa
+                      </Button>
+                    </ListGroup.Item>
+                  )}
+
                   {loadingDeliver && <Loader />}
                   {userInfo &&
                     userInfo.role === "admin" &&

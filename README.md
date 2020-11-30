@@ -24,6 +24,7 @@
 - Checkout process (shipping, payment method, etc)
 - Order summary
 - PayPal / credit card integration
+- Esewa payment integration (Nepali payment gateway)
 - Database seeder (products, users, reviews, & orders)
 
 **New features (Added)**
@@ -53,6 +54,7 @@
 ## API :man_technologist:
 
 - [PayPal API](https://developer.paypal.com/)
+- [Esewa API](https://developer.esewa.com.np)
 - [Send Grid API](https://sendgrid.com/)
 - [Cloudinary API](https://cloudinary.com/)
 

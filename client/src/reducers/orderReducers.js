@@ -52,7 +52,7 @@ export const orderPayReducer = (state = {}, action) => {
       };
     case orderConstants.ORDER_PAY_SUCCESS:
       return {
-        success: true,
+        success: action.payload,
       };
     case orderConstants.ORDER_PAY_FAIL:
       return {

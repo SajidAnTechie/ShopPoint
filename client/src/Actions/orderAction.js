@@ -102,11 +102,11 @@ export const payOrder = (orderId, paymentResult) => async (
     await axios
       .post(`/api/v1/order/${orderId}/pay`, paymentResult, config)
       .then((resp) => {
-        const data = resp.data.data;
+        const message = resp.data.message;
 
         dispatch({
           type: orderConstants.ORDER_PAY_SUCCESS,
-          payload: data,
+          payload: message,
         });
       });
   } catch (error) {

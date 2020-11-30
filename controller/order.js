@@ -53,12 +53,23 @@ const payment = asyncHandler(async (req, res, next) => {
     );
   order.isPaid = true;
   order.paidAt = Date.now();
-  order.paymentResult = {
-    id: req.body.id,
-    status: req.body.status,
-    update_time: req.body.update_time,
-    email_address: req.body.payer.email_address,
-  };
+  if (req.body.status) {
+    order.paymentResult = {
+      id: req.body.id,
+      status: req.body.status,
+      update_time: req.body.update_time,
+      email_address: req.body.payer.email_address,
+    };
+  } else {
+    //Esewa payment integration
+    order.paymentResult = {
+      id: order._id,
+      status: 200,
+      update_time: Date.now(),
+      email_address: "epaytest@gmail.com",
+    };
+  }
+
   await order.save();
 
   const updatedorder = await Order.findById(req.params.orderId);
