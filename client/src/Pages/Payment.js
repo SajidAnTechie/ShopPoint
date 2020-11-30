@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Form } from "react-bootstrap";
+import { Col, Form, Row } from "react-bootstrap";
 import { useDispatch } from "react-redux";
 import FormContainer from "../components/FormContainer/FormContainer";
 import CheckoutSteps from "../components/CheckoutStep/CheckoutSteps";
@@ -18,12 +18,15 @@ const PaymentMethod = ({ history }) => {
     history.push("/shipping");
   }
 
-  const [paymentMethod, setPaymentMethod] = useState("PayPal");
+  const [paymentMethod, setPaymentMethod] = useState("");
 
   const dispatch = useDispatch();
 
   const submitHandler = (e) => {
     e.preventDefault();
+    if (paymentMethod === "") {
+      return;
+    }
     dispatch(savePaymentMethod(paymentMethod));
     history.push("/placeorder");
   };
@@ -35,18 +38,36 @@ const PaymentMethod = ({ history }) => {
       <Form onSubmit={submitHandler}>
         <FormControl component="fieldset">
           <FormLabel component="legend">Select Method</FormLabel>
-          <RadioGroup
-            aria-label="paymemtMethod"
-            name="paymemtMethod"
-            value={paymentMethod}
-            onChange={(e) => setPaymentMethod(e.target.value)}
-          >
-            <FormControlLabel
-              value="PayPal"
-              control={<Radio color="primary" />}
-              label="PayPal or Credit Card"
-            />
-          </RadioGroup>
+          <Row>
+            <Col md="8">
+              <RadioGroup
+                aria-label="paymemtMethod"
+                name="paymemtMethod"
+                value={paymentMethod}
+                onChange={(e) => setPaymentMethod(e.target.value)}
+              >
+                <FormControlLabel
+                  value="PayPal"
+                  control={<Radio color="primary" />}
+                  label="PayPal or Credit Card"
+                />
+              </RadioGroup>
+            </Col>
+            <Col md="4">
+              <RadioGroup
+                aria-label="paymemtMethod"
+                name="paymemtMethod"
+                value={paymentMethod}
+                onChange={(e) => setPaymentMethod(e.target.value)}
+              >
+                <FormControlLabel
+                  value="esewa"
+                  control={<Radio color="primary" />}
+                  label="Esewa"
+                />
+              </RadioGroup>
+            </Col>
+          </Row>
         </FormControl>
 
         <Button type="submit" variant="contained" color="primary" fullWidth>

@@ -91,6 +91,16 @@ const Order = ({ match }) => {
   };
 
   const payWithEsewa = () => {
+    var resultId = "";
+    var characters =
+      "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+    var charactersLength = characters.length;
+    for (var i = 0; i < 14; i++) {
+      resultId += characters.charAt(
+        Math.floor(Math.random() * charactersLength)
+      );
+    }
+
     var path = "https://uat.esewa.com.np/epay/main";
     var params = {
       amt: order.itemsPrice,
@@ -98,7 +108,7 @@ const Order = ({ match }) => {
       pdc: 0,
       txAmt: order.taxPrice,
       tAmt: order.totalPrice,
-      pid: "ee2c3ca1-696b-4cc5-a6be-2c40d929d4535",
+      pid: resultId,
       scd: "EPAYTEST",
       su: `http://localhost:3000/order/${orderId}`,
       fu: `http://localhost:3000/order/${orderId}`,
@@ -237,31 +247,40 @@ const Order = ({ match }) => {
                       <Col>${order.totalPrice}</Col>
                     </Row>
                   </ListGroup.Item>
-                  {!order.isPaid && (
-                    <ListGroup.Item>
-                      {loadingPay && <Loader />}
-                      {!sdkReady ? (
-                        <Loader />
-                      ) : (
-                        <PayPalButton
-                          amount={order.totalPrice}
-                          onSuccess={successPaymentHandler}
-                        />
-                      )}
-                    </ListGroup.Item>
-                  )}
-                  {!order.isPaid && (
-                    <ListGroup.Item>
-                      <Button
-                        variant="outlined"
-                        color="primary"
-                        fullWidth
-                        onClick={payWithEsewa}
-                      >
-                        Esewa
-                      </Button>
-                    </ListGroup.Item>
-                  )}
+                  {order.payment &&
+                    order.payment.paymentMethod === "PayPal" &&
+                    !order.isPaid && (
+                      <ListGroup.Item>
+                        {loadingPay && <Loader />}
+                        {!sdkReady ? (
+                          <Loader />
+                        ) : (
+                          <PayPalButton
+                            amount={order.totalPrice}
+                            onSuccess={successPaymentHandler}
+                          />
+                        )}
+                      </ListGroup.Item>
+                    )}
+                  {order.payment &&
+                    order.payment.paymentMethod === "esewa" &&
+                    !order.isPaid && (
+                      <ListGroup.Item>
+                        <Button
+                          variant="outlined"
+                          color="primary"
+                          fullWidth
+                          onClick={payWithEsewa}
+                        >
+                          <Image
+                            src="https://www.nepalitrends.com/wp-content/uploads/2018/03/esewa.png"
+                            alt="esewa"
+                            fluid
+                            rounded
+                          />
+                        </Button>
+                      </ListGroup.Item>
+                    )}
 
                   {loadingDeliver && <Loader />}
                   {userInfo &&
