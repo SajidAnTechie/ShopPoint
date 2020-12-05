@@ -2,6 +2,7 @@ const express = require("express");
 const dotenv = require("dotenv");
 const colors = require("colors");
 const path = require("path");
+const cors = require("cors");
 const fileUpload = require("express-fileupload");
 const { unknownEndpoints, errorHandler } = require("./middleware/error");
 const connectDb = require("./config/db");
@@ -26,6 +27,8 @@ app.use(
     useTempFiles: true,
   })
 );
+
+app.use(cors());
 
 app.use("/api/v1/auth", authRouter);
 app.use("/api/v1/user", userRouter);
