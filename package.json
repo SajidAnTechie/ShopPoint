@@ -1,7 +1,7 @@
 {
   "name": "e-commerce",
   "version": "1.0.0",
-  "description": "A mern stack e-commerce app",
+  "description": "A mern stack multivendor e-commerce app",
   "main": "app.js",
   "author": "Sajid Ansari",
   "license": "MIT",
