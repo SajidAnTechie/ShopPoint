@@ -39,14 +39,14 @@ const Home = () => {
 
   const fetchProductList = () => {
     dispatch(
-      productAction.listProducts(
+      productAction.listProducts({
         searchProductKey,
         sort,
         category,
         priceRange,
         initialLoading,
-        ltORgt
-      )
+        ltORgt,
+      })
     );
   };
 

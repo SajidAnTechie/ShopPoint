@@ -1,14 +1,16 @@
 import axios from "axios";
 import * as productConstants from "../constants/productConstants";
 
-export const listProducts = (
-  searchProductKey,
-  sort,
-  category,
-  priceRange,
-  initialLoading,
-  ltORgt
-) => async (dispatch) => {
+export const listProducts = (productInfo) => async (dispatch) => {
+  const {
+    searchProductKey,
+    sort,
+    category,
+    priceRange,
+    initialLoading,
+    ltORgt,
+  } = productInfo;
+
   try {
     if (initialLoading) {
       dispatch({ type: productConstants.PRODUCTLIST_FETCH_START });
