@@ -11,9 +11,9 @@ import Meta from "../components/Meta/Meta";
 
 const Home = () => {
   const [sort, setSort] = useState([]);
-  const [category, setCategory] = useState("");
   const [priceRange, setPriceRange] = useState("");
   const [ltORgt, setLtORgt] = useState("");
+  const [filters, setFilters] = useState({});
 
   const [initialLoading, setInitialLoading] = useState(true);
 
@@ -28,6 +28,10 @@ const Home = () => {
 
   const dispatch = useDispatch();
 
+  const handleFilters = (key, value) => {
+    setFilters({ ...filters, [key]: value });
+  };
+
   useEffect(() => {
     if (success && initialLoading) {
       setInitialLoading(false);
@@ -35,33 +39,60 @@ const Home = () => {
       fetchProductList();
     }
     // eslint-disable-next-line
-  }, [dispatch, searchProductKey, success, sort, category]);
+  }, [dispatch, filters, success]);
+
+  useEffect(() => {
+    handleFilters("keyWord", searchProductKey);
+    // eslint-disable-next-line
+  }, [searchProductKey]);
+
+  useEffect(() => {
+    handleFilters("sort", sort.join(","));
+    // eslint-disable-next-line
+  }, [sort]);
 
   const fetchProductList = () => {
     dispatch(
-      productAction.listProducts({
-        searchProductKey,
-        sort,
-        category,
-        priceRange,
-        initialLoading,
-        ltORgt,
-      })
+      productAction.listProducts(
+        {
+          ...filters,
+        },
+        initialLoading
+      )
     );
   };
 
   const handleSort = (value) => {
     sort.includes(value)
       ? setSort(sort.filter((s) => s !== value))
-      : setSort((sort) => sort.concat(value));
+      : setSort((preState) => [...preState, value]);
   };
 
   const handlePriceRange = () => {
-    if (priceRange === "" || ltORgt === "") {
+    if ([priceRange, ltORgt].includes("")) {
       return;
     }
-    fetchProductList();
+
+    filterPrevPrice();
+
+    handleFilters(`price[${ltORgt}]`, priceRange);
   };
+
+  const filterPrevPrice = () => {
+    const filterprice = Object.keys(filters).filter((price) =>
+      ["price[lt]", "price[gte]"].includes(price)
+    );
+    filterprice.forEach((price) => {
+      if (filters[price]) {
+        delete filters[price];
+      }
+    });
+  };
+
+  const clearFilter = () => {
+    setFilters({});
+  };
+
   return (
     <>
       <Meta />
@@ -88,18 +119,20 @@ const Home = () => {
               <span className="float-right">
                 {" "}
                 <Filter
-                  setCategory={setCategory}
                   sort={sort}
                   handleSort={handleSort}
                   setPriceRange={setPriceRange}
                   setLtORgt={setLtORgt}
                   ltORgt={ltORgt}
                   handlePriceRange={handlePriceRange}
+                  handleFilters={handleFilters}
+                  filters={filters}
+                  clearFilter={clearFilter}
                 />
               </span>
             </div>
           )}
-          {products.length === 0 && <h4>No Products</h4>}
+          {!products.length && <h4>No Products</h4>}
           <Row>
             {products.map((product) => (
               <Col key={product._id} sm={12} md={6} lg={4} xl={3}>

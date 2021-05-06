@@ -7,7 +7,7 @@
   "license": "MIT",
   "scripts": {
     "start": "NODE_ENV=production node app.js",
-    "dev": "node app",
+    "start:dev": "node app",
     "heroku-postbuild": "YARN_PRODUCTION=false cd client && yarn install"
   },
   "dependencies": {
@@ -22,8 +22,5 @@
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^5.10.6",
     "node-cron": "^2.0.3"
-  },
-  "engines": {
-    "node": "10.x"
   }
 }

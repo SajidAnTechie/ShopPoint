@@ -24,13 +24,15 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 function Filtetr({
-  setCategory,
   sort,
   handleSort,
   setPriceRange,
   setLtORgt,
   ltORgt,
   handlePriceRange,
+  handleFilters,
+  filters,
+  clearFilter,
 }) {
   const classes = useStyles();
   const [anchorEl, setAnchorEl] = useState(null);
@@ -75,7 +77,7 @@ function Filtetr({
           <FormControlLabel
             control={
               <Checkbox
-                checked={sort.includes("name") ? true : false}
+                checked={sort.includes("name")}
                 color="primary"
                 inputProps={{ "aria-label": "secondary checkbox" }}
                 value="name"
@@ -87,7 +89,7 @@ function Filtetr({
           <FormControlLabel
             control={
               <Checkbox
-                checked={sort.includes("price") ? true : false}
+                checked={sort.includes("price")}
                 color="primary"
                 inputProps={{ "aria-label": "secondary checkbox" }}
                 value="price"
@@ -99,7 +101,7 @@ function Filtetr({
           <FormControlLabel
             control={
               <Checkbox
-                checked={sort.includes("averageRating") ? true : false}
+                checked={sort.includes("averageRating")}
                 color="primary"
                 inputProps={{ "aria-label": "secondary checkbox" }}
                 value="averageRating"
@@ -116,7 +118,7 @@ function Filtetr({
             <Select
               labelId="demo-simple-select-outlined-label"
               id="demo-simple-select-outlined"
-              onChange={(e) => setCategory(e.target.value)}
+              onChange={(e) => handleFilters("category", e.target.value)}
               label="Category"
             >
               <MenuItem value="">
@@ -142,7 +144,7 @@ function Filtetr({
             <FormControlLabel
               control={
                 <Checkbox
-                  checked={ltORgt === "lt" ? true : false}
+                  checked={ltORgt === "lt"}
                   color="primary"
                   inputProps={{ "aria-label": "secondary checkbox" }}
                   value="lt"
@@ -154,7 +156,7 @@ function Filtetr({
             <FormControlLabel
               control={
                 <Checkbox
-                  checked={ltORgt === "gte" ? true : false}
+                  checked={ltORgt === "gte"}
                   color="primary"
                   inputProps={{ "aria-label": "secondary checkbox" }}
                   value="gte"
@@ -171,6 +173,9 @@ function Filtetr({
               onClick={handlePriceRange}
             >
               Done
+            </Button>
+            <Button variant="contained" color="primary" onClick={clearFilter}>
+              clearFilter
             </Button>
           </div>
         </Typography>

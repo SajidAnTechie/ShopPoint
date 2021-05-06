@@ -1,37 +1,43 @@
 import axios from "axios";
 import * as productConstants from "../constants/productConstants";
 
-export const listProducts = (productInfo) => async (dispatch) => {
-  const {
-    searchProductKey,
-    sort,
-    category,
-    priceRange,
-    initialLoading,
-    ltORgt,
-  } = productInfo;
-
+export const listProducts = (filters, initialLoading) => async (dispatch) => {
   try {
     if (initialLoading) {
       dispatch({ type: productConstants.PRODUCTLIST_FETCH_START });
     }
 
-    const queryString = [
-      sort.length > 0 ? `sort=${sort.join(",")}` : "",
-      searchProductKey !== "" ? `&keyWord=${searchProductKey}` : "",
-      category !== "" ? `&category=${category}` : "",
-      priceRange !== "" ? `&price[${ltORgt}]=${Number(priceRange)}` : "",
-    ];
-
-    await axios.get(`/api/v1/product/?${queryString.join("")}`).then((resp) => {
-      const productList = resp.data.data.results;
-      const totalProduct = resp.data.data.count;
-
-      dispatch({
-        type: productConstants.PRODUCTLIST_FETCH_SUCCESS,
-        payload: { productList, totalProduct },
-      });
+    const keys = Object.keys(filters);
+    keys.forEach((key) => {
+      if (filters.hasOwnProperty(key)) {
+        if (filters[key] === "") {
+          delete filters[key];
+        }
+      }
     });
+
+    // const queryString = [
+    //   sort.length > 0 ? `sort=${sort.join(",")}` : "",
+    //   searchProductKey !== "" ? `&keyWord=${searchProductKey}` : "",
+    //   category !== "" ? `&category=${category}` : "",
+    //   priceRange !== "" ? `&price[${ltORgt}]=${Number(priceRange)}` : "",
+    // ];
+
+    await axios
+      .get("/api/v1/product", {
+        params: {
+          ...filters,
+        },
+      })
+      .then((resp) => {
+        const productList = resp.data.data.results;
+        const totalProduct = resp.data.data.count;
+
+        dispatch({
+          type: productConstants.PRODUCTLIST_FETCH_SUCCESS,
+          payload: { productList, totalProduct },
+        });
+      });
   } catch (error) {
     dispatch({
       type: productConstants.PRODUCTLIST_FETCH_ERROR,
