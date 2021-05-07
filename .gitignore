@@ -3,3 +3,4 @@ client/build/
 data/reviews.json
 data/users.json
 config/config.env
+.env

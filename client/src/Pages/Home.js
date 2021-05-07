@@ -72,9 +72,7 @@ const Home = () => {
     if ([priceRange, ltORgt].includes("")) {
       return;
     }
-
     filterPrevPrice();
-
     handleFilters(`price[${ltORgt}]`, priceRange);
   };
 

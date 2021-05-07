@@ -7,21 +7,13 @@ export const listProducts = (filters, initialLoading) => async (dispatch) => {
       dispatch({ type: productConstants.PRODUCTLIST_FETCH_START });
     }
 
-    const keys = Object.keys(filters);
-    keys.forEach((key) => {
+    Object.keys(filters).forEach((key) => {
       if (filters.hasOwnProperty(key)) {
         if (filters[key] === "") {
           delete filters[key];
         }
       }
     });
-
-    // const queryString = [
-    //   sort.length > 0 ? `sort=${sort.join(",")}` : "",
-    //   searchProductKey !== "" ? `&keyWord=${searchProductKey}` : "",
-    //   category !== "" ? `&category=${category}` : "",
-    //   priceRange !== "" ? `&price[${ltORgt}]=${Number(priceRange)}` : "",
-    // ];
 
     await axios
       .get("/api/v1/product", {
