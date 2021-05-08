@@ -146,7 +146,7 @@ const forgotPassword = asyncHandler(async (req, res, next) => {
   await user.save({ validateBeforeSave: false });
 
   try {
-    const resetUrl = `https://shoppoint.herokuapp.com/resetPassword/?token=${resetToken}`;
+    const resetUrl = `https://shoppoint.herokuapp.com/reset-password/?token=${resetToken}`;
 
     const message = `You are receiving this email because you (or someone else ) has
     requested the reset of a password.`;
