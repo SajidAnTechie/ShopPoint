@@ -13,7 +13,7 @@ const instance = axios.create({
  *
  * @param {String} url The url fro the api request (without the base)
  * @param {Object} [config]
- * @param {Object} [config.params] Ab object of queries that will be added to
+ * @param {Object} [config.params] An object of queries that will be added to
  * @param {Boolean} [config.accessToken] Whether or not to include
  * access-token header
  * @returns {Promise}
@@ -41,8 +41,8 @@ function get(
  *
  * @param {String} url The url fro the api request (without the base)
  * @param {Object} [config]
- * @param {Object} [config.params] Ab object of queries that will be added to
- * @param {Object} [config.body] Ab object that will be sent in the request
+ * @param {Object} [config.params] An object of queries that will be added to
+ * @param {Object} [config.body] An object that will be sent in the request
  * @param {Boolean} [config.accessToken] Whether or not to include
  * access-token header
  * @returns {Promise}
@@ -70,8 +70,8 @@ function post(
  *
  * @param {String} url The url fro the api request (without the base)
  * @param {Object} [config]
- * @param {Object} [config.params] Ab object of queries that will be added to
- * @param {Object} [config.body] Ab object that will be sent in the request
+ * @param {Object} [config.params] An object of queries that will be added to
+ * @param {Object} [config.body] An object that will be sent in the request
  * @param {Boolean} [config.accessToken] Whether or not to include
  * access-token header
  * @returns {Promise}
@@ -99,8 +99,7 @@ function put(
  *
  * @param {String} url The url fro the api request (without the base)
  * @param {Object} [config]
- * @param {Object} [config.params] Ab object of queries that will be added to
- * @param {Object} [config.body] Ab object that will be sent in the request
+ * @param {Object} [config.params] An object of queries that will be added to
  * @param {Boolean} [config.accessToken] Whether or not to include
  * access-token header
  * @returns {Promise}
