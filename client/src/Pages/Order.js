@@ -14,6 +14,7 @@ import {
   ORDER_DELIVER_RESET,
 } from "../constants/orderConstants";
 import { interpolate } from "../utils/string";
+import config from "../config";
 import * as routes from "../constants/routes";
 import OrderLoader from "../components/Loader/OrderLoader";
 import config from "../config";
@@ -104,7 +105,7 @@ const Order = ({ match }) => {
       );
     }
 
-    var path = "https://uat.esewa.com.np/epay/main";
+    var path = config.esewaPaymentUrl;
     var params = {
       amt: order.itemsPrice,
       psc: order.shippingPrice,
