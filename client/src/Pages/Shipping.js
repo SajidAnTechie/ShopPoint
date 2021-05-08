@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import FormContainer from "../components/FormContainer/FormContainer";
 import CheckoutSteps from "../components/CheckoutStep/CheckoutSteps";
 import { saveShippingAddress } from "../actions/cartAction";
+import * as routes from "../constants/routes";
 import { TextField, Button } from "@material-ui/core/";
 
 const Shipping = ({ history }) => {
@@ -16,7 +17,9 @@ const Shipping = ({ history }) => {
   const [country, setCountry] = useState(shippingAddress.country);
 
   if (!cartItems.length) {
-    history.push("/");
+    history.push({
+      pathname: routes.HOME,
+    });
   }
 
   const dispatch = useDispatch();
@@ -24,7 +27,9 @@ const Shipping = ({ history }) => {
   const submitHandler = (e) => {
     e.preventDefault();
     dispatch(saveShippingAddress({ address, city, postalCode, country }));
-    history.push("/payment");
+    history.push({
+      pathname: routes.PAYMENT,
+    });
   };
   return (
     <FormContainer>
