@@ -10,6 +10,7 @@ import {
   CircularProgress,
   makeStyles,
 } from "@material-ui/core/";
+import * as routes from "../constants/routes";
 import * as userAction from "../actions/userAction";
 import * as userConstants from "../constants/userConstants";
 
@@ -28,7 +29,9 @@ const Login = ({ location, history }) => {
 
   const { userInfo, error, loading } = userAuthData;
 
-  const redirect = location.search ? location.search.split("=")[1] : "/";
+  const redirect = location.search
+    ? location.search.split("=")[1]
+    : routes.HOME;
 
   const dispatch = useDispatch();
 
@@ -42,6 +45,10 @@ const Login = ({ location, history }) => {
     e.preventDefault();
     dispatch(userAction.auth(email, password));
   };
+
+  const redirectUserToRegisterRoute = redirect
+    ? routes.REGISTER + `?redirect=${redirect}`
+    : routes.REGISTER;
 
   return (
     <>
@@ -108,14 +115,10 @@ const Login = ({ location, history }) => {
         <Row className="py-3">
           <Col>
             New Customer?
-            <Link
-              to={redirect ? `/register?redirect=${redirect}` : "/register"}
-            >
-              Register
-            </Link>
+            <Link to={redirectUserToRegisterRoute}>Register</Link>
           </Col>
           <Col className="text-right">
-            <Link to={"/forgotPasssword"}>Forgot Password</Link>
+            <Link to={routes.FORGOT_PASSWORD}>Forgot Password</Link>
           </Col>
         </Row>
       </FormContainer>

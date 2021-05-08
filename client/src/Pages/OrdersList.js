@@ -8,6 +8,9 @@ import TableLoader from "../components/Loader/TableLoader";
 import Print from "../components/Print/Print";
 import pdfMake from "pdfmake/build/pdfmake";
 import pdfFonts from "pdfmake/build/vfs_fonts";
+import * as routes from "../constants/routes";
+import { createPdfData } from "../services/order";
+import { interpolate } from "../utils/string";
 pdfMake.vfs = pdfFonts.pdfMake.vfs;
 
 const OrderList = () => {
@@ -24,176 +27,14 @@ const OrderList = () => {
     // eslint-disable-next-line
   }, [dispatch]);
 
-  const printAs = (e) => {
-    const downloadAs = e.target.value;
+  const printAs = (value) => {
+    const downloadAs = value;
 
     switch (downloadAs) {
       case "pdf":
-        var docDefinition = {
-          content: [
-            //Header
-            {
-              table: {
-                widths: ["auto", "*"],
+        var docDefinition = createPdfData(userInfo, orders);
 
-                body: [
-                  [
-                    {
-                      text: "SHOPPOINT",
-                      style: "mainheader",
-                      bold: true,
-                      marginTop: 10,
-                    },
-
-                    {
-                      width: "*",
-                      style: "usersOrders",
-                      marginBottom: 30,
-                      stack: [
-                        {
-                          style: "h2",
-                          text: `Name: ${userInfo.name}`,
-                        },
-                        {
-                          style: "h2",
-                          text: `Email: ${userInfo.email}`,
-                        },
-                      ],
-                    },
-                  ],
-                ],
-              },
-              layout: {
-                hLineWidth: function (line) {
-                  return line === 1;
-                },
-                vLineWidth: function () {
-                  return 0;
-                },
-                paddingBottom: function () {
-                  return 5;
-                },
-              },
-            },
-
-            //Vitals Details
-            {
-              style: "header",
-              table: {
-                widths: "*",
-                body: [
-                  [
-                    {
-                      border: ["#5bc0de", false, false, false],
-                      text: "Orders List",
-                    },
-                  ],
-                ],
-              },
-            },
-
-            orders.length > 0
-              ? {
-                  layout: {
-                    hLineWidth: function () {
-                      return 0;
-                    },
-                    vLineWidth: function () {
-                      return 0;
-                    },
-                    paddingBottom: function () {
-                      return 5;
-                    },
-                  },
-                  table: {
-                    headerRows: 1,
-                    body: [
-                      [
-                        {
-                          text: "S.No",
-                          bold: true,
-                          fillColor: "#2B2B52",
-                          color: "white",
-                        },
-                        {
-                          text: "ID",
-                          bold: true,
-                          fillColor: "#2B2B52",
-                          color: "white",
-                        },
-                        {
-                          text: "USER",
-                          bold: true,
-                          fillColor: "#2B2B52",
-                          color: "white",
-                        },
-                        {
-                          text: "DATE",
-                          bold: true,
-                          fillColor: "#2B2B52",
-                          color: "white",
-                        },
-                        {
-                          text: "TOTAL PRICE",
-                          bold: true,
-                          fillColor: "#2B2B52",
-                          color: "white",
-                        },
-                        {
-                          text: "PAID",
-                          bold: true,
-                          fillColor: "#2B2B52",
-                          color: "white",
-                        },
-                        {
-                          text: "DELIVERED",
-                          bold: true,
-                          fillColor: "#2B2B52",
-                          color: "white",
-                        },
-                      ],
-
-                      ...orders.map((o, i) => [
-                        i + 1,
-                        o._id,
-                        o.userId && o.userId.name,
-                        o.createdAt.substring(0, 10),
-                        o.totalPrice,
-                        o.isPaid ? o.paidAt.substring(0, 10) : "Not paid",
-                        o.isDelivered
-                          ? o.deliveredAt.substring(0, 10)
-                          : "Not paid",
-                      ]),
-                    ],
-                  },
-
-                  fontSize: 9,
-                  alignment: "center",
-                }
-              : null,
-          ],
-          styles: {
-            header: {
-              fontSize: 12,
-              marginBottom: 20,
-              marginTop: 20,
-              bold: true,
-            },
-            mainheader: {
-              fontSize: 15,
-            },
-
-            usersOrders: {
-              marginLeft: 315,
-            },
-
-            h2: {
-              marginTop: 5,
-              fontSize: 7,
-            },
-          },
-        };
-        pdfMake.createPdf(docDefinition).download("ordersList.pdf");
+        pdfMake.createPdf(docDefinition).download("orders-list.pdf");
 
         break;
       case "excel":
@@ -256,7 +97,11 @@ const OrderList = () => {
                   )}
                 </td>
                 <td>
-                  <LinkContainer to={`/order/${order._id}`}>
+                  <LinkContainer
+                    to={interpolate(routes.ORDER, {
+                      orderId: order._id,
+                    })}
+                  >
                     <Button variant="light" className="btn-sm">
                       Details
                     </Button>

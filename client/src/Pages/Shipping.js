@@ -15,7 +15,7 @@ const Shipping = ({ history }) => {
   const [postalCode, setPostalCode] = useState(shippingAddress.postalCode);
   const [country, setCountry] = useState(shippingAddress.country);
 
-  if (cartItems.length === 0) {
+  if (!cartItems.length) {
     history.push("/");
   }
 

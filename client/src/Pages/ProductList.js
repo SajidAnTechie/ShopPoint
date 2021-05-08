@@ -28,8 +28,10 @@ import {
   deleteProduct,
   createProduct,
 } from "../actions/productAction";
+import * as routes from "../constants/routes";
+import { interpolate } from "../utils/string";
 import * as productConstants from "../constants/productConstants";
-import { confirmAlert } from "react-confirm-alert"; // Import
+import { confirmAlert } from "react-confirm-alert";
 import "react-confirm-alert/src/react-confirm-alert.css";
 
 const useStyles = makeStyles((theme) => ({
@@ -411,7 +413,11 @@ const ProductList = () => {
                   <td>{product.category}</td>
                   <td>{product.brand}</td>
                   <td>
-                    <LinkContainer to={`/admin/product/${product._id}/edit`}>
+                    <LinkContainer
+                      to={interpolate(routes.PRODUCT_EDIT, {
+                        productId: product._id,
+                      })}
+                    >
                       <Button variant="light" className="btn-sm">
                         <i className="fas fa-edit"></i>
                       </Button>

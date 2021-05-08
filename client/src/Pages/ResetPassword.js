@@ -10,6 +10,7 @@ import {
   CircularProgress,
   makeStyles,
 } from "@material-ui/core/";
+import * as routes from "../constants/routes";
 import * as userAction from "../actions/userAction";
 import * as userConstants from "../constants/userConstants";
 
@@ -42,14 +43,18 @@ const ForgotPassword = ({ history }) => {
     if (token) {
       setToken(token);
     } else {
-      history.push("/login");
+      history.push({
+        pathname: routes.LOGIN,
+      });
     }
   }, [dispatch, token, history]);
 
   useEffect(() => {
     if (success) {
       setTimeout(() => {
-        history.push("/login");
+        history.push({
+          pathname: routes.LOGIN,
+        });
       }, 3000);
     }
   }, [dispatch, success, history]);

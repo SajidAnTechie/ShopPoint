@@ -11,11 +11,12 @@ import {
   CircularProgress,
   makeStyles,
 } from "@material-ui/core/";
+import * as routes from "../constants/routes";
 import * as userAction from "../actions/userAction";
 import * as userConstants from "../constants/userConstants";
 
 const useStyles = makeStyles((theme) => ({
-  prgressColor: {
+  progressColor: {
     color: "#fff",
   },
 }));
@@ -35,15 +36,17 @@ const Register = ({ location, history }) => {
 
   const dispatch = useDispatch();
 
-  const redirect = location.search ? location.search.split("=")[1] : "/";
+  const redirect = location.search
+    ? location.search.split("=")[1]
+    : routes.HOME;
 
   useEffect(() => {
     if (success) {
       setTimeout(() => {
-        const redirectUrl = redirect
-          ? `/EmailVerification?redirect=${redirect}`
-          : "/EmailVerification";
-        history.push(redirectUrl);
+        history.push({
+          pathname: routes.EMAIL_VERIFICATION,
+          search: `?redirect=${redirect}`,
+        });
       }, 5000);
     }
   }, [success, history, redirect]);
@@ -52,10 +55,14 @@ const Register = ({ location, history }) => {
     e.preventDefault();
     setVerificationMessage("");
     if (password !== confirmPassword) {
-      return setVerificationMessage("Passwords do not match");
+      return setVerificationMessage("Passwords don't match");
     }
     dispatch(userAction.Register(name, email, password));
   };
+
+  const redirectUserToLoginRoute = redirect
+    ? routes.LOGIN + `?redirect=${redirect}`
+    : routes.LOGIN;
 
   return (
     <FormContainer>
@@ -150,7 +157,7 @@ const Register = ({ location, history }) => {
           {loading ? (
             <CircularProgress
               color="inherit"
-              className={classes.prgressColor}
+              className={classes.progressColor}
             />
           ) : (
             <>Register</>
@@ -160,10 +167,7 @@ const Register = ({ location, history }) => {
 
       <Row className="py-3">
         <Col>
-          Have an Account?{" "}
-          <Link to={redirect ? `/login?redirect=${redirect}` : "/login"}>
-            Login
-          </Link>
+          Have an Account? <Link to={redirectUserToLoginRoute}>Login</Link>
         </Col>
       </Row>
     </FormContainer>

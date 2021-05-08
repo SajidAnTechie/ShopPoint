@@ -5,6 +5,8 @@ import { useDispatch, useSelector } from "react-redux";
 import ErrorMessage from "../components/Message/errorMessage";
 import CheckoutSteps from "../components/CheckoutStep/CheckoutSteps";
 import { createOrder } from "../actions/orderAction";
+import * as routes from "../constants/routes";
+import { interpolate } from "../utils/string";
 import * as orderConstants from "../constants/orderConstants";
 import { Button, CircularProgress, makeStyles } from "@material-ui/core/";
 
@@ -19,6 +21,16 @@ const PlaceOrder = ({ history }) => {
   const classes = useStyles();
 
   const cart = useSelector((state) => state.cart);
+
+  const redirectUser = !localStorage.getItem("shippingAddress")
+    ? routes.SHIPPING
+    : !localStorage.getItem("paymentMethod")
+    ? routes.PAYMENT
+    : null;
+
+  if (redirectUser) {
+    history.push(redirectUser);
+  }
 
   //   Calculate prices
   const addDecimals = (num) => {
@@ -41,7 +53,9 @@ const PlaceOrder = ({ history }) => {
 
   useEffect(() => {
     if (success) {
-      history.push(`/order/${order._id}`);
+      history.push({
+        pathname: interpolate(routes.ORDER, { orderId: order._id }),
+      });
     }
     // eslint-disable-next-line
   }, [history, success]);
@@ -93,7 +107,7 @@ const PlaceOrder = ({ history }) => {
 
             <ListGroup.Item>
               <h2>Order Items</h2>
-              {cart.cartItems.length === 0 ? (
+              {!cart.cartItems.length ? (
                 <>Your cart is empty</>
               ) : (
                 <ListGroup variant="flush">
@@ -109,7 +123,11 @@ const PlaceOrder = ({ history }) => {
                           />
                         </Col>
                         <Col>
-                          <Link to={`/product/${item.productId}`}>
+                          <Link
+                            to={interpolate(routes.PRODUCT, {
+                              productId: item.productId,
+                            })}
+                          >
                             {item.productName}
                           </Link>
                         </Col>
@@ -160,7 +178,7 @@ const PlaceOrder = ({ history }) => {
                   variant="contained"
                   color="primary"
                   fullWidth
-                  disabled={cart.cartItems === 0 || loading}
+                  disabled={!cart.cartItems || loading}
                   onClick={placeOrderHandler}
                 >
                   {loading ? (

@@ -13,7 +13,10 @@ import {
   ORDER_PAY_RESET,
   ORDER_DELIVER_RESET,
 } from "../constants/orderConstants";
+import { interpolate } from "../utils/string";
+import * as routes from "../constants/routes";
 import OrderLoader from "../components/Loader/OrderLoader";
+import config from "../config";
 
 const Order = ({ match }) => {
   const orderId = match.params.orderId;
@@ -117,13 +120,13 @@ const Order = ({ match }) => {
     form.setAttribute("method", "POST");
     form.setAttribute("action", path);
 
-    for (var key in params) {
+    Object.keys(params).forEach((key) => {
       var hiddenField = document.createElement("input");
       hiddenField.setAttribute("type", "hidden");
       hiddenField.setAttribute("name", key);
       hiddenField.setAttribute("value", params[key]);
       form.appendChild(hiddenField);
-    }
+    });
 
     document.body.appendChild(form);
     form.submit();
@@ -182,7 +185,7 @@ const Order = ({ match }) => {
                 {order.orderItems ? (
                   <ListGroup.Item>
                     <h2>Order Items</h2>
-                    {order.orderItems.length === 0 ? (
+                    {!order.orderItems.length ? (
                       <Message>Order is empty</Message>
                     ) : (
                       <ListGroup variant="flush">
@@ -198,7 +201,11 @@ const Order = ({ match }) => {
                                 />
                               </Col>
                               <Col>
-                                <Link to={`/product/${item.productId}`}>
+                                <Link
+                                  to={interpolate(routes.PRODUCT, {
+                                    productId: item.productId,
+                                  })}
+                                >
                                   {item.productName}
                                 </Link>
                               </Col>
@@ -273,7 +280,7 @@ const Order = ({ match }) => {
                           onClick={payWithEsewa}
                         >
                           <Image
-                            src="https://www.nepalitrends.com/wp-content/uploads/2018/03/esewa.png"
+                            src={config.esewaImageUrl}
                             alt="esewa"
                             fluid
                             rounded

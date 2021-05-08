@@ -43,7 +43,6 @@ const orderItemSchema = new mongoose.Schema({
     type: String,
     required: [true, "Please add a product price"],
   },
- 
   productId: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "Product",

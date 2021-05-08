@@ -4,6 +4,7 @@ import { useDispatch } from "react-redux";
 import FormContainer from "../components/FormContainer/FormContainer";
 import CheckoutSteps from "../components/CheckoutStep/CheckoutSteps";
 import { savePaymentMethod } from "../actions/cartAction";
+import * as routes from "../constants/routes";
 import {
   Button,
   Radio,
@@ -15,7 +16,9 @@ import {
 
 const PaymentMethod = ({ history }) => {
   if (!localStorage.getItem("shippingAddress")) {
-    history.push("/shipping");
+    history.push({
+      pathname: routes.SHIPPING,
+    });
   }
 
   const [paymentMethod, setPaymentMethod] = useState("");
@@ -28,7 +31,9 @@ const PaymentMethod = ({ history }) => {
       return;
     }
     dispatch(savePaymentMethod(paymentMethod));
-    history.push("/placeorder");
+    history.push({
+      pathname: routes.PLACE_ORDER,
+    });
   };
 
   return (

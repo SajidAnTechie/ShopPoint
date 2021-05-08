@@ -24,6 +24,7 @@ import Register from "./pages/Register";
 import ForgotPassword from "./pages/ForgotPassword";
 import ResetPassword from "./pages/ResetPassword";
 import EmailVerification from "./pages/EmailVerification";
+import * as routes from "./constants/routes";
 
 function App() {
   return (
@@ -32,69 +33,69 @@ function App() {
       <main className="py-3">
         <Container>
           <Switch>
-            <Route exact={true} path="/" component={Home} />
+            <Route exact={true} path={routes.HOME} component={Home} />
+            <Route exact={true} path={routes.PRODUCT} component={Product} />
+            <Route exact={true} path={routes.LOGIN} component={Login} />
+            <Route exact={true} path={routes.CART} component={Cart} />
             <Route
               exact={true}
-              path="/product/:productId"
-              component={Product}
-            />
-            <Route exact={true} path="/login" component={Login} />
-            <Route exact={true} path="/cart" component={Cart} />
-            <Route
-              exact={true}
-              path="/forgotPasssword"
+              path={routes.FORGOT_PASSWORD}
               component={ForgotPassword}
             />
             <Route
               exact={true}
-              path="/resetPassword"
+              path={routes.RESET_PASSWORD}
               component={ResetPassword}
             />
-            <PrivateRoute exact={true} path="/shipping" component={Shipping} />
-            <PrivateRoute exact={true} path="/payment" component={Payment} />
             <PrivateRoute
               exact={true}
-              path="/placeOrder"
+              path={routes.SHIPPING}
+              component={Shipping}
+            />
+            <PrivateRoute
+              exact={true}
+              path={routes.PAYMENT}
+              component={Payment}
+            />
+            <PrivateRoute
+              exact={true}
+              path={routes.PLACE_ORDER}
               component={PlaceOrder}
             />
+            <PrivateRoute exact={true} path={routes.ORDER} component={Order} />
             <PrivateRoute
               exact={true}
-              path="/order/:orderId"
-              component={Order}
+              path={routes.PROFILE}
+              component={Profile}
             />
-            <PrivateRoute exact={true} path="/profile" component={Profile} />
             <AdminRoute
               exact={true}
-              path="/admin/orderList"
+              path={routes.ORDERS}
               component={OrderList}
             />
             <AdminRoute
               exact={true}
-              path="/admin/productList"
+              path={routes.PRODUCTS}
               component={ProductList}
             />
             <AdminRoute
               exact={true}
-              path="/admin/product/:productId/edit"
+              path={routes.PRODUCT_EDIT}
               component={EditProduct}
             />
+            <AdminRoute exact={true} path={routes.USERS} component={UserList} />
             <AdminRoute
               exact={true}
-              path="/admin/userList"
-              component={UserList}
-            />
-            <AdminRoute
-              exact={true}
-              path="/admin/user/:userId/edit"
+              path={routes.USER_EDIT}
               component={EditUser}
             />
-            <Route exact={true} path="/register" component={Register} />
+            <Route exact={true} path={routes.REGISTER} component={Register} />
             <Route
               exact={true}
-              path="/EmailVerification"
+              path={routes.EMAIL_VERIFICATION}
               component={EmailVerification}
             />
-            <Route exact={true} path="/logout" component={Logout} />
+            <Route exact={true} path={routes.LOGOUT} component={Logout} />
           </Switch>
         </Container>
       </main>

@@ -17,6 +17,7 @@ import {
 } from "@material-ui/core/";
 
 import * as productConstants from "../../constants/productConstants";
+import * as routes from "../../constants/routes";
 
 const useStyles = makeStyles((theme) => ({
   typography: {
@@ -88,7 +89,7 @@ const ProductReview = ({ productId }) => {
       <Row>
         <Col md={6}>
           <h2>Reviews({count})</h2>
-          {productReviews.length === 0 && <h4>No Reviews</h4>}
+          {!productReviews.length && <h4>No Reviews</h4>}
           <ListGroup variant="flush">
             {productReviews.map((review) => (
               <ListGroup.Item key={review._id}>
@@ -178,7 +179,8 @@ const ProductReview = ({ productId }) => {
                 </Form>
               ) : (
                 <>
-                  Please <Link to="/login">sign in</Link> to write a review{" "}
+                  Please <Link to={routes.LOGIN}>sign in</Link> to write a
+                  review{" "}
                 </>
               )}
             </ListGroup.Item>

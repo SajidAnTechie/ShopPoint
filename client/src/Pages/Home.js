@@ -8,6 +8,7 @@ import Filter from "../components/Filter/Filter";
 import ErrorMessage from "../components/Message/errorMessage";
 import HomeLoader from "../components/Loader/HomeLoader";
 import Meta from "../components/Meta/Meta";
+import * as routes from "../constants/routes";
 
 const Home = () => {
   const [sort, setSort] = useState([]);
@@ -102,7 +103,7 @@ const Home = () => {
         <>
           {searchProductKey ? (
             <>
-              <Link to="/" className="btn btn-light">
+              <Link to={routes.HOME} className="btn btn-light">
                 Go Back
               </Link>
               <h1>

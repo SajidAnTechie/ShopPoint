@@ -6,7 +6,10 @@ const getOrders = asyncHandler(async (req, res, next) => {
   res.status(200).send(res.advanceResults);
 });
 const authOrder = asyncHandler(async (req, res, next) => {
-  const authOrders = await Order.find({ userId: req.user._id });
+  const authOrders = await Order.find({ userId: req.user._id }).populate({
+    path: "userId",
+    select: "name email",
+  });
   return res.status(200).send({
     status: "success",
     count: authOrders.length,

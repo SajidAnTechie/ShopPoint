@@ -17,7 +17,8 @@ import {
 } from "@material-ui/core/";
 import { Link, Redirect } from "react-router-dom";
 import confirmationImg from "../assests/confirmation.png";
-import { confirmAlert } from "react-confirm-alert"; // Import
+import { confirmAlert } from "react-confirm-alert";
+import * as routes from "../constants/routes";
 import "react-confirm-alert/src/react-confirm-alert.css";
 
 const useStyles = makeStyles((theme) => ({
@@ -116,7 +117,7 @@ const UpdateUser = ({ match }) => {
 
   return (
     <>
-      {Success && <Redirect to="/admin/userList" />}
+      {Success && <Redirect to={routes.USERS} />}
       {updateError && (
         <ErrorMessage
           header="Something went wrong"
@@ -124,7 +125,7 @@ const UpdateUser = ({ match }) => {
           reset={userConstants.USER_EDIT_RESET}
         />
       )}
-      <Link to="/admin/userList" className="btn btn-light my-3">
+      <Link to={routes.USERS} className="btn btn-light my-3">
         Go Back
       </Link>
       {loading ? (

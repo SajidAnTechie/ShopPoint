@@ -16,6 +16,7 @@ import {
 import * as productConstants from "../constants/productConstants";
 import SinglePageLoader from "../components/Loader/SinglePageLoader";
 import { addToCart } from "../actions/cartAction";
+import * as routes from "../constants/routes";
 
 const useStyles = makeStyles((theme) => ({
   typography: {
@@ -54,7 +55,7 @@ const ProductDetails = ({ match, history }) => {
 
   const addToCartHandler = () => {
     dispatch(addToCart(match.params.productId, qty));
-    history.push("/cart");
+    history.push(routes.CART);
   };
 
   return (
@@ -66,7 +67,7 @@ const ProductDetails = ({ match, history }) => {
           reset={productConstants.CREATE_REVIEW_RESET}
         />
       )}
-      <Link className="btn btn-light my-3" to="/">
+      <Link className="btn btn-light my-3" to={routes.HOME}>
         Go Back
       </Link>
       {loading ? (
@@ -152,7 +153,7 @@ const ProductDetails = ({ match, history }) => {
                       color="primary"
                       onClick={addToCartHandler}
                       fullWidth
-                      disabled={product.countInStock === 0}
+                      disabled={!product.countInStock}
                     >
                       Add To Cart
                     </Button>

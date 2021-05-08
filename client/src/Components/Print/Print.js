@@ -28,7 +28,7 @@ const Print = ({ printAs }) => {
       <Select
         labelId="demo-simple-select-outlined-label"
         id="demo-simple-select-outlined"
-        onChange={(e) => printAs(e)}
+        onChange={(e) => printAs(e.target.value)}
         label="Print"
         autoWidth
       >

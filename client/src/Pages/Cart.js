@@ -10,6 +10,8 @@ import {
   makeStyles,
   MenuItem,
 } from "@material-ui/core/";
+import { interpolate } from "../utils/string";
+import * as routes from "../constants/routes";
 
 const useStyles = makeStyles((theme) => ({
   typography: {
@@ -35,16 +37,19 @@ const Cart = ({ history }) => {
   };
 
   const handleCheckout = () => {
-    history.push("/login?redirect=shipping");
+    history.push({
+      pathname: routes.LOGIN,
+      search: `?redirect=${routes.SHIPPING}`,
+    });
   };
 
   return (
     <Row>
       <Col md={8}>
         <h1>Shopping Cart</h1>
-        {cartItems.length === 0 ? (
+        {!cartItems.length ? (
           <>
-            Your cart is empty <Link to="/">Go Back</Link>
+            Your cart is empty <Link to={routes.HOME}>Go Back</Link>
           </>
         ) : (
           <ListGroup variant="flush">
@@ -60,7 +65,11 @@ const Cart = ({ history }) => {
                     />
                   </Col>
                   <Col md={3}>
-                    <Link to={`/product/${item.productId}`}>
+                    <Link
+                      to={interpolate(routes.PRODUCT, {
+                        productId: item.productId,
+                      })}
+                    >
                       {item.productName}
                     </Link>
                   </Col>
@@ -121,7 +130,7 @@ const Cart = ({ history }) => {
                 color="primary"
                 onClick={handleCheckout}
                 fullWidth
-                disabled={cartItems.length === 0}
+                disabled={!cartItems.length}
               >
                 Proceed To Checkout
               </Button>

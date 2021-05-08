@@ -9,6 +9,7 @@ import {
   CircularProgress,
   makeStyles,
 } from "@material-ui/core/";
+import * as routes from "../constants/routes";
 import * as userAction from "../actions/userAction";
 import * as userConstants from "../constants/userConstants";
 
@@ -26,7 +27,9 @@ const EmailVerification = ({ location, history }) => {
 
   const { userInfo, error, loading } = userAuthData;
 
-  const redirect = location.search ? location.search.split("=")[1] : "/";
+  const redirect = location.search
+    ? location.search.split("=")[1]
+    : routes.HOME;
 
   const dispatch = useDispatch();
 

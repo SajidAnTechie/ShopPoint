@@ -8310,6 +8310,11 @@ pinkie@^2.0.0:
   resolved "https://registry.yarnpkg.com/pinkie/-/pinkie-2.0.4.tgz#72556b80cfa0d48a974e80e77248e80ed4f7f870"
   integrity sha1-clVrgM+g1IqXToDnckjoDtT3+HA=
 
+pinterpolate@^0.2.3:
+  version "0.2.3"
+  resolved "https://registry.yarnpkg.com/pinterpolate/-/pinterpolate-0.2.3.tgz#d35408cf26670ae2a6dddebfbab06e824a20e382"
+  integrity sha512-ZlNZGJ9ujvZEO8MFwKYWhbaI9v/4kTNIG+4a2AQLdqD1/75/bfzZqUqjeWvjeMKk9D0IJY+XJVio2/N9MfhVtQ==
+
 pirates@^4.0.1:
   version "4.0.1"
   resolved "https://registry.yarnpkg.com/pirates/-/pirates-4.0.1.tgz#643a92caf894566f91b2b986d2c66950a8e2fb87"
