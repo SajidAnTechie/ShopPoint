@@ -3,13 +3,13 @@ import {
   bodyForOrders,
   tableStyles,
 } from "../components/table/tableLayout";
+
 /**
  * Create PDF UI
  * @param {Object} userInfo
  * @param {Array} orders
  * @returns {Object}
  */
-
 export const createPdfData = (userInfo, orders) => {
   return {
     content: [
