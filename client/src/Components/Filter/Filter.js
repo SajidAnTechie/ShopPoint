@@ -32,7 +32,6 @@ function Filtetr({
   handlePriceRange,
   handleFilters,
   filters,
-  clearFilter,
 }) {
   const classes = useStyles();
   const [anchorEl, setAnchorEl] = useState(null);
@@ -173,9 +172,6 @@ function Filtetr({
               onClick={handlePriceRange}
             >
               Done
-            </Button>
-            <Button variant="contained" color="primary" onClick={clearFilter}>
-              clearFilter
             </Button>
           </div>
         </Typography>

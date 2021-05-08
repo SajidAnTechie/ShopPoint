@@ -88,10 +88,6 @@ const Home = () => {
     });
   };
 
-  const clearFilter = () => {
-    setFilters({});
-  };
-
   return (
     <>
       <Meta />
@@ -126,7 +122,6 @@ const Home = () => {
                   handlePriceRange={handlePriceRange}
                   handleFilters={handleFilters}
                   filters={filters}
-                  clearFilter={clearFilter}
                 />
               </span>
             </div>
