@@ -29,11 +29,11 @@ const Print = ({ printAs }) => {
         labelId="demo-simple-select-outlined-label"
         id="demo-simple-select-outlined"
         onChange={(e) => printAs(e.target.value)}
-        label="Print"
+        label="Print As"
         autoWidth
       >
-        <MenuItem value="pdf">Print as pdf</MenuItem>
-        <MenuItem value="excel">Print as excel</MenuItem>
+        <MenuItem value="pdf"> PDF</MenuItem>
+        <MenuItem value="excel">EXCEL</MenuItem>
       </Select>
     </FormControl>
   );

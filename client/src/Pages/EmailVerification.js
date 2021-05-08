@@ -54,7 +54,7 @@ const EmailVerification = ({ location, history }) => {
         />
       )}
       <FormContainer>
-        <h1>Email Verification</h1>
+        <h1>Verify Your Email</h1>
         <Form>
           <TextField
             variant="outlined"

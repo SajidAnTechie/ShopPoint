@@ -139,7 +139,7 @@ const Register = ({ location, history }) => {
           required
           fullWidth
           name="password"
-          label="Password"
+          label="Confirm Password"
           id="password"
           value={confirmPassword}
           autoComplete="current-password"
