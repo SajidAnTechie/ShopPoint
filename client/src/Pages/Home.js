@@ -54,7 +54,7 @@ const Home = () => {
 
   const fetchProductList = () => {
     dispatch(
-      productAction.listProducts(
+      productAction.productList(
         {
           ...filters,
         },

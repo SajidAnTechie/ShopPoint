@@ -66,13 +66,18 @@ const ProductReview = ({ productId }) => {
       setRating("");
       dispatch({ type: productConstants.CREATE_REVIEW_RESET });
     }
+
+    dispatch(productAction.productReviews(productId, initialLoading));
+
+    // eslint-disable-next-line
+  }, [dispatch, createReviewSuccess]);
+
+  useEffect(() => {
     if (success && initialLoading) {
       setInitialLoading(false);
-    } else {
-      dispatch(productAction.productReview(productId, initialLoading));
     }
     // eslint-disable-next-line
-  }, [dispatch, createReviewSuccess, success]);
+  }, [dispatch, success]);
 
   const handleCreateReview = (e) => {
     e.preventDefault();

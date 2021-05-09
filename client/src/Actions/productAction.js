@@ -1,68 +1,46 @@
 import axios from "axios";
+import * as productServices from "../services/Product";
+import { handleError } from "../utils/error";
 import * as productConstants from "../constants/productConstants";
 
-export const listProducts = (filters, initialLoading) => async (dispatch) => {
+export const productList = (filters, initialLoading) => async (dispatch) => {
   try {
     if (initialLoading) {
       dispatch({ type: productConstants.PRODUCTLIST_FETCH_START });
     }
 
-    Object.keys(filters).forEach((key) => {
-      if (filters.hasOwnProperty(key)) {
-        if (filters[key] === "") {
-          delete filters[key];
-        }
-      }
+    productServices.filterParams(filters);
+
+    const { results, count } = await productServices.fetchProducts(filters);
+
+    dispatch({
+      type: productConstants.PRODUCTLIST_FETCH_SUCCESS,
+      payload: { results, count },
     });
-
-    await axios
-      .get("/api/v1/product", {
-        params: {
-          ...filters,
-        },
-      })
-      .then((resp) => {
-        const productList = resp.data.data.results;
-        const totalProduct = resp.data.data.count;
-
-        dispatch({
-          type: productConstants.PRODUCTLIST_FETCH_SUCCESS,
-          payload: { productList, totalProduct },
-        });
-      });
-  } catch (error) {
+  } catch (err) {
     dispatch({
       type: productConstants.PRODUCTLIST_FETCH_ERROR,
-      payload:
-        error.response && error.response.data.error
-          ? error.response.data.error
-          : error.message,
+      payload: handleError(err),
     });
   }
 };
 
-export const listProductsForAdmin = (initialLoading) => async (dispatch) => {
+export const productListForAdmin = (initialLoading) => async (dispatch) => {
   try {
     if (initialLoading) {
       dispatch({ type: productConstants.PRODUCTLIST_FETCH_START });
     }
 
-    await axios.get(`/api/v1/product/`).then((resp) => {
-      const productList = resp.data.data.results;
-      const totalProduct = resp.data.data.count;
+    const { results, count } = await productServices.fetchProducts({});
 
-      dispatch({
-        type: productConstants.PRODUCTLIST_FETCH_SUCCESS,
-        payload: { productList, totalProduct },
-      });
+    dispatch({
+      type: productConstants.PRODUCTLIST_FETCH_SUCCESS,
+      payload: { results, count },
     });
-  } catch (error) {
+  } catch (err) {
     dispatch({
       type: productConstants.PRODUCTLIST_FETCH_ERROR,
-      payload:
-        error.response && error.response.data.error
-          ? error.response.data.error
-          : error.message,
+      payload: handleError(err),
     });
   }
 };
@@ -71,182 +49,113 @@ export const product = (id) => async (dispatch) => {
   try {
     dispatch({ type: productConstants.PRODUCT_FETCH_START });
 
-    await axios.get(`/api/v1/product/${id}`).then((resp) => {
-      const product = resp.data.data;
+    const data = await productServices.fetchProduct(id);
 
-      dispatch({
-        type: productConstants.PRODUCT_FETCH_SUCCESS,
-        payload: product,
-      });
+    dispatch({
+      type: productConstants.PRODUCT_FETCH_SUCCESS,
+      payload: data,
     });
-  } catch (error) {
+  } catch (err) {
     dispatch({
       type: productConstants.PRODUCT_FETCH_FAIL,
-      payload:
-        error.response && error.response.data.error
-          ? error.response.data.error
-          : error.message,
+      payload: handleError(err),
     });
   }
 };
 
-export const productReview = (id, initialLoading) => async (dispatch) => {
+export const productReviews = (id, initialLoading) => async (dispatch) => {
   try {
     if (initialLoading) {
       dispatch({ type: productConstants.PRODUCTREVIEW_FETCH_START });
     }
-    await axios.get(`/api/v1/product/${id}/reviews`).then((resp) => {
-      const productReviews = resp.data.data;
-      const totalReview = resp.data.count;
 
-      dispatch({
-        type: productConstants.PRODUCTREVIEW_FETCH_SUCCESS,
-        payload: {
-          productReviews,
-          totalReview,
-        },
-      });
+    const { data, count } = await productServices.fetchProductReviews(id);
+
+    dispatch({
+      type: productConstants.PRODUCTREVIEW_FETCH_SUCCESS,
+      payload: {
+        data,
+        count,
+      },
     });
-  } catch (error) {
+  } catch (err) {
     dispatch({
       type: productConstants.PRODUCTREVIEW_FETCH_FAIL,
-      payload:
-        error.response && error.response.data.error
-          ? error.response.data.error
-          : error.message,
+      payload: handleError(err),
     });
   }
 };
 
-export const createReview = (id, title, text, rating) => async (
-  dispatch,
-  getState
-) => {
+export const createReview = (id, title, text, rating) => async (dispatch) => {
   try {
     dispatch({ type: productConstants.CREATE_REVIEW_START });
 
-    const {
-      userLogin: { userInfo },
-    } = getState();
-
-    const config = {
-      headers: {
-        Authorization: `Bearer ${userInfo.token}`,
-      },
-    };
-
-    const data = {
+    const body = {
       title,
       text,
       rating,
     };
-    await axios
-      .post(`/api/v1/product/${id}/reviews`, data, config)
-      .then((resp) => {
-        dispatch({
-          type: productConstants.CREATE_REVIEW_SUCCESS,
-        });
-      });
-  } catch (error) {
+
+    await productServices.createReview(id, body);
+
+    dispatch({
+      type: productConstants.CREATE_REVIEW_SUCCESS,
+    });
+  } catch (err) {
     dispatch({
       type: productConstants.CREATE_REVIEW_FAIL,
-      payload:
-        error.response && error.response.data.error
-          ? error.response.data.error
-          : error.message,
+      payload: handleError(err),
     });
   }
 };
 
-export const deleteProduct = (id) => async (dispatch, getState) => {
+export const deleteProduct = (id) => async (dispatch) => {
   try {
     dispatch({ type: productConstants.DELETE_PRODUCT_START });
 
-    const {
-      userLogin: { userInfo },
-    } = getState();
+    await productServices.deleteProduct(id);
 
-    const config = {
-      headers: {
-        Authorization: `Bearer ${userInfo.token}`,
-      },
-    };
-
-    await axios.delete(`/api/v1/product/${id}`, config).then((resp) => {
-      dispatch({
-        type: productConstants.DELETE_PRODUCT_SUCCESS,
-      });
+    dispatch({
+      type: productConstants.DELETE_PRODUCT_SUCCESS,
     });
-  } catch (error) {
+  } catch (err) {
     dispatch({
       type: productConstants.DELETE_PRODUCT_FAIL,
-      payload:
-        error.response && error.response.data.error
-          ? error.response.data.error
-          : error.message,
+      payload: handleError(err),
     });
   }
 };
 
-export const createProduct = (formData) => async (dispatch, getState) => {
+export const createProduct = (formData) => async (dispatch) => {
   try {
     dispatch({ type: productConstants.CREATE_PRODUCT_START });
 
-    const {
-      userLogin: { userInfo },
-    } = getState();
+    await productServices.createProduct(formData);
 
-    const config = {
-      headers: {
-        Authorization: `Bearer ${userInfo.token}`,
-      },
-    };
-
-    await axios.post("/api/v1/product/", formData, config).then((resp) => {
-      dispatch({
-        type: productConstants.CREATE_PRODUCT_SUCCESS,
-      });
+    dispatch({
+      type: productConstants.CREATE_PRODUCT_SUCCESS,
     });
-  } catch (error) {
+  } catch (err) {
     dispatch({
       type: productConstants.CREATE_PRODUCT_FAIL,
-      payload:
-        error.response && error.response.data.error
-          ? error.response.data.error
-          : error.message,
+      payload: handleError(err),
     });
   }
 };
 
-export const EditProduct = (id, UpdatedData) => async (dispatch, getState) => {
+export const EditProduct = (id, UpdatedData) => async (dispatch) => {
   try {
     dispatch({ type: productConstants.EDIT_PRODUCT_START });
 
-    const {
-      userLogin: { userInfo },
-    } = getState();
+    await productServices.updateProduct(id, UpdatedData);
 
-    const config = {
-      headers: {
-        Authorization: `Bearer ${userInfo.token}`,
-      },
-    };
-
-    await axios
-      .put(`/api/v1/product/${id}`, UpdatedData, config)
-      .then((resp) => {
-        dispatch({
-          type: productConstants.EDIT_PRODUCT_SUCCESS,
-          payload: "Product updated successfully",
-        });
-      });
-  } catch (error) {
+    dispatch({
+      type: productConstants.EDIT_PRODUCT_SUCCESS,
+    });
+  } catch (err) {
     dispatch({
       type: productConstants.EDIT_PRODUCT_FAIL,
-      payload:
-        error.response && error.response.data.error
-          ? error.response.data.error
-          : error.message,
+      payload: handleError(err),
     });
   }
 };

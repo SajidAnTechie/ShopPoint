@@ -17,7 +17,6 @@ import { interpolate } from "../utils/string";
 import config from "../config";
 import * as routes from "../constants/routes";
 import OrderLoader from "../components/Loader/OrderLoader";
-import config from "../config";
 
 const Order = ({ match }) => {
   const orderId = match.params.orderId;
@@ -69,15 +68,19 @@ const Order = ({ match }) => {
   }, [dispatch, orderId, successPayMessage, successDeliver, order]);
 
   useEffect(() => {
+    dispatch({ type: ORDER_PAY_RESET });
+    dispatch({ type: ORDER_DELIVER_RESET });
+    dispatch(getOrder(orderId, initialLoading));
+
+    // eslint-disable-next-line
+  }, [dispatch, successPayMessage, successDeliver, refId]);
+
+  useEffect(() => {
     if (success && initialLoading) {
       setInitialLoading(false);
-    } else {
-      dispatch({ type: ORDER_PAY_RESET });
-      dispatch({ type: ORDER_DELIVER_RESET });
-      dispatch(getOrder(orderId, initialLoading));
     }
     // eslint-disable-next-line
-  }, [dispatch, successPayMessage, success, successDeliver, refId]);
+  }, [dispatch, success]);
 
   useEffect(() => {
     if (refId) {

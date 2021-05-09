@@ -114,7 +114,6 @@ function remove(url, { params = {}, accessToken = false, headers = {} } = {}) {
   return instance({
     url,
     params,
-    data: body,
     method: "delete",
     headers: { ...authHeaders, ...headers },
   }).then((response) => response);

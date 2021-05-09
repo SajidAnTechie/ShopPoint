@@ -30,13 +30,17 @@ const UserList = () => {
   const { userInfo } = userLogin;
 
   useEffect(() => {
+    dispatch(userList(initialLoading));
+
+    // eslint-disable-next-line
+  }, [dispatch, deleteSuccess]);
+
+  useEffect(() => {
     if (success && initialLoading) {
       setInitialLoading(false);
-    } else {
-      dispatch(userList(initialLoading));
     }
     // eslint-disable-next-line
-  }, [dispatch, success, deleteSuccess]);
+  }, [dispatch, success]);
 
   const deleteHandler = (id, e) => {
     e.preventDefault();

@@ -24,7 +24,7 @@ import {
   makeStyles,
 } from "@material-ui/core/";
 import {
-  listProductsForAdmin,
+  productListForAdmin,
   deleteProduct,
   createProduct,
 } from "../actions/productAction";
@@ -96,14 +96,17 @@ const ProductList = () => {
       dispatch({ type: productConstants.CREATE_PRODUCT_RESET });
     }
 
-    if (success && initialLoading) {
-      setInitialLoading(false);
-    } else {
-      dispatch(listProductsForAdmin(initialLoading));
-    }
+    dispatch(productListForAdmin(initialLoading));
 
     // eslint-disable-next-line
-  }, [dispatch, deleteSuccess, success, createSuccess]);
+  }, [dispatch, deleteSuccess, createSuccess]);
+
+  useEffect(() => {
+    if (success && initialLoading) {
+      setInitialLoading(false);
+    }
+    // eslint-disable-next-line
+  }, [dispatch, success]);
 
   const cancelCreateProduct = () => {
     setOpenForm(false);
@@ -262,9 +265,6 @@ const ProductList = () => {
                           label="Category"
                           value={category}
                         >
-                          <MenuItem value="">
-                            <em>None</em>
-                          </MenuItem>
                           <MenuItem value="Shirt">T-shirt</MenuItem>
                           <MenuItem value="Pants">Pant</MenuItem>
                           <MenuItem value="Vest">Vest</MenuItem>

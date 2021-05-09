@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Table, Button } from "react-bootstrap";
 import { LinkContainer } from "react-router-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
@@ -16,16 +16,25 @@ pdfMake.vfs = pdfFonts.pdfMake.vfs;
 const OrderList = () => {
   const orderList = useSelector((state) => state.orderList);
   const userLogin = useSelector((state) => state.userLogin);
+  const [initialLoading, setInitialLoading] = useState(true);
 
-  const { orders, loading, error, count } = orderList;
+  const { orders, loading, error, count, success } = orderList;
   const { userInfo } = userLogin;
 
   const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(listOrders());
+
     // eslint-disable-next-line
   }, [dispatch]);
+
+  useEffect(() => {
+    if (success && initialLoading) {
+      setInitialLoading(false);
+    }
+    // eslint-disable-next-line
+  }, [dispatch, success]);
 
   const printAs = (value) => {
     const downloadAs = value;

@@ -1,5 +1,6 @@
 import axios from "axios";
 import * as userConstants from "../constants/userConstants";
+import * as tokenService from "../services/token";
 
 export const auth = (email, password) => async (dispatch) => {
   try {
@@ -19,7 +20,7 @@ export const auth = (email, password) => async (dispatch) => {
         token,
       };
 
-      localStorage.setItem("userInfo", JSON.stringify(userInfo));
+      tokenService.setToken(userInfo);
       dispatch({
         type: userConstants.USER_AUTH_SUCCESS,
         payload: userInfo,
@@ -37,7 +38,7 @@ export const auth = (email, password) => async (dispatch) => {
 };
 
 export const Logout = () => (dispatch) => {
-  localStorage.removeItem("userInfo");
+  tokenService.removeToken();
   dispatch({ type: userConstants.RESET });
 };
 

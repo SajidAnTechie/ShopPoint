@@ -9,8 +9,8 @@ export const listProducts = (state = { products: [] }, action) => {
       };
     case productConstants.PRODUCTLIST_FETCH_SUCCESS:
       return {
-        products: action.payload.productList,
-        count: action.payload.totalProduct,
+        products: action.payload.results,
+        count: action.payload.count,
         success: true,
       };
     case productConstants.PRODUCTLIST_FETCH_ERROR:
@@ -54,8 +54,8 @@ export const productReview = (state = { productReviews: [] }, action) => {
       };
     case productConstants.PRODUCTREVIEW_FETCH_SUCCESS:
       return {
-        productReviews: action.payload.productReviews,
-        count: action.payload.totalReview,
+        productReviews: action.payload.data,
+        count: action.payload.count,
         success: true,
       };
     case productConstants.PRODUCT_FETCH_FAIL:
