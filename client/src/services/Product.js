@@ -5,7 +5,7 @@ import { interpolate } from "../utils/string";
 /**
  *
  * @param {Object} filters
- * @returns {Array} list of products
+ * @returns {Array} data
  */
 export const fetchProducts = async (filters) => {
   const { data } = await http.get(config.apiEndPoint.product.fetchProducts, {
@@ -19,7 +19,7 @@ export const fetchProducts = async (filters) => {
 /**
  *
  * @param {Integer} id
- * @returns {Object}
+ * @returns {Object} data
  */
 export const fetchProduct = async (id) => {
   const url = interpolate(config.apiEndPoint.product.fetchProduct, { id: id });
@@ -32,7 +32,7 @@ export const fetchProduct = async (id) => {
 /**
  *
  * @param {Integer} id
- * @returns {Object}
+ * @returns {Object} data
  */
 
 export const fetchProductReviews = async (id) => {
@@ -47,7 +47,7 @@ export const fetchProductReviews = async (id) => {
 /**
  *
  * @param {Integer} id
- * @returns {Object}
+ * @returns {Object} data
  */
 export const createReview = async (id, body) => {
   const url = interpolate(config.apiEndPoint.product.createReview, {
@@ -64,7 +64,7 @@ export const createReview = async (id, body) => {
 /**
  *
  * @param {Integer} id
- * @returns {String}
+ * @returns {Object} data
  */
 export const deleteProduct = async (id) => {
   const url = interpolate(config.apiEndPoint.product.deleteProduct, {
@@ -80,7 +80,7 @@ export const deleteProduct = async (id) => {
 /**
  *
  * @param {Object} body
- * @returns {Object}
+ * @returns {Object} data
  */
 export const createProduct = async (body) => {
   const { data } = await http.post(config.apiEndPoint.product.createProduct, {
@@ -94,7 +94,7 @@ export const createProduct = async (body) => {
 /**
  *
  * @param {Integer} id
- * @returns {Object}
+ * @returns {Object} data
  */
 export const updateProduct = async (id, body) => {
   const url = interpolate(config.apiEndPoint.product.updateProduct, {

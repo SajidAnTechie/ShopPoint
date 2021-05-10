@@ -116,8 +116,8 @@ export const listOrders = (state = { orders: [] }, action) => {
     case orderConstants.ORDERLIST_FETCH_SUCCESS:
       return {
         success: true,
-        orders: action.payload.data,
-        count: action.payload.totalOrders,
+        orders: action.payload.results,
+        count: action.payload.count,
       };
     case orderConstants.ORDERLIST_FETCH_FAIL:
       return {

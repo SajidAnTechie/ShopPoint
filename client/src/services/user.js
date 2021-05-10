@@ -9,7 +9,7 @@ import { interpolate } from "../utils/string";
 
 /**
  *
- * @returns {Object}
+ * @returns {Object} data
  */
 export const fetchUsers = async () => {
   const { data } = await http.get(config.apiEndPoint.user.fetchUsers, {
@@ -21,7 +21,7 @@ export const fetchUsers = async () => {
 /**
  *
  * @param {Integer} id
- * @returns {Object}
+ * @returns {Object} data
  */
 export const fetchUser = async (id) => {
   const url = interpolate(config.apiEndPoint.user.fetchUser, { id: id });
@@ -36,7 +36,7 @@ export const fetchUser = async (id) => {
 /**
  *
  * @param {String} body
- * @returns {Object}
+ * @returns {Object} data
  */
 
 export const forgotPassword = async (body) => {
@@ -50,7 +50,7 @@ export const forgotPassword = async (body) => {
 /**
  *
  * @param {String} body
- * @returns {Object}
+ * @returns {Object} data
  */
 
 export const resetPassword = async (body) => {
@@ -64,7 +64,7 @@ export const resetPassword = async (body) => {
 /**
  *
  * @param {Object} body
- * @returns {Object}
+ * @returns {Object} data
  */
 export const login = async (body) => {
   const { data } = await http.post(config.apiEndPoint.user.login, {
@@ -77,7 +77,7 @@ export const login = async (body) => {
 /**
  *
  * @param {Object} body
- * @returns {Object}
+ * @returns {Object} data
  */
 export const registerUser = async (body) => {
   const { data } = await http.post(config.apiEndPoint.user.create, {
@@ -90,7 +90,7 @@ export const registerUser = async (body) => {
 /**
  *
  * @param {String} body
- * @returns {Object}
+ * @returns {Object} data
  */
 export const verifyEmail = async (body) => {
   const { data } = await http.post(config.apiEndPoint.user.verifyEmail, {
@@ -103,7 +103,7 @@ export const verifyEmail = async (body) => {
 /**
  *
  * @param {Integer} id
- * @returns {String}
+ * @returns {Object} data
  */
 export const deleteUser = async (id) => {
   const url = interpolate(config.apiEndPoint.user.deleteUser, {
@@ -120,7 +120,7 @@ export const deleteUser = async (id) => {
  *
  * @param {Integer} id
  * @param {Object} body
- * @returns {Object}
+ * @returns {Object} data
  */
 export const updateUser = async (id, body) => {
   const url = interpolate(config.apiEndPoint.user.updateUser, {

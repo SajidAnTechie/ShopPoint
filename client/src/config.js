@@ -27,6 +27,14 @@ const config = {
       forgotPassword: "/auth/forgotPassword",
       resetPassword: "/auth/resetPassword",
     },
+    order: {
+      createOrder: "/order",
+      order: "/order/:id",
+      pay: "/order/:id/pay",
+      deliverOrder: "/order/:id/deliver",
+      userOrder: "/order/authOrders",
+      orders: "/order",
+    },
   },
 };
 
