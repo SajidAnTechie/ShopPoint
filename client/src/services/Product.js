@@ -97,7 +97,7 @@ export const createProduct = async (body) => {
  * @returns {Object}
  */
 export const updateProduct = async (id, body) => {
-  const url = interpolate(config.apiEndPoint.product.editProduct, {
+  const url = interpolate(config.apiEndPoint.product.updateProduct, {
     id: id,
   });
   const { data } = await http.put(url, {

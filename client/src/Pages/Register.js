@@ -57,7 +57,7 @@ const Register = ({ location, history }) => {
     if (password !== confirmPassword) {
       return setVerificationMessage("Passwords don't match");
     }
-    dispatch(userAction.Register(name, email, password));
+    dispatch(userAction.register(name, email, password));
   };
 
   const redirectUserToLoginRoute = redirect

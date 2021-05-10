@@ -1,4 +1,3 @@
-import axios from "axios";
 import * as productServices from "../services/Product";
 import { handleError } from "../utils/error";
 import * as productConstants from "../constants/productConstants";

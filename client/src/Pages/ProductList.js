@@ -383,7 +383,7 @@ const ProductList = () => {
             color="primary"
             onClick={() => setOpenForm(true)}
           >
-            <i className="fas fa-plus"></i> Create Product
+            <i className="fas fa-plus mr-2"></i> Add Product
           </MaterialButton>
         </Col>
       </Row>

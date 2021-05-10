@@ -3,6 +3,136 @@ import {
   bodyForUsers,
   tableStyles,
 } from "../components/table/tableLayout";
+import config from "../config";
+import http from "../utils/http";
+import { interpolate } from "../utils/string";
+
+/**
+ *
+ * @returns {Object}
+ */
+export const fetchUsers = async () => {
+  const { data } = await http.get(config.apiEndPoint.user.fetchUsers, {
+    accessToken: true,
+  });
+  return data.data;
+};
+
+/**
+ *
+ * @param {Integer} id
+ * @returns {Object}
+ */
+export const fetchUser = async (id) => {
+  const url = interpolate(config.apiEndPoint.user.fetchUser, { id: id });
+
+  const { data } = await http.get(url, {
+    accessToken: true,
+  });
+
+  return data.data;
+};
+
+/**
+ *
+ * @param {String} body
+ * @returns {Object}
+ */
+
+export const forgotPassword = async (body) => {
+  const { data } = await http.post(config.apiEndPoint.user.forgotPassword, {
+    body,
+  });
+
+  return data;
+};
+
+/**
+ *
+ * @param {String} body
+ * @returns {Object}
+ */
+
+export const resetPassword = async (body) => {
+  const { data } = await http.post(config.apiEndPoint.user.resetPassword, {
+    body,
+  });
+
+  return data;
+};
+
+/**
+ *
+ * @param {Object} body
+ * @returns {Object}
+ */
+export const login = async (body) => {
+  const { data } = await http.post(config.apiEndPoint.user.login, {
+    body,
+  });
+
+  return data;
+};
+
+/**
+ *
+ * @param {Object} body
+ * @returns {Object}
+ */
+export const registerUser = async (body) => {
+  const { data } = await http.post(config.apiEndPoint.user.create, {
+    body,
+  });
+
+  return data;
+};
+
+/**
+ *
+ * @param {String} body
+ * @returns {Object}
+ */
+export const verifyEmail = async (body) => {
+  const { data } = await http.post(config.apiEndPoint.user.verifyEmail, {
+    body,
+  });
+
+  return data;
+};
+
+/**
+ *
+ * @param {Integer} id
+ * @returns {String}
+ */
+export const deleteUser = async (id) => {
+  const url = interpolate(config.apiEndPoint.user.deleteUser, {
+    id: id,
+  });
+  const { data } = await http.remove(url, {
+    accessToken: true,
+  });
+
+  return data;
+};
+
+/**
+ *
+ * @param {Integer} id
+ * @param {Object} body
+ * @returns {Object}
+ */
+export const updateUser = async (id, body) => {
+  const url = interpolate(config.apiEndPoint.user.updateUser, {
+    id: id,
+  });
+  const { data } = await http.put(url, {
+    body,
+    accessToken: true,
+  });
+
+  return data;
+};
 
 /**
  * Create PDF UI

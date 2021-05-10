@@ -81,7 +81,7 @@ const UpdateUser = ({ match }) => {
       email,
       role,
     };
-    dispatch(userAction.userUpdate(userId, UpdateData));
+    dispatch(userAction.updateUser(userId, UpdateData));
   };
 
   const ConfirmedAlert = () => {
