@@ -15,8 +15,8 @@ router.route("/register").post(RegisterUser);
 router.route("/login").post(login);
 router.route("/update/userDetails").put(protect, updateDetails);
 router.route("/update/password").put(protect, updatePassword);
-router.route("/forgotPassword").post(forgotPassword);
-router.route("/resetPassword").post(resetPassword);
-router.route("/verifyEmail").post(verificationEmail);
+router.route("/forgot-password").post(forgotPassword);
+router.route("/reset-password").post(resetPassword);
+router.route("/verify-email").post(verificationEmail);
 
 module.exports = router;

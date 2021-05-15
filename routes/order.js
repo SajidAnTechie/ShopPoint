@@ -33,7 +33,7 @@ router
     getOrders
   )
   .post(createOrder);
-router.route("/authOrders").get(authOrder);
+router.route("/auth-orders").get(authOrder);
 
 router.route("/:orderId").get(getOrder).put(updateOrder).delete(deleteOrder);
 

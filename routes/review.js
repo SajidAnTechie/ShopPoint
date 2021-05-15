@@ -32,6 +32,6 @@ router
   .get(getReview)
   .put(protect, updateReview)
   .delete(protect, deleteReview);
-router.route("/updateRating/:id").put(protect, updateRating);
+router.route("/update-rating/:id").put(protect, updateRating);
 
 module.exports = router;
