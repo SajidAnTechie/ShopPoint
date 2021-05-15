@@ -1,15 +1,15 @@
-import React, { useState } from "react";
-import { Form, FormControl } from "react-bootstrap";
-import * as routes from "../../constants/routes";
-import { useHistory } from "react-router-dom";
-import "../style.css";
+import React, { useState } from 'react';
+import { Form, FormControl } from 'react-bootstrap';
+import * as routes from '../../constants/routes';
+import { useHistory } from 'react-router-dom';
+import '../style.css';
 const SearchBox = () => {
-  const [searchKey, setSearchKey] = useState("");
+  const [searchKey, setSearchKey] = useState('');
   const history = useHistory();
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (searchKey !== "") {
+    if (searchKey !== '') {
       history.push(`/?search=${searchKey}`);
     } else {
       history.push({

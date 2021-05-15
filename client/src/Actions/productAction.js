@@ -1,6 +1,6 @@
-import * as productServices from "../services/Product";
-import { handleError } from "../utils/error";
-import * as productConstants from "../constants/productConstants";
+import * as productServices from '../services/Product';
+import { handleError } from '../utils/error';
+import * as productConstants from '../constants/productConstants';
 
 export const productList = (filters, initialLoading) => async (dispatch) => {
   try {

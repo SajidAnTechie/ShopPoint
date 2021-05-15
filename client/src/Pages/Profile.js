@@ -1,17 +1,17 @@
-import React, { useEffect } from "react";
-import { Table, Button, Row, Col, ListGroup, Card } from "react-bootstrap";
-import { LinkContainer } from "react-router-bootstrap";
-import { useDispatch, useSelector } from "react-redux";
-import ErrorMessage from "../components/Message/errorMessage";
+import React, { useEffect } from 'react';
+import { Table, Button, Row, Col, ListGroup, Card } from 'react-bootstrap';
+import { LinkContainer } from 'react-router-bootstrap';
+import { useDispatch, useSelector } from 'react-redux';
+import ErrorMessage from '../components/Message/errorMessage';
 //import { Button as MeterialButton } from "@material-ui/core/";
-import { authOrder } from "../actions/orderAction";
-import { interpolate } from "../utils/string";
-import { createPdfData } from "../services/order";
-import * as routes from "../constants/routes";
-import TableLoader from "../components/Loader/TableLoader";
-import Print from "../components/Print/Print";
-import pdfMake from "pdfmake/build/pdfmake";
-import pdfFonts from "pdfmake/build/vfs_fonts";
+import { authOrder } from '../actions/orderAction';
+import { interpolate } from '../utils/string';
+import { createPdfData } from '../services/order';
+import * as routes from '../constants/routes';
+import TableLoader from '../components/Loader/TableLoader';
+import Print from '../components/Print/Print';
+import pdfMake from 'pdfmake/build/pdfmake';
+import pdfFonts from 'pdfmake/build/vfs_fonts';
 pdfMake.vfs = pdfFonts.pdfMake.vfs;
 
 const Profile = () => {
@@ -32,13 +32,13 @@ const Profile = () => {
     const downloadAs = value;
 
     switch (downloadAs) {
-      case "pdf":
+      case 'pdf':
         var docDefinition = createPdfData(userInfo, orders);
 
-        pdfMake.createPdf(docDefinition).download("user-order.pdf");
+        pdfMake.createPdf(docDefinition).download('user-order.pdf');
 
         break;
-      case "excel":
+      case 'excel':
         break;
 
       default:
@@ -74,9 +74,7 @@ const Profile = () => {
               <Row>
                 <Col>Account:</Col>
                 <Col>
-                  <strong>
-                    {userInfo.verify ? "Verified" : "Not Verified"}
-                  </strong>
+                  <strong>{userInfo.verify ? 'Verified' : 'Not Verified'}</strong>
                 </Col>
               </Row>
             </ListGroup.Item>
@@ -103,7 +101,7 @@ const Profile = () => {
           </span>
 
           <span className="float-right">
-            {" "}
+            {' '}
             <Print printAs={printAs} />
           </span>
         </div>
@@ -134,14 +132,14 @@ const Profile = () => {
                     {order.isPaid ? (
                       order.paidAt.substring(0, 10)
                     ) : (
-                      <i className="fas fa-times" style={{ color: "red" }}></i>
+                      <i className="fas fa-times" style={{ color: 'red' }}></i>
                     )}
                   </td>
                   <td>
                     {order.isDelivered ? (
                       order.deliveredAt.substring(0, 10)
                     ) : (
-                      <i className="fas fa-times" style={{ color: "red" }}></i>
+                      <i className="fas fa-times" style={{ color: 'red' }}></i>
                     )}
                   </td>
                   <td>

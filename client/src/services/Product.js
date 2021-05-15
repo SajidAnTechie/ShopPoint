@@ -1,6 +1,6 @@
-import config from "../config";
-import http from "../utils/http";
-import { interpolate } from "../utils/string";
+import config from '../config';
+import http from '../utils/http';
+import { interpolate } from '../utils/string';
 
 /**
  *
@@ -115,7 +115,7 @@ export const updateProduct = async (id, body) => {
 export const filterParams = (filters) => {
   Object.keys(filters).forEach((key) => {
     if (filters.hasOwnProperty(key)) {
-      if (filters[key] === "") {
+      if (filters[key] === '') {
         delete filters[key];
       }
     }

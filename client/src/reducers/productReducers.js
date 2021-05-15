@@ -1,4 +1,4 @@
-import * as productConstants from "../constants/productConstants";
+import * as productConstants from '../constants/productConstants';
 
 export const listProducts = (state = { products: [] }, action) => {
   switch (action.type) {

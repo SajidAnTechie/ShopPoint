@@ -1,22 +1,16 @@
-import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
-import { Row, Col, Image, ListGroup, Card } from "react-bootstrap";
-import * as productAction from "../actions/productAction";
-import ErrorMessage from "../components/Message/errorMessage";
-import ProductReview from "../components/ProductReview/ProductReview";
-import Rating from "../components/Rating/Rating";
-import {
-  Select,
-  Button,
-  FormControl,
-  makeStyles,
-  MenuItem,
-} from "@material-ui/core/";
-import * as productConstants from "../constants/productConstants";
-import SinglePageLoader from "../components/Loader/SinglePageLoader";
-import { addToCart } from "../actions/cartAction";
-import * as routes from "../constants/routes";
+import React, { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { Row, Col, Image, ListGroup, Card } from 'react-bootstrap';
+import * as productAction from '../actions/productAction';
+import ErrorMessage from '../components/Message/errorMessage';
+import ProductReview from '../components/ProductReview/ProductReview';
+import Rating from '../components/Rating/Rating';
+import { Select, Button, FormControl, makeStyles, MenuItem } from '@material-ui/core/';
+import * as productConstants from '../constants/productConstants';
+import SinglePageLoader from '../components/Loader/SinglePageLoader';
+import { addToCart } from '../actions/cartAction';
+import * as routes from '../constants/routes';
 
 const useStyles = makeStyles((theme) => ({
   typography: {
@@ -28,7 +22,7 @@ const useStyles = makeStyles((theme) => ({
     minWidth: 85,
     top: -17,
     left: 6,
-    position: "absolute",
+    position: 'absolute',
   },
   selectEmpty: {
     marginTop: theme.spacing(2),
@@ -61,11 +55,7 @@ const ProductDetails = ({ match, history }) => {
   return (
     <>
       {createReviewError && (
-        <ErrorMessage
-          header="Opps!!!"
-          message={createReviewError}
-          reset={productConstants.CREATE_REVIEW_RESET}
-        />
+        <ErrorMessage header="Opps!!!" message={createReviewError} reset={productConstants.CREATE_REVIEW_RESET} />
       )}
       <Link className="btn btn-light my-3" to={routes.HOME}>
         Go Back
@@ -88,15 +78,11 @@ const ProductDetails = ({ match, history }) => {
                 <ListGroup.Item>
                   <Rating
                     value={product.averageRating}
-                    text={`${
-                      product.Reviews ? product.Reviews.length : 0
-                    } reviews`}
+                    text={`${product.Reviews ? product.Reviews.length : 0} reviews`}
                   />
                 </ListGroup.Item>
                 <ListGroup.Item>Price: ${product.price}</ListGroup.Item>
-                <ListGroup.Item>
-                  Description: {product.description}
-                </ListGroup.Item>
+                <ListGroup.Item>Description: {product.description}</ListGroup.Item>
               </ListGroup>
             </Col>
             <Col md={3}>
@@ -114,9 +100,7 @@ const ProductDetails = ({ match, history }) => {
                   <ListGroup.Item>
                     <Row>
                       <Col>Status:</Col>
-                      <Col>
-                        {product.countInStock > 0 ? "In Stock" : "Out Of Stock"}
-                      </Col>
+                      <Col>{product.countInStock > 0 ? 'In Stock' : 'Out Of Stock'}</Col>
                     </Row>
                   </ListGroup.Item>
 
@@ -133,13 +117,11 @@ const ProductDetails = ({ match, history }) => {
                               label="Qty"
                               value={qty}
                             >
-                              {[...Array(product.countInStock).keys()].map(
-                                (x) => (
-                                  <MenuItem key={x + 1} value={x + 1}>
-                                    {x + 1}
-                                  </MenuItem>
-                                )
-                              )}
+                              {[...Array(product.countInStock).keys()].map((x) => (
+                                <MenuItem key={x + 1} value={x + 1}>
+                                  {x + 1}
+                                </MenuItem>
+                              ))}
                             </Select>
                           </FormControl>
                         </Col>

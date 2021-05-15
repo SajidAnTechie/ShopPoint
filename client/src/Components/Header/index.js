@@ -1,10 +1,10 @@
-import React from "react";
-import { Navbar, Nav, Container, NavDropdown } from "react-bootstrap";
-import { LinkContainer } from "react-router-bootstrap";
-import { useSelector } from "react-redux";
-import SearchBox from "../SearchBox/SearchBox";
-import * as routes from "../../constants/routes";
-import "../style.css";
+import React from 'react';
+import { Navbar, Nav, Container, NavDropdown } from 'react-bootstrap';
+import { LinkContainer } from 'react-router-bootstrap';
+import { useSelector } from 'react-redux';
+import SearchBox from '../SearchBox/SearchBox';
+import * as routes from '../../constants/routes';
+import '../style.css';
 
 const Header = () => {
   const userAuthData = useSelector((state) => state.userLogin);
@@ -27,11 +27,9 @@ const Header = () => {
             <Nav className="ml-auto">
               <LinkContainer to={routes.CART}>
                 <Nav.Link>
-                  <i className="fas fa-shopping-cart"></i>{" "}
+                  <i className="fas fa-shopping-cart"></i>{' '}
                   {cartItems.length > 0 && (
-                    <span className="cart">
-                      {cartItems.reduce((acc, item) => acc + item.qty, 0)}
-                    </span>
+                    <span className="cart">{cartItems.reduce((acc, item) => acc + item.qty, 0)}</span>
                   )}
                 </Nav.Link>
               </LinkContainer>
@@ -52,7 +50,7 @@ const Header = () => {
                   </Nav.Link>
                 </LinkContainer>
               )}
-              {userInfo && userInfo.role === "admin" && (
+              {userInfo && userInfo.role === 'admin' && (
                 <NavDropdown title="Admin" id="adminMenu">
                   <LinkContainer to={routes.USERS}>
                     <NavDropdown.Item>Users</NavDropdown.Item>

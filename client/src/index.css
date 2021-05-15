@@ -34,7 +34,7 @@ h2 {
 .MuiButton-contained.Mui-disabled {
   color: white !important;
 }
-.MuiButton-label img{
+.MuiButton-label img {
   width: 100px;
 }
 /* ConfrimAlert */

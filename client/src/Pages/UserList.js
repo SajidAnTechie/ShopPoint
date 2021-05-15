@@ -1,19 +1,19 @@
-import React, { useEffect, useState } from "react";
-import { LinkContainer } from "react-router-bootstrap";
-import { Table, Button } from "react-bootstrap";
-import { useDispatch, useSelector } from "react-redux";
-import ErrorMessage from "../components/Message/errorMessage";
-import SuccessMessage from "../components/Message/successMessage";
-import { userList, userDelete } from "../actions/userAction";
-import * as userConstants from "../constants/userConstants";
-import { Button as MaterialButton } from "@material-ui/core/";
-import TableLoader from "../components/Loader/TableLoader";
-import { createPdfData } from "../services/user";
-import { confirmAlert } from "react-confirm-alert"; // Import
-import "react-confirm-alert/src/react-confirm-alert.css";
-import Print from "../components/Print/Print";
-import pdfMake from "pdfmake/build/pdfmake";
-import pdfFonts from "pdfmake/build/vfs_fonts";
+import React, { useEffect, useState } from 'react';
+import { LinkContainer } from 'react-router-bootstrap';
+import { Table, Button } from 'react-bootstrap';
+import { useDispatch, useSelector } from 'react-redux';
+import ErrorMessage from '../components/Message/errorMessage';
+import SuccessMessage from '../components/Message/successMessage';
+import { userList, userDelete } from '../actions/userAction';
+import * as userConstants from '../constants/userConstants';
+import { Button as MaterialButton } from '@material-ui/core/';
+import TableLoader from '../components/Loader/TableLoader';
+import { createPdfData } from '../services/user';
+import { confirmAlert } from 'react-confirm-alert'; // Import
+import 'react-confirm-alert/src/react-confirm-alert.css';
+import Print from '../components/Print/Print';
+import pdfMake from 'pdfmake/build/pdfmake';
+import pdfFonts from 'pdfmake/build/vfs_fonts';
 pdfMake.vfs = pdfFonts.pdfMake.vfs;
 
 const UserList = () => {
@@ -60,11 +60,7 @@ const UserList = () => {
             >
               Yes, Delete it !
             </MaterialButton>
-            <MaterialButton
-              variant="contained"
-              color="primary"
-              onClick={onClose}
-            >
+            <MaterialButton variant="contained" color="primary" onClick={onClose}>
               No
             </MaterialButton>
           </div>
@@ -77,13 +73,13 @@ const UserList = () => {
     const downloadAs = value;
 
     switch (downloadAs) {
-      case "pdf":
+      case 'pdf':
         var docDefinition = createPdfData(userInfo, users);
 
-        pdfMake.createPdf(docDefinition).download("users-list.pdf");
+        pdfMake.createPdf(docDefinition).download('users-list.pdf');
 
         break;
-      case "excel":
+      case 'excel':
         break;
 
       default:
@@ -94,18 +90,10 @@ const UserList = () => {
   return (
     <>
       {deleteSuccess && (
-        <SuccessMessage
-          header="Done"
-          message="User Deleted Successfully"
-          reset={userConstants.USER_DELETE_RESET}
-        />
+        <SuccessMessage header="Done" message="User Deleted Successfully" reset={userConstants.USER_DELETE_RESET} />
       )}
       {deleteFail && (
-        <ErrorMessage
-          header="Something went wrong"
-          message={deleteFail}
-          reset={userConstants.USER_DELETE_RESET}
-        />
+        <ErrorMessage header="Something went wrong" message={deleteFail} reset={userConstants.USER_DELETE_RESET} />
       )}
       <div className="clearfix">
         <span className="float-left">
@@ -113,7 +101,7 @@ const UserList = () => {
         </span>
 
         <span className="float-right">
-          {" "}
+          {' '}
           <Print printAs={printAs} />
         </span>
       </div>
@@ -146,12 +134,9 @@ const UserList = () => {
                   </td>
                   <td>
                     {user.verify ? (
-                      <i
-                        className="fas fa-check"
-                        style={{ color: "#43BE31" }}
-                      ></i>
+                      <i className="fas fa-check" style={{ color: '#43BE31' }}></i>
                     ) : (
-                      <i className="fas fa-times" style={{ color: "red" }}></i>
+                      <i className="fas fa-times" style={{ color: 'red' }}></i>
                     )}
                   </td>
                   <td>{user.role}</td>
@@ -163,11 +148,7 @@ const UserList = () => {
                         <i className="fas fa-edit"></i>
                       </Button>
                     </LinkContainer>
-                    <Button
-                      variant="danger"
-                      className="btn-sm"
-                      onClick={(e) => deleteHandler(user._id, e)}
-                    >
+                    <Button variant="danger" className="btn-sm" onClick={(e) => deleteHandler(user._id, e)}>
                       <i className="fas fa-trash"></i>
                     </Button>
                   </td>

@@ -1,4 +1,4 @@
-import pinterpolate from "pinterpolate";
+import pinterpolate from 'pinterpolate';
 
 /**
  *

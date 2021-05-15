@@ -1,35 +1,28 @@
-import React, { useState, useEffect } from "react";
-import { Form } from "react-bootstrap";
-import { useDispatch, useSelector } from "react-redux";
-import ErrorMessage from "../components/Message/errorMessage";
-import FormContainer from "../components/FormContainer/FormContainer";
-import {
-  TextField,
-  Button,
-  CircularProgress,
-  makeStyles,
-} from "@material-ui/core/";
-import * as routes from "../constants/routes";
-import * as userAction from "../actions/userAction";
-import * as userConstants from "../constants/userConstants";
+import React, { useState, useEffect } from 'react';
+import { Form } from 'react-bootstrap';
+import { useDispatch, useSelector } from 'react-redux';
+import ErrorMessage from '../components/Message/errorMessage';
+import FormContainer from '../components/FormContainer/FormContainer';
+import { TextField, Button, CircularProgress, makeStyles } from '@material-ui/core/';
+import * as routes from '../constants/routes';
+import * as userAction from '../actions/userAction';
+import * as userConstants from '../constants/userConstants';
 
 const useStyles = makeStyles((theme) => ({
   prgressColor: {
-    color: "#fff",
+    color: '#fff',
   },
 }));
 
 const EmailVerification = ({ location, history }) => {
-  const [verificationCode, setVerificationCode] = useState("");
+  const [verificationCode, setVerificationCode] = useState('');
   const classes = useStyles();
 
   const userAuthData = useSelector((state) => state.userLogin);
 
   const { userInfo, error, loading } = userAuthData;
 
-  const redirect = location.search
-    ? location.search.split("=")[1]
-    : routes.HOME;
+  const redirect = location.search ? location.search.split('=')[1] : routes.HOME;
 
   const dispatch = useDispatch();
 
@@ -46,13 +39,7 @@ const EmailVerification = ({ location, history }) => {
 
   return (
     <>
-      {error && (
-        <ErrorMessage
-          header="Auth Error"
-          message={error}
-          reset={userConstants.RESET}
-        />
-      )}
+      {error && <ErrorMessage header="Auth Error" message={error} reset={userConstants.RESET} />}
       <FormContainer>
         <h1>Verify Your Email</h1>
         <Form>
@@ -70,22 +57,8 @@ const EmailVerification = ({ location, history }) => {
             value={verificationCode}
             onChange={(e) => setVerificationCode(e.target.value)}
           />
-          <Button
-            type="submit"
-            variant="contained"
-            color="primary"
-            fullWidth
-            onClick={handleSubmit}
-            disabled={loading}
-          >
-            {loading ? (
-              <CircularProgress
-                color="inherit"
-                className={classes.prgressColor}
-              />
-            ) : (
-              <>Verify</>
-            )}
+          <Button type="submit" variant="contained" color="primary" fullWidth onClick={handleSubmit} disabled={loading}>
+            {loading ? <CircularProgress color="inherit" className={classes.prgressColor} /> : <>Verify</>}
           </Button>
         </Form>
       </FormContainer>

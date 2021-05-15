@@ -1,37 +1,30 @@
-import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
-import { Form, Row, Col } from "react-bootstrap";
-import { useDispatch, useSelector } from "react-redux";
-import ErrorMessage from "../components/Message/errorMessage";
-import FormContainer from "../components/FormContainer/FormContainer";
-import {
-  TextField,
-  Button,
-  CircularProgress,
-  makeStyles,
-} from "@material-ui/core/";
-import * as routes from "../constants/routes";
-import * as userAction from "../actions/userAction";
-import * as userConstants from "../constants/userConstants";
+import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
+import { Form, Row, Col } from 'react-bootstrap';
+import { useDispatch, useSelector } from 'react-redux';
+import ErrorMessage from '../components/Message/errorMessage';
+import FormContainer from '../components/FormContainer/FormContainer';
+import { TextField, Button, CircularProgress, makeStyles } from '@material-ui/core/';
+import * as routes from '../constants/routes';
+import * as userAction from '../actions/userAction';
+import * as userConstants from '../constants/userConstants';
 
 const useStyles = makeStyles((theme) => ({
   prgressColor: {
-    color: "#fff",
+    color: '#fff',
   },
 }));
 
 const Login = ({ location, history }) => {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
   const classes = useStyles();
 
   const userAuthData = useSelector((state) => state.userLogin);
 
   const { userInfo, error, loading } = userAuthData;
 
-  const redirect = location.search
-    ? location.search.split("=")[1]
-    : routes.HOME;
+  const redirect = location.search ? location.search.split('=')[1] : routes.HOME;
 
   const dispatch = useDispatch();
 
@@ -46,19 +39,11 @@ const Login = ({ location, history }) => {
     dispatch(userAction.auth(email, password));
   };
 
-  const redirectUserToRegisterRoute = redirect
-    ? routes.REGISTER + `?redirect=${redirect}`
-    : routes.REGISTER;
+  const redirectUserToRegisterRoute = redirect ? routes.REGISTER + `?redirect=${redirect}` : routes.REGISTER;
 
   return (
     <>
-      {error && (
-        <ErrorMessage
-          header="Auth Error"
-          message={error}
-          reset={userConstants.RESET}
-        />
-      )}
+      {error && <ErrorMessage header="Auth Error" message={error} reset={userConstants.RESET} />}
       <FormContainer>
         <h1>Sign In</h1>
 
@@ -94,21 +79,8 @@ const Login = ({ location, history }) => {
             onChange={(e) => setPassword(e.target.value)}
           />
 
-          <Button
-            type="submit"
-            variant="contained"
-            color="primary"
-            fullWidth
-            disabled={loading}
-          >
-            {loading ? (
-              <CircularProgress
-                color="inherit"
-                className={classes.prgressColor}
-              />
-            ) : (
-              <>Sign In</>
-            )}
+          <Button type="submit" variant="contained" color="primary" fullWidth disabled={loading}>
+            {loading ? <CircularProgress color="inherit" className={classes.prgressColor} /> : <>Sign In</>}
           </Button>
         </Form>
 

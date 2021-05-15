@@ -1,7 +1,7 @@
-import * as orderServices from "../services/order";
-import { handleError } from "../utils/error";
-import * as orderConstants from "../constants/orderConstants";
-import * as cartConstants from "../constants/cartConstants";
+import * as orderServices from '../services/order';
+import { handleError } from '../utils/error';
+import * as orderConstants from '../constants/orderConstants';
+import * as cartConstants from '../constants/cartConstants';
 
 export const createOrder = (orderData) => async (dispatch) => {
   try {
@@ -13,9 +13,9 @@ export const createOrder = (orderData) => async (dispatch) => {
       type: orderConstants.CREATE_ORDER_SUCCESS,
       payload: data,
     });
-    localStorage.removeItem("cartItems");
-    localStorage.removeItem("shippingAddress");
-    localStorage.removeItem("paymentMethod");
+    localStorage.removeItem('cartItems');
+    localStorage.removeItem('shippingAddress');
+    localStorage.removeItem('paymentMethod');
     dispatch({
       type: cartConstants.CART_RESET,
     });

@@ -1,7 +1,7 @@
 {
   "name": "client",
   "proxy": "http://127.0.0.1:5000",
-  "version": "0.1.0",
+  "version": "1.0.1",
   "private": true,
   "dependencies": {
     "@material-ui/core": "^4.11.0",
@@ -30,7 +30,8 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "format":"prettier --write ."
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -46,5 +47,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "prettier": "2.3.0"
   }
 }

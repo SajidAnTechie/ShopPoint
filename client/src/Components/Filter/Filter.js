@@ -1,13 +1,13 @@
-import React, { useState } from "react";
-import { makeStyles } from "@material-ui/core/styles";
-import { Checkbox, FormControlLabel, TextField } from "@material-ui/core";
-import Popover from "@material-ui/core/Popover";
-import Typography from "@material-ui/core/Typography";
-import Button from "@material-ui/core/Button";
-import InputLabel from "@material-ui/core/InputLabel";
-import MenuItem from "@material-ui/core/MenuItem";
-import FormControl from "@material-ui/core/FormControl";
-import Select from "@material-ui/core/Select";
+import React, { useState } from 'react';
+import { makeStyles } from '@material-ui/core/styles';
+import { Checkbox, FormControlLabel, TextField } from '@material-ui/core';
+import Popover from '@material-ui/core/Popover';
+import Typography from '@material-ui/core/Typography';
+import Button from '@material-ui/core/Button';
+import InputLabel from '@material-ui/core/InputLabel';
+import MenuItem from '@material-ui/core/MenuItem';
+import FormControl from '@material-ui/core/FormControl';
+import Select from '@material-ui/core/Select';
 
 const useStyles = makeStyles((theme) => ({
   typography: {
@@ -23,16 +23,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function Filtetr({
-  sort,
-  handleSort,
-  setPriceRange,
-  setLtORgt,
-  ltORgt,
-  handlePriceRange,
-  handleFilters,
-  filters,
-}) {
+function Filtetr({ sort, handleSort, setPriceRange, setLtORgt, ltORgt, handlePriceRange, handleFilters, filters }) {
   const classes = useStyles();
   const [anchorEl, setAnchorEl] = useState(null);
 
@@ -45,16 +36,11 @@ function Filtetr({
   };
 
   const open = Boolean(anchorEl);
-  const id = open ? "simple-popover" : undefined;
+  const id = open ? 'simple-popover' : undefined;
 
   return (
     <div>
-      <Button
-        aria-describedby={id}
-        variant="contained"
-        color="primary"
-        onClick={handleClick}
-      >
+      <Button aria-describedby={id} variant="contained" color="primary" onClick={handleClick}>
         Filter
       </Button>
       <Popover
@@ -63,12 +49,12 @@ function Filtetr({
         anchorEl={anchorEl}
         onClose={handleClose}
         anchorOrigin={{
-          vertical: "bottom",
-          horizontal: "center",
+          vertical: 'bottom',
+          horizontal: 'center',
         }}
         transformOrigin={{
-          vertical: "top",
-          horizontal: "center",
+          vertical: 'top',
+          horizontal: 'center',
         }}
       >
         <Typography className={classes.typography}>
@@ -76,9 +62,9 @@ function Filtetr({
           <FormControlLabel
             control={
               <Checkbox
-                checked={sort.includes("name")}
+                checked={sort.includes('name')}
                 color="primary"
-                inputProps={{ "aria-label": "secondary checkbox" }}
+                inputProps={{ 'aria-label': 'secondary checkbox' }}
                 value="name"
                 onChange={(e) => handleSort(e.target.value)}
               />
@@ -88,9 +74,9 @@ function Filtetr({
           <FormControlLabel
             control={
               <Checkbox
-                checked={sort.includes("price")}
+                checked={sort.includes('price')}
                 color="primary"
-                inputProps={{ "aria-label": "secondary checkbox" }}
+                inputProps={{ 'aria-label': 'secondary checkbox' }}
                 value="price"
                 onChange={(e) => handleSort(e.target.value)}
               />
@@ -100,9 +86,9 @@ function Filtetr({
           <FormControlLabel
             control={
               <Checkbox
-                checked={sort.includes("averageRating")}
+                checked={sort.includes('averageRating')}
                 color="primary"
-                inputProps={{ "aria-label": "secondary checkbox" }}
+                inputProps={{ 'aria-label': 'secondary checkbox' }}
                 value="averageRating"
                 onChange={(e) => handleSort(e.target.value)}
               />
@@ -111,13 +97,11 @@ function Filtetr({
           />
 
           <FormControl variant="outlined" className={classes.formControl}>
-            <InputLabel id="demo-simple-select-outlined-label">
-              Category
-            </InputLabel>
+            <InputLabel id="demo-simple-select-outlined-label">Category</InputLabel>
             <Select
               labelId="demo-simple-select-outlined-label"
               id="demo-simple-select-outlined"
-              onChange={(e) => handleFilters("category", e.target.value)}
+              onChange={(e) => handleFilters('category', e.target.value)}
               label="Category"
             >
               <MenuItem value="">
@@ -139,13 +123,13 @@ function Filtetr({
               placeholder="Price Range"
               label="Price Range"
               onChange={(e) => setPriceRange(e.target.value)}
-            />{" "}
+            />{' '}
             <FormControlLabel
               control={
                 <Checkbox
-                  checked={ltORgt === "lt"}
+                  checked={ltORgt === 'lt'}
                   color="primary"
-                  inputProps={{ "aria-label": "secondary checkbox" }}
+                  inputProps={{ 'aria-label': 'secondary checkbox' }}
                   value="lt"
                   onChange={(e) => setLtORgt(e.target.value)}
                 />
@@ -155,9 +139,9 @@ function Filtetr({
             <FormControlLabel
               control={
                 <Checkbox
-                  checked={ltORgt === "gte"}
+                  checked={ltORgt === 'gte'}
                   color="primary"
-                  inputProps={{ "aria-label": "secondary checkbox" }}
+                  inputProps={{ 'aria-label': 'secondary checkbox' }}
                   value="gte"
                   onChange={(e) => setLtORgt(e.target.value)}
                 />
@@ -166,11 +150,7 @@ function Filtetr({
             />
           </div>
           <div>
-            <Button
-              variant="contained"
-              color="primary"
-              onClick={handlePriceRange}
-            >
+            <Button variant="contained" color="primary" onClick={handlePriceRange}>
               Done
             </Button>
           </div>

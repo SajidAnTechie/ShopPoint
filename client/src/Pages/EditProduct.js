@@ -1,10 +1,10 @@
-import React, { useState, useEffect } from "react";
-import { Form } from "react-bootstrap";
-import { useDispatch, useSelector } from "react-redux";
-import FormContainer from "../components/FormContainer/FormContainer";
-import * as productAction from "../actions/productAction";
-import * as productConstants from "../constants/productConstants";
-import ErrorMessage from "../components/Message/errorMessage";
+import React, { useState, useEffect } from 'react';
+import { Form } from 'react-bootstrap';
+import { useDispatch, useSelector } from 'react-redux';
+import FormContainer from '../components/FormContainer/FormContainer';
+import * as productAction from '../actions/productAction';
+import * as productConstants from '../constants/productConstants';
+import ErrorMessage from '../components/Message/errorMessage';
 import {
   TextField,
   Button,
@@ -14,12 +14,12 @@ import {
   Select,
   MenuItem,
   makeStyles,
-} from "@material-ui/core/";
-import { Link, Redirect } from "react-router-dom";
-import confirmationImg from "../assests/confirmation.png";
-import { confirmAlert } from "react-confirm-alert";
-import * as routes from "../constants/routes";
-import "react-confirm-alert/src/react-confirm-alert.css";
+} from '@material-ui/core/';
+import { Link, Redirect } from 'react-router-dom';
+import confirmationImg from '../assests/confirmation.png';
+import { confirmAlert } from 'react-confirm-alert';
+import * as routes from '../constants/routes';
+import 'react-confirm-alert/src/react-confirm-alert.css';
 
 const useStyles = makeStyles((theme) => ({
   typography: {
@@ -33,7 +33,7 @@ const useStyles = makeStyles((theme) => ({
     marginTop: theme.spacing(2),
   },
   prgressColor: {
-    color: "#fff",
+    color: '#fff',
   },
 }));
 
@@ -42,21 +42,15 @@ const EditProduct = ({ match }) => {
   const productData = useSelector((state) => state.Product);
   const { loading, product, error, success } = productData;
 
-  const updateProductDetails = useSelector(
-    (state) => state.updateProductDetails
-  );
-  const {
-    loading: EditProductLoading,
-    error: EditProductError,
-    success: EditProductSuccess,
-  } = updateProductDetails;
+  const updateProductDetails = useSelector((state) => state.updateProductDetails);
+  const { loading: EditProductLoading, error: EditProductError, success: EditProductSuccess } = updateProductDetails;
 
-  const [name, setName] = useState("");
-  const [brand, setBrand] = useState("");
+  const [name, setName] = useState('');
+  const [brand, setBrand] = useState('');
   const [price, setPrice] = useState(0);
-  const [category, setCategory] = useState("");
+  const [category, setCategory] = useState('');
   const [countInStock, setCountInStock] = useState(0);
-  const [description, setDescription] = useState("");
+  const [description, setDescription] = useState('');
   const [Success, setSuccess] = useState(false);
 
   const classes = useStyles();
@@ -103,9 +97,7 @@ const EditProduct = ({ match }) => {
               <div className="success-img">
                 <img src={confirmationImg} alt="confirmationImg" />
               </div>
-              <h3 className="font-weight-bold text">
-                Product updated successfully
-              </h3>
+              <h3 className="font-weight-bold text">Product updated successfully</h3>
               <Button
                 type="submit"
                 variant="contained"
@@ -221,9 +213,7 @@ const EditProduct = ({ match }) => {
                 onChange={(e) => setDescription(e.target.value)}
               />
               <FormControl variant="outlined" className={classes.formControl}>
-                <InputLabel id="demo-simple-select-outlined-label">
-                  Category
-                </InputLabel>
+                <InputLabel id="demo-simple-select-outlined-label">Category</InputLabel>
                 <Select
                   labelId="demo-simple-select-outlined-label"
                   id="demo-simple-select-outlined"
@@ -240,18 +230,9 @@ const EditProduct = ({ match }) => {
                 </Select>
               </FormControl>
 
-              <Button
-                type="submit"
-                variant="contained"
-                color="primary"
-                fullWidth
-                disabled={EditProductLoading}
-              >
+              <Button type="submit" variant="contained" color="primary" fullWidth disabled={EditProductLoading}>
                 {EditProductLoading ? (
-                  <CircularProgress
-                    color="inherit"
-                    className={classes.prgressColor}
-                  />
+                  <CircularProgress color="inherit" className={classes.prgressColor} />
                 ) : (
                   <>Update</>
                 )}

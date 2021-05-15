@@ -1,6 +1,6 @@
-import React from "react";
-import { Table } from "react-bootstrap";
-import Skeleton, { SkeletonTheme } from "react-loading-skeleton";
+import React from 'react';
+import { Table } from 'react-bootstrap';
+import Skeleton, { SkeletonTheme } from 'react-loading-skeleton';
 
 const TableLoader = () => {
   return (

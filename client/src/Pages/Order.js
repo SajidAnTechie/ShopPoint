@@ -1,22 +1,19 @@
-import React, { useState, useEffect } from "react";
-import axios from "axios";
-import { PayPalButton } from "react-paypal-button-v2";
-import { Link } from "react-router-dom";
-import { Row, Col, ListGroup, Image, Card } from "react-bootstrap";
-import { useDispatch, useSelector } from "react-redux";
-import { Button } from "@material-ui/core/";
-import ErrorMessage from "../components/Message/errorMessage";
-import Message from "../components/InfoMessage/Message";
-import Loader from "../components/Loader/Loader";
-import { getOrder, payOrder, deliverOrder } from "../actions/orderAction";
-import {
-  ORDER_PAY_RESET,
-  ORDER_DELIVER_RESET,
-} from "../constants/orderConstants";
-import { interpolate } from "../utils/string";
-import config from "../config";
-import * as routes from "../constants/routes";
-import OrderLoader from "../components/Loader/OrderLoader";
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
+import { PayPalButton } from 'react-paypal-button-v2';
+import { Link } from 'react-router-dom';
+import { Row, Col, ListGroup, Image, Card } from 'react-bootstrap';
+import { useDispatch, useSelector } from 'react-redux';
+import { Button } from '@material-ui/core/';
+import ErrorMessage from '../components/Message/errorMessage';
+import Message from '../components/InfoMessage/Message';
+import Loader from '../components/Loader/Loader';
+import { getOrder, payOrder, deliverOrder } from '../actions/orderAction';
+import { ORDER_PAY_RESET, ORDER_DELIVER_RESET } from '../constants/orderConstants';
+import { interpolate } from '../utils/string';
+import config from '../config';
+import * as routes from '../constants/routes';
+import OrderLoader from '../components/Loader/OrderLoader';
 
 const Order = ({ match }) => {
   const orderId = match.params.orderId;
@@ -40,15 +37,13 @@ const Order = ({ match }) => {
 
   const queryParams = new URLSearchParams(window.location.search);
 
-  const refId = queryParams.get("refId")
-    ? queryParams.get("refId").trim()
-    : null;
+  const refId = queryParams.get('refId') ? queryParams.get('refId').trim() : null;
 
   useEffect(() => {
     const addPayPalScript = async () => {
-      const { data: clientId } = await axios.get("/api/config/paypal");
-      const script = document.createElement("script");
-      script.type = "text/javascript";
+      const { data: clientId } = await axios.get('/api/config/paypal');
+      const script = document.createElement('script');
+      script.type = 'text/javascript';
       script.src = `https://www.paypal.com/sdk/js?client-id=${clientId}`;
       script.async = true;
       script.onload = () => {
@@ -98,14 +93,11 @@ const Order = ({ match }) => {
   };
 
   const payWithEsewa = () => {
-    var resultId = "";
-    var characters =
-      "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+    var resultId = '';
+    var characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
     var charactersLength = characters.length;
     for (var i = 0; i < 14; i++) {
-      resultId += characters.charAt(
-        Math.floor(Math.random() * charactersLength)
-      );
+      resultId += characters.charAt(Math.floor(Math.random() * charactersLength));
     }
 
     var path = config.esewaPaymentUrl;
@@ -116,19 +108,19 @@ const Order = ({ match }) => {
       txAmt: order.taxPrice,
       tAmt: order.totalPrice,
       pid: resultId,
-      scd: "EPAYTEST",
+      scd: 'EPAYTEST',
       su: `http://localhost:3000/order/${orderId}`,
       fu: `http://localhost:3000/order/${orderId}`,
     };
-    var form = document.createElement("form");
-    form.setAttribute("method", "POST");
-    form.setAttribute("action", path);
+    var form = document.createElement('form');
+    form.setAttribute('method', 'POST');
+    form.setAttribute('action', path);
 
     Object.keys(params).forEach((key) => {
-      var hiddenField = document.createElement("input");
-      hiddenField.setAttribute("type", "hidden");
-      hiddenField.setAttribute("name", key);
-      hiddenField.setAttribute("value", params[key]);
+      var hiddenField = document.createElement('input');
+      hiddenField.setAttribute('type', 'hidden');
+      hiddenField.setAttribute('name', key);
+      hiddenField.setAttribute('value', params[key]);
       form.appendChild(hiddenField);
     });
 
@@ -154,20 +146,14 @@ const Order = ({ match }) => {
                     <strong>Name: </strong> {order.userId.name}
                   </p>
                   <p>
-                    <strong>Email: </strong>{" "}
-                    <a href={`mailto:${order.userId.email}`}>
-                      {order.userId.email}
-                    </a>
+                    <strong>Email: </strong> <a href={`mailto:${order.userId.email}`}>{order.userId.email}</a>
                   </p>
                   <p>
-                    <strong>Address:</strong> {order.shipping.address},
-                    {order.shipping.city} {order.shipping.postalCode},{" "}
-                    {order.shipping.country}
+                    <strong>Address:</strong> {order.shipping.address},{order.shipping.city} {order.shipping.postalCode}
+                    , {order.shipping.country}
                   </p>
                   {order.isDelivered ? (
-                    <Message variant="success">
-                      Delivered on {order.deliveredAt}
-                    </Message>
+                    <Message variant="success">Delivered on {order.deliveredAt}</Message>
                   ) : (
                     <Message variant="danger">Not Delivered</Message>
                   )}
@@ -177,7 +163,7 @@ const Order = ({ match }) => {
                   <h2>Payment Method</h2>
                   <p>
                     <strong>Method: </strong>
-                    {order.payment ? order.payment.paymentMethod : ""}
+                    {order.payment ? order.payment.paymentMethod : ''}
                   </p>
                   {order.isPaid ? (
                     <Message variant="success">Paid on {order.paidAt}</Message>
@@ -197,12 +183,7 @@ const Order = ({ match }) => {
                           <ListGroup.Item key={index}>
                             <Row>
                               <Col md={1}>
-                                <Image
-                                  src={item.productImage}
-                                  alt={item.productName}
-                                  fluid
-                                  rounded
-                                />
+                                <Image src={item.productImage} alt={item.productName} fluid rounded />
                               </Col>
                               <Col>
                                 <Link
@@ -214,8 +195,7 @@ const Order = ({ match }) => {
                                 </Link>
                               </Col>
                               <Col md={4}>
-                                {item.qty} x ${item.price} = $
-                                {item.qty * item.price}
+                                {item.qty} x ${item.price} = ${item.qty * item.price}
                               </Col>
                             </Row>
                           </ListGroup.Item>
@@ -224,7 +204,7 @@ const Order = ({ match }) => {
                     )}
                   </ListGroup.Item>
                 ) : (
-                  ""
+                  ''
                 )}
               </ListGroup>
             </Col>
@@ -258,65 +238,39 @@ const Order = ({ match }) => {
                       <Col>${order.totalPrice}</Col>
                     </Row>
                   </ListGroup.Item>
-                  {order.payment &&
-                    order.payment.paymentMethod === "PayPal" &&
-                    !order.isPaid && (
-                      <ListGroup.Item>
-                        {loadingPay && <Loader />}
-                        {!sdkReady ? (
-                          <Loader />
-                        ) : (
-                          <PayPalButton
-                            amount={order.totalPrice}
-                            onSuccess={successPaymentHandler}
-                          />
-                        )}
-                      </ListGroup.Item>
-                    )}
-                  {order.payment &&
-                    order.payment.paymentMethod === "esewa" &&
-                    !order.isPaid && (
-                      <ListGroup.Item>
-                        <Button
-                          variant="outlined"
-                          color="primary"
-                          fullWidth
-                          onClick={payWithEsewa}
-                        >
-                          <Image
-                            src={config.esewaImageUrl}
-                            alt="esewa"
-                            fluid
-                            rounded
-                          />
-                        </Button>
-                      </ListGroup.Item>
-                    )}
+                  {order.payment && order.payment.paymentMethod === 'PayPal' && !order.isPaid && (
+                    <ListGroup.Item>
+                      {loadingPay && <Loader />}
+                      {!sdkReady ? (
+                        <Loader />
+                      ) : (
+                        <PayPalButton amount={order.totalPrice} onSuccess={successPaymentHandler} />
+                      )}
+                    </ListGroup.Item>
+                  )}
+                  {order.payment && order.payment.paymentMethod === 'esewa' && !order.isPaid && (
+                    <ListGroup.Item>
+                      <Button variant="outlined" color="primary" fullWidth onClick={payWithEsewa}>
+                        <Image src={config.esewaImageUrl} alt="esewa" fluid rounded />
+                      </Button>
+                    </ListGroup.Item>
+                  )}
 
                   {loadingDeliver && <Loader />}
-                  {userInfo &&
-                    userInfo.role === "admin" &&
-                    order.isPaid &&
-                    !order.isDelivered && (
-                      <ListGroup.Item>
-                        <Button
-                          type="submit"
-                          variant="contained"
-                          color="primary"
-                          fullWidth
-                          onClick={deliverHandler}
-                        >
-                          Mark As Delivered
-                        </Button>
-                      </ListGroup.Item>
-                    )}
+                  {userInfo && userInfo.role === 'admin' && order.isPaid && !order.isDelivered && (
+                    <ListGroup.Item>
+                      <Button type="submit" variant="contained" color="primary" fullWidth onClick={deliverHandler}>
+                        Mark As Delivered
+                      </Button>
+                    </ListGroup.Item>
+                  )}
                 </ListGroup>
               </Card>
             </Col>
           </Row>
         </>
       ) : (
-        ""
+        ''
       )}
     </>
   );

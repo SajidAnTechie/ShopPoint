@@ -1,7 +1,7 @@
-import React, { useState } from "react";
-import { Toast } from "react-bootstrap";
-import { useDispatch } from "react-redux";
-import "animate.css";
+import React, { useState } from 'react';
+import { Toast } from 'react-bootstrap';
+import { useDispatch } from 'react-redux';
+import 'animate.css';
 
 const SuccessMessage = ({ header, message, reset }) => {
   const [show, setShow] = useState(true);
@@ -9,7 +9,7 @@ const SuccessMessage = ({ header, message, reset }) => {
 
   return (
     <>
-      <div style={{ position: "fixed", right: "0", zIndex: "20180210" }}>
+      <div style={{ position: 'fixed', right: '0', zIndex: '20180210' }}>
         <Toast
           onClose={() => {
             setShow(false);
@@ -22,9 +22,9 @@ const SuccessMessage = ({ header, message, reset }) => {
         >
           <Toast.Header
             style={{
-              background: "#43BE31",
-              color: "white",
-              fontWeight: "bold",
+              background: '#43BE31',
+              color: 'white',
+              fontWeight: 'bold',
             }}
           >
             <strong className="mr-auto">{header}</strong>

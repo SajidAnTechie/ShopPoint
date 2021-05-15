@@ -1,10 +1,10 @@
-import React from "react";
-import { Link } from "react-router-dom";
-import { Card } from "react-bootstrap";
-import Rating from "../Rating/Rating";
-import * as routes from "../../constants/routes";
-import { interpolate } from "../../utils/string";
-import "animate.css";
+import React from 'react';
+import { Link } from 'react-router-dom';
+import { Card } from 'react-bootstrap';
+import Rating from '../Rating/Rating';
+import * as routes from '../../constants/routes';
+import { interpolate } from '../../utils/string';
+import 'animate.css';
 
 const Product = ({ product }) => {
   return (
@@ -21,10 +21,7 @@ const Product = ({ product }) => {
         </Link>
 
         <Card.Text as="div">
-          <Rating
-            value={product.averageRating}
-            text={`${product.Reviews ? product.Reviews.length : 0} reviews`}
-          />
+          <Rating value={product.averageRating} text={`${product.Reviews ? product.Reviews.length : 0} reviews`} />
         </Card.Text>
 
         <Card.Text as="h3">${product.price}</Card.Text>

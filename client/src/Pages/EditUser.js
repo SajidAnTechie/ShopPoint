@@ -1,10 +1,10 @@
-import React, { useState, useEffect } from "react";
-import { Form } from "react-bootstrap";
-import { useDispatch, useSelector } from "react-redux";
-import FormContainer from "../components/FormContainer/FormContainer";
-import * as userAction from "../actions/userAction";
-import * as userConstants from "../constants/userConstants";
-import ErrorMessage from "../components/Message/errorMessage";
+import React, { useState, useEffect } from 'react';
+import { Form } from 'react-bootstrap';
+import { useDispatch, useSelector } from 'react-redux';
+import FormContainer from '../components/FormContainer/FormContainer';
+import * as userAction from '../actions/userAction';
+import * as userConstants from '../constants/userConstants';
+import ErrorMessage from '../components/Message/errorMessage';
 import {
   TextField,
   Button,
@@ -14,12 +14,12 @@ import {
   Select,
   MenuItem,
   makeStyles,
-} from "@material-ui/core/";
-import { Link, Redirect } from "react-router-dom";
-import confirmationImg from "../assests/confirmation.png";
-import { confirmAlert } from "react-confirm-alert";
-import * as routes from "../constants/routes";
-import "react-confirm-alert/src/react-confirm-alert.css";
+} from '@material-ui/core/';
+import { Link, Redirect } from 'react-router-dom';
+import confirmationImg from '../assests/confirmation.png';
+import { confirmAlert } from 'react-confirm-alert';
+import * as routes from '../constants/routes';
+import 'react-confirm-alert/src/react-confirm-alert.css';
 
 const useStyles = makeStyles((theme) => ({
   typography: {
@@ -33,25 +33,21 @@ const useStyles = makeStyles((theme) => ({
     marginTop: theme.spacing(2),
   },
   prgressColor: {
-    color: "#fff",
+    color: '#fff',
   },
 }));
 
 const UpdateUser = ({ match }) => {
   const userId = match.params.userId;
   const userUpdateDetails = useSelector((state) => state.userUpdateDetails);
-  const {
-    loading: updateLoading,
-    error: updateError,
-    success: updateSuccess,
-  } = userUpdateDetails;
+  const { loading: updateLoading, error: updateError, success: updateSuccess } = userUpdateDetails;
 
   const userDetails = useSelector((state) => state.userDetails);
   const { loading, user, error, success } = userDetails;
 
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
-  const [role, setRole] = useState("");
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
+  const [role, setRole] = useState('');
   const [Success, setSuccess] = useState(false);
 
   const classes = useStyles();
@@ -93,9 +89,7 @@ const UpdateUser = ({ match }) => {
               <div className="success-img">
                 <img src={confirmationImg} alt="confirmationImg" />
               </div>
-              <h3 className="font-weight-bold text">
-                User updated successfully
-              </h3>
+              <h3 className="font-weight-bold text">User updated successfully</h3>
               <Button
                 type="submit"
                 variant="contained"
@@ -119,11 +113,7 @@ const UpdateUser = ({ match }) => {
     <>
       {Success && <Redirect to={routes.USERS} />}
       {updateError && (
-        <ErrorMessage
-          header="Something went wrong"
-          message={updateError}
-          reset={userConstants.USER_EDIT_RESET}
-        />
+        <ErrorMessage header="Something went wrong" message={updateError} reset={userConstants.USER_EDIT_RESET} />
       )}
       <Link to={routes.USERS} className="btn btn-light my-3">
         Go Back
@@ -168,9 +158,7 @@ const UpdateUser = ({ match }) => {
               />
 
               <FormControl variant="outlined" className={classes.formControl}>
-                <InputLabel id="demo-simple-select-outlined-label">
-                  Role
-                </InputLabel>
+                <InputLabel id="demo-simple-select-outlined-label">Role</InputLabel>
                 <Select
                   labelId="demo-simple-select-outlined-label"
                   id="demo-simple-select-outlined"
@@ -194,11 +182,7 @@ const UpdateUser = ({ match }) => {
                 disabled={updateLoading}
                 className={classes.prgressColor}
               >
-                {updateLoading ? (
-                  <CircularProgress color="inherit" />
-                ) : (
-                  <>Update</>
-                )}
+                {updateLoading ? <CircularProgress color="inherit" /> : <>Update</>}
               </Button>
             </Form>
           </FormContainer>

@@ -1,11 +1,7 @@
-import {
-  mainHeader,
-  bodyForUsers,
-  tableStyles,
-} from "../components/table/tableLayout";
-import config from "../config";
-import http from "../utils/http";
-import { interpolate } from "../utils/string";
+import { mainHeader, bodyForUsers, tableStyles } from '../components/table/tableLayout';
+import config from '../config';
+import http from '../utils/http';
+import { interpolate } from '../utils/string';
 
 /**
  *
@@ -149,14 +145,14 @@ export const createPdfData = (userInfo, users) => {
       },
 
       {
-        style: "header",
+        style: 'header',
         table: {
-          widths: "*",
+          widths: '*',
           body: [
             [
               {
-                border: ["#5bc0de", false, false, false],
-                text: "Users List",
+                border: ['#5bc0de', false, false, false],
+                text: 'Users List',
               },
             ],
           ],
@@ -181,7 +177,7 @@ export const createPdfData = (userInfo, users) => {
             },
 
             fontSize: 8,
-            alignment: "center",
+            alignment: 'center',
           }
         : null,
     ],

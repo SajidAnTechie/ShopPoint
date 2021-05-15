@@ -1,11 +1,11 @@
-import React, { useState } from "react";
-import { Form } from "react-bootstrap";
-import { useDispatch, useSelector } from "react-redux";
-import FormContainer from "../components/FormContainer/FormContainer";
-import CheckoutSteps from "../components/CheckoutStep/CheckoutSteps";
-import { saveShippingAddress } from "../actions/cartAction";
-import * as routes from "../constants/routes";
-import { TextField, Button } from "@material-ui/core/";
+import React, { useState } from 'react';
+import { Form } from 'react-bootstrap';
+import { useDispatch, useSelector } from 'react-redux';
+import FormContainer from '../components/FormContainer/FormContainer';
+import CheckoutSteps from '../components/CheckoutStep/CheckoutSteps';
+import { saveShippingAddress } from '../actions/cartAction';
+import * as routes from '../constants/routes';
+import { TextField, Button } from '@material-ui/core/';
 
 const Shipping = ({ history }) => {
   const cart = useSelector((state) => state.cart);

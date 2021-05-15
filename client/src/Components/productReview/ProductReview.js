@@ -1,10 +1,10 @@
-import React, { useEffect, useState } from "react";
-import { Row, Col, ListGroup, Form } from "react-bootstrap";
-import { useDispatch, useSelector } from "react-redux";
-import * as productAction from "../../actions/productAction";
-import ErrorMessage from "../Message/errorMessage";
-import { Link } from "react-router-dom";
-import Rating from "../Rating/Rating";
+import React, { useEffect, useState } from 'react';
+import { Row, Col, ListGroup, Form } from 'react-bootstrap';
+import { useDispatch, useSelector } from 'react-redux';
+import * as productAction from '../../actions/productAction';
+import ErrorMessage from '../Message/errorMessage';
+import { Link } from 'react-router-dom';
+import Rating from '../Rating/Rating';
 import {
   Select,
   Button,
@@ -14,10 +14,10 @@ import {
   InputLabel,
   TextField,
   CircularProgress,
-} from "@material-ui/core/";
+} from '@material-ui/core/';
 
-import * as productConstants from "../../constants/productConstants";
-import * as routes from "../../constants/routes";
+import * as productConstants from '../../constants/productConstants';
+import * as routes from '../../constants/routes';
 
 const useStyles = makeStyles((theme) => ({
   typography: {
@@ -31,25 +31,22 @@ const useStyles = makeStyles((theme) => ({
     marginTop: theme.spacing(2),
   },
   prgressColor: {
-    color: "#fff",
+    color: '#fff',
   },
 }));
 
 const ProductReview = ({ productId }) => {
   const [initialLoading, setInitialLoading] = useState(true);
-  const [title, setTitle] = useState("");
-  const [text, setText] = useState("");
-  const [rating, setRating] = useState("");
+  const [title, setTitle] = useState('');
+  const [text, setText] = useState('');
+  const [rating, setRating] = useState('');
 
   const classes = useStyles();
 
   const productReviewsData = useSelector((state) => state.productReview);
   const reviewResponses = useSelector((state) => state.createReview);
 
-  const {
-    success: createReviewSuccess,
-    loading: createReviewLoading,
-  } = reviewResponses;
+  const { success: createReviewSuccess, loading: createReviewLoading } = reviewResponses;
 
   const userAuthData = useSelector((state) => state.userLogin);
 
@@ -61,9 +58,9 @@ const ProductReview = ({ productId }) => {
 
   useEffect(() => {
     if (createReviewSuccess) {
-      setTitle("");
-      setText("");
-      setRating("");
+      setTitle('');
+      setText('');
+      setRating('');
       dispatch({ type: productConstants.CREATE_REVIEW_RESET });
     }
 
@@ -139,13 +136,8 @@ const ProductReview = ({ productId }) => {
                     onChange={(e) => setText(e.target.value)}
                   />
 
-                  <FormControl
-                    variant="outlined"
-                    className={classes.formControl}
-                  >
-                    <InputLabel id="demo-simple-select-outlined-label">
-                      Rating
-                    </InputLabel>
+                  <FormControl variant="outlined" className={classes.formControl}>
+                    <InputLabel id="demo-simple-select-outlined-label">Rating</InputLabel>
                     <Select
                       labelId="demo-simple-select-outlined-label"
                       id="demo-simple-select-outlined"
@@ -165,17 +157,9 @@ const ProductReview = ({ productId }) => {
                     </Select>
                   </FormControl>
                   <div className="my-3">
-                    <Button
-                      variant="contained"
-                      color="primary"
-                      type="submit"
-                      disabled={createReviewLoading}
-                    >
+                    <Button variant="contained" color="primary" type="submit" disabled={createReviewLoading}>
                       {createReviewLoading ? (
-                        <CircularProgress
-                          color="inherit"
-                          className={classes.prgressColor}
-                        />
+                        <CircularProgress color="inherit" className={classes.prgressColor} />
                       ) : (
                         <>Submit</>
                       )}
@@ -184,8 +168,7 @@ const ProductReview = ({ productId }) => {
                 </Form>
               ) : (
                 <>
-                  Please <Link to={routes.LOGIN}>sign in</Link> to write a
-                  review{" "}
+                  Please <Link to={routes.LOGIN}>sign in</Link> to write a review{' '}
                 </>
               )}
             </ListGroup.Item>

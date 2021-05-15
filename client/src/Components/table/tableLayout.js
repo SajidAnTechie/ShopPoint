@@ -1,28 +1,28 @@
 export const mainHeader = (userInfo) => {
   return {
     table: {
-      widths: ["auto", "*"],
+      widths: ['auto', '*'],
 
       body: [
         [
           {
-            text: "SHOPPOINT",
-            style: "mainheader",
+            text: 'SHOPPOINT',
+            style: 'mainheader',
             bold: true,
             marginTop: 10,
           },
 
           {
-            width: "*",
-            style: "info",
+            width: '*',
+            style: 'info',
             marginBottom: 30,
             stack: [
               {
-                style: "h2",
+                style: 'h2',
                 text: `Name: ${userInfo.name}`,
               },
               {
-                style: "h2",
+                style: 'h2',
                 text: `Email: ${userInfo.email}`,
               },
             ],
@@ -50,46 +50,46 @@ export const bodyForOrders = (orders) => {
     body: [
       [
         {
-          text: "S.No",
+          text: 'S.No',
           bold: true,
-          fillColor: "#2B2B52",
-          color: "white",
+          fillColor: '#2B2B52',
+          color: 'white',
         },
         {
-          text: "ID",
+          text: 'ID',
           bold: true,
-          fillColor: "#2B2B52",
-          color: "white",
+          fillColor: '#2B2B52',
+          color: 'white',
         },
         {
-          text: "USER",
+          text: 'USER',
           bold: true,
-          fillColor: "#2B2B52",
-          color: "white",
+          fillColor: '#2B2B52',
+          color: 'white',
         },
         {
-          text: "DATE",
+          text: 'DATE',
           bold: true,
-          fillColor: "#2B2B52",
-          color: "white",
+          fillColor: '#2B2B52',
+          color: 'white',
         },
         {
-          text: "TOTAL PRICE",
+          text: 'TOTAL PRICE',
           bold: true,
-          fillColor: "#2B2B52",
-          color: "white",
+          fillColor: '#2B2B52',
+          color: 'white',
         },
         {
-          text: "PAID",
+          text: 'PAID',
           bold: true,
-          fillColor: "#2B2B52",
-          color: "white",
+          fillColor: '#2B2B52',
+          color: 'white',
         },
         {
-          text: "DELIVERED",
+          text: 'DELIVERED',
           bold: true,
-          fillColor: "#2B2B52",
-          color: "white",
+          fillColor: '#2B2B52',
+          color: 'white',
         },
       ],
 
@@ -99,8 +99,8 @@ export const bodyForOrders = (orders) => {
         o.userId && o.userId.name,
         o.createdAt.substring(0, 10),
         o.totalPrice,
-        o.isPaid ? o.paidAt.substring(0, 10) : "Not paid",
-        o.isDelivered ? o.deliveredAt.substring(0, 10) : "Not paid",
+        o.isPaid ? o.paidAt.substring(0, 10) : 'Not paid',
+        o.isDelivered ? o.deliveredAt.substring(0, 10) : 'Not paid',
       ]),
     ],
   };
@@ -112,46 +112,46 @@ export const bodyForUsers = (users) => {
     body: [
       [
         {
-          text: "S.No",
+          text: 'S.No',
           bold: true,
-          fillColor: "#2B2B52",
-          color: "white",
+          fillColor: '#2B2B52',
+          color: 'white',
         },
         {
-          text: "ID",
+          text: 'ID',
           bold: true,
-          fillColor: "#2B2B52",
-          color: "white",
+          fillColor: '#2B2B52',
+          color: 'white',
         },
         {
-          text: "NAME",
+          text: 'NAME',
           bold: true,
-          fillColor: "#2B2B52",
-          color: "white",
+          fillColor: '#2B2B52',
+          color: 'white',
         },
         {
-          text: "EMAIL",
+          text: 'EMAIL',
           bold: true,
-          fillColor: "#2B2B52",
-          color: "white",
+          fillColor: '#2B2B52',
+          color: 'white',
         },
         {
-          text: "VERIFIED",
+          text: 'VERIFIED',
           bold: true,
-          fillColor: "#2B2B52",
-          color: "white",
+          fillColor: '#2B2B52',
+          color: 'white',
         },
         {
-          text: "ROLE",
+          text: 'ROLE',
           bold: true,
-          fillColor: "#2B2B52",
-          color: "white",
+          fillColor: '#2B2B52',
+          color: 'white',
         },
         {
-          text: "DATE",
+          text: 'DATE',
           bold: true,
-          fillColor: "#2B2B52",
-          color: "white",
+          fillColor: '#2B2B52',
+          color: 'white',
         },
       ],
 
@@ -160,7 +160,7 @@ export const bodyForUsers = (users) => {
         u._id,
         u.name,
         u.email,
-        u.verify ? "Verified" : "Not paid",
+        u.verify ? 'Verified' : 'Not paid',
         u.role,
         u.createdAt.substring(0, 10),
       ]),

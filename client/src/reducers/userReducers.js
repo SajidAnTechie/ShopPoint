@@ -1,4 +1,4 @@
-import * as userConstants from "../constants/userConstants";
+import * as userConstants from '../constants/userConstants';
 
 export const userLogin = (state = {}, action) => {
   switch (action.type) {
@@ -135,7 +135,7 @@ export const getUser = (state = { user: {} }, action) => {
   }
 };
 
-export const forgotPassword = (state = { message: "" }, action) => {
+export const forgotPassword = (state = { message: '' }, action) => {
   switch (action.type) {
     case userConstants.FORGOT_PASSWORD_SEND_START:
       return {
@@ -158,7 +158,7 @@ export const forgotPassword = (state = { message: "" }, action) => {
   }
 };
 
-export const resetPassword = (state = { message: "" }, action) => {
+export const resetPassword = (state = { message: '' }, action) => {
   switch (action.type) {
     case userConstants.RESET_PASSWORD_START:
       return {

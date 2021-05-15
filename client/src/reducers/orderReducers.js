@@ -1,4 +1,4 @@
-import * as orderConstants from "../constants/orderConstants";
+import * as orderConstants from '../constants/orderConstants';
 
 export const createOrderReducer = (state = { order: {} }, action) => {
   switch (action.type) {

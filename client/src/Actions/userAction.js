@@ -1,7 +1,7 @@
-import * as userServices from "../services/user";
-import { handleError } from "../utils/error";
-import * as userConstants from "../constants/userConstants";
-import * as tokenService from "../services/token";
+import * as userServices from '../services/user';
+import { handleError } from '../utils/error';
+import * as userConstants from '../constants/userConstants';
+import * as tokenService from '../services/token';
 
 export const auth = (email, password) => async (dispatch) => {
   try {
@@ -75,7 +75,7 @@ export const emailVerification = (verificationCode) => async (dispatch) => {
       token,
     };
 
-    localStorage.setItem("userInfo", JSON.stringify(userInfo));
+    localStorage.setItem('userInfo', JSON.stringify(userInfo));
     dispatch({
       type: userConstants.USER_AUTH_SUCCESS,
       payload: userInfo,

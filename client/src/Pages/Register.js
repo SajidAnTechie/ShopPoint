@@ -1,32 +1,27 @@
-import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
-import { Form, Row, Col } from "react-bootstrap";
-import { useDispatch, useSelector } from "react-redux";
-import ErrorMessage from "../components/Message/errorMessage";
-import SuccessMessage from "../components/Message/successMessage";
-import FormContainer from "../components/FormContainer/FormContainer";
-import {
-  TextField,
-  Button,
-  CircularProgress,
-  makeStyles,
-} from "@material-ui/core/";
-import * as routes from "../constants/routes";
-import * as userAction from "../actions/userAction";
-import * as userConstants from "../constants/userConstants";
+import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
+import { Form, Row, Col } from 'react-bootstrap';
+import { useDispatch, useSelector } from 'react-redux';
+import ErrorMessage from '../components/Message/errorMessage';
+import SuccessMessage from '../components/Message/successMessage';
+import FormContainer from '../components/FormContainer/FormContainer';
+import { TextField, Button, CircularProgress, makeStyles } from '@material-ui/core/';
+import * as routes from '../constants/routes';
+import * as userAction from '../actions/userAction';
+import * as userConstants from '../constants/userConstants';
 
 const useStyles = makeStyles((theme) => ({
   progressColor: {
-    color: "#fff",
+    color: '#fff',
   },
 }));
 
 const Register = ({ location, history }) => {
-  const [name, setName] = useState("");
-  const [verificationMessage, setVerificationMessage] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [confirmPassword, setConfirmPassword] = useState("");
+  const [name, setName] = useState('');
+  const [verificationMessage, setVerificationMessage] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
 
   const classes = useStyles();
 
@@ -36,9 +31,7 @@ const Register = ({ location, history }) => {
 
   const dispatch = useDispatch();
 
-  const redirect = location.search
-    ? location.search.split("=")[1]
-    : routes.HOME;
+  const redirect = location.search ? location.search.split('=')[1] : routes.HOME;
 
   useEffect(() => {
     if (success) {
@@ -53,36 +46,22 @@ const Register = ({ location, history }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    setVerificationMessage("");
+    setVerificationMessage('');
     if (password !== confirmPassword) {
       return setVerificationMessage("Passwords don't match");
     }
     dispatch(userAction.register(name, email, password));
   };
 
-  const redirectUserToLoginRoute = redirect
-    ? routes.LOGIN + `?redirect=${redirect}`
-    : routes.LOGIN;
+  const redirectUserToLoginRoute = redirect ? routes.LOGIN + `?redirect=${redirect}` : routes.LOGIN;
 
   return (
     <FormContainer>
       <h1>Sign Up</h1>
-      {error && (
-        <ErrorMessage
-          header="Auth Error"
-          message={error}
-          reset={userConstants.USER_REGISTER_RESET}
-        />
-      )}
-      {verificationMessage !== "" && (
-        <ErrorMessage header="Auth Error" message={verificationMessage} />
-      )}
+      {error && <ErrorMessage header="Auth Error" message={error} reset={userConstants.USER_REGISTER_RESET} />}
+      {verificationMessage !== '' && <ErrorMessage header="Auth Error" message={verificationMessage} />}
       {success && (
-        <SuccessMessage
-          header="Register SuccessFully"
-          message={message}
-          reset={userConstants.USER_REGISTER_RESET}
-        />
+        <SuccessMessage header="Register SuccessFully" message={message} reset={userConstants.USER_REGISTER_RESET} />
       )}
       <Form onSubmit={handleSubmit}>
         <TextField
@@ -146,22 +125,8 @@ const Register = ({ location, history }) => {
           onChange={(e) => setConfirmPassword(e.target.value)}
         />
 
-        <Button
-          type="submit"
-          variant="contained"
-          color="primary"
-          fullWidth
-          onClick={handleSubmit}
-          disabled={loading}
-        >
-          {loading ? (
-            <CircularProgress
-              color="inherit"
-              className={classes.progressColor}
-            />
-          ) : (
-            <>Register</>
-          )}
+        <Button type="submit" variant="contained" color="primary" fullWidth onClick={handleSubmit} disabled={loading}>
+          {loading ? <CircularProgress color="inherit" className={classes.progressColor} /> : <>Register</>}
         </Button>
       </Form>
 

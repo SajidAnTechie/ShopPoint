@@ -1,6 +1,6 @@
-import * as productServices from "../services/Product";
-import { handleError } from "../utils/error";
-import * as cartConstants from "../constants/cartConstants";
+import * as productServices from '../services/Product';
+import { handleError } from '../utils/error';
+import * as cartConstants from '../constants/cartConstants';
 
 export const addToCart = (id, qty) => async (dispatch, getState) => {
   try {
@@ -11,10 +11,7 @@ export const addToCart = (id, qty) => async (dispatch, getState) => {
       payload: payLoadForCartItem(data, qty),
     });
 
-    localStorage.setItem(
-      "cartItems",
-      JSON.stringify(getState().cart.cartItems)
-    );
+    localStorage.setItem('cartItems', JSON.stringify(getState().cart.cartItems));
   } catch (err) {
     dispatch({
       type: cartConstants.ADD_TO_CART_FAIL,
@@ -40,7 +37,7 @@ export const removeItemFromCart = (id) => async (dispatch, getState) => {
     payload: id,
   });
 
-  localStorage.setItem("cartItems", JSON.stringify(getState().cart.cartItems));
+  localStorage.setItem('cartItems', JSON.stringify(getState().cart.cartItems));
 };
 
 export const saveShippingAddress = (data) => async (dispatch) => {
@@ -49,7 +46,7 @@ export const saveShippingAddress = (data) => async (dispatch) => {
     payload: data,
   });
 
-  localStorage.setItem("shippingAddress", JSON.stringify(data));
+  localStorage.setItem('shippingAddress', JSON.stringify(data));
 };
 
 export const savePaymentMethod = (data) => async (dispatch) => {
@@ -58,5 +55,5 @@ export const savePaymentMethod = (data) => async (dispatch) => {
     payload: data,
   });
 
-  localStorage.setItem("paymentMethod", JSON.stringify(data));
+  localStorage.setItem('paymentMethod', JSON.stringify(data));
 };

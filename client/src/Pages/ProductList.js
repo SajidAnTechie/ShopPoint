@@ -1,18 +1,10 @@
-import React, { useEffect, useState } from "react";
-import { LinkContainer } from "react-router-bootstrap";
-import {
-  Table,
-  Button,
-  Row,
-  Col,
-  Modal,
-  Form,
-  Container,
-} from "react-bootstrap";
-import { useDispatch, useSelector } from "react-redux";
-import ErrorMessage from "../components/Message/errorMessage";
-import SuccessMessage from "../components/Message/successMessage";
-import TableLoader from "../components/Loader/TableLoader";
+import React, { useEffect, useState } from 'react';
+import { LinkContainer } from 'react-router-bootstrap';
+import { Table, Button, Row, Col, Modal, Form, Container } from 'react-bootstrap';
+import { useDispatch, useSelector } from 'react-redux';
+import ErrorMessage from '../components/Message/errorMessage';
+import SuccessMessage from '../components/Message/successMessage';
+import TableLoader from '../components/Loader/TableLoader';
 import {
   Button as MaterialButton,
   TextField,
@@ -22,17 +14,13 @@ import {
   Select,
   MenuItem,
   makeStyles,
-} from "@material-ui/core/";
-import {
-  productListForAdmin,
-  deleteProduct,
-  createProduct,
-} from "../actions/productAction";
-import * as routes from "../constants/routes";
-import { interpolate } from "../utils/string";
-import * as productConstants from "../constants/productConstants";
-import { confirmAlert } from "react-confirm-alert";
-import "react-confirm-alert/src/react-confirm-alert.css";
+} from '@material-ui/core/';
+import { productListForAdmin, deleteProduct, createProduct } from '../actions/productAction';
+import * as routes from '../constants/routes';
+import { interpolate } from '../utils/string';
+import * as productConstants from '../constants/productConstants';
+import { confirmAlert } from 'react-confirm-alert';
+import 'react-confirm-alert/src/react-confirm-alert.css';
 
 const useStyles = makeStyles((theme) => ({
   typography: {
@@ -48,7 +36,7 @@ const useStyles = makeStyles((theme) => ({
     marginTop: theme.spacing(2),
   },
   prgressColor: {
-    color: "#fff",
+    color: '#fff',
   },
 }));
 
@@ -61,37 +49,31 @@ const ProductList = () => {
   const deleteProductData = useSelector((state) => state.deleteProduct);
   const { success: deleteSuccess, error: deleteFail } = deleteProductData;
 
-  const createProductDetails = useSelector(
-    (state) => state.createProductDetails
-  );
-  const {
-    success: createSuccess,
-    error: createFail,
-    loading: createLoading,
-  } = createProductDetails;
+  const createProductDetails = useSelector((state) => state.createProductDetails);
+  const { success: createSuccess, error: createFail, loading: createLoading } = createProductDetails;
 
   const classes = useStyles();
 
-  const [name, setName] = useState("");
-  const [productImage, setProductImage] = useState("");
-  const [brand, setBrand] = useState("");
-  const [price, setPrice] = useState("");
-  const [category, setCategory] = useState("");
+  const [name, setName] = useState('');
+  const [productImage, setProductImage] = useState('');
+  const [brand, setBrand] = useState('');
+  const [price, setPrice] = useState('');
+  const [category, setCategory] = useState('');
   const [countInStock, setCountInStock] = useState(0);
-  const [description, setDescription] = useState("");
+  const [description, setDescription] = useState('');
   const [openForm, setOpenForm] = useState(false);
   const [initialLoading, setInitialLoading] = useState(true);
 
   useEffect(() => {
     if (createSuccess) {
       setOpenForm(false);
-      setName("");
-      setProductImage("");
-      setBrand("");
-      setPrice("");
-      setCategory("");
-      setCountInStock("");
-      setDescription("");
+      setName('');
+      setProductImage('');
+      setBrand('');
+      setPrice('');
+      setCategory('');
+      setCountInStock('');
+      setDescription('');
 
       dispatch({ type: productConstants.CREATE_PRODUCT_RESET });
     }
@@ -115,26 +97,26 @@ const ProductList = () => {
   const submitHandler = (e) => {
     e.preventDefault();
     if (
-      name === "" ||
-      category === "" ||
-      productImage === "" ||
-      description === "" ||
-      brand === "" ||
-      price === "" ||
-      countInStock === ""
+      name === '' ||
+      category === '' ||
+      productImage === '' ||
+      description === '' ||
+      brand === '' ||
+      price === '' ||
+      countInStock === ''
     ) {
       return;
     }
 
     const formData = new FormData();
 
-    formData.append("name", name);
-    formData.append("productImage", productImage);
-    formData.append("brand", brand);
-    formData.append("price", price);
-    formData.append("category", category);
-    formData.append("countInStock", countInStock);
-    formData.append("description", description);
+    formData.append('name', name);
+    formData.append('productImage', productImage);
+    formData.append('brand', brand);
+    formData.append('price', price);
+    formData.append('category', category);
+    formData.append('countInStock', countInStock);
+    formData.append('description', description);
     dispatch(createProduct(formData));
   };
 
@@ -142,16 +124,9 @@ const ProductList = () => {
     if (openForm) {
       return (
         <>
-          <Modal
-            show={openForm}
-            size="lg"
-            aria-labelledby="contained-modal-title-vcenter"
-            centered
-          >
+          <Modal show={openForm} size="lg" aria-labelledby="contained-modal-title-vcenter" centered>
             <Modal.Header>
-              <Modal.Title id="contained-modal-title-vcenter">
-                Add Product
-              </Modal.Title>
+              <Modal.Title id="contained-modal-title-vcenter">Add Product</Modal.Title>
             </Modal.Header>
             {createFail && (
               <ErrorMessage
@@ -228,9 +203,7 @@ const ProductList = () => {
                         autoComplete="countInStock"
                         autoFocus
                         value={countInStock}
-                        onChange={(e) =>
-                          setCountInStock(Number(e.target.value))
-                        }
+                        onChange={(e) => setCountInStock(Number(e.target.value))}
                       />
                     </Col>
                   </Row>
@@ -251,13 +224,8 @@ const ProductList = () => {
                       />
                     </Col>
                     <Col xs={12} md={6}>
-                      <FormControl
-                        variant="outlined"
-                        className={classes.formControl}
-                      >
-                        <InputLabel id="demo-simple-select-outlined-label">
-                          Category
-                        </InputLabel>
+                      <FormControl variant="outlined" className={classes.formControl}>
+                        <InputLabel id="demo-simple-select-outlined-label">Category</InputLabel>
                         <Select
                           labelId="demo-simple-select-outlined-label"
                           id="demo-simple-select-outlined"
@@ -302,20 +270,9 @@ const ProductList = () => {
                   className="mr-2"
                   disabled={createLoading}
                 >
-                  {createLoading ? (
-                    <CircularProgress
-                      color="inherit"
-                      className={classes.prgressColor}
-                    />
-                  ) : (
-                    <>Submit</>
-                  )}
-                </MaterialButton>{" "}
-                <MaterialButton
-                  variant="contained"
-                  color="primary"
-                  onClick={cancelCreateProduct}
-                >
+                  {createLoading ? <CircularProgress color="inherit" className={classes.prgressColor} /> : <>Submit</>}
+                </MaterialButton>{' '}
+                <MaterialButton variant="contained" color="primary" onClick={cancelCreateProduct}>
                   Close
                 </MaterialButton>
               </Modal.Footer>
@@ -344,11 +301,7 @@ const ProductList = () => {
             >
               Yes, Delete it !
             </MaterialButton>
-            <MaterialButton
-              variant="contained"
-              color="primary"
-              onClick={onClose}
-            >
+            <MaterialButton variant="contained" color="primary" onClick={onClose}>
               No
             </MaterialButton>
           </div>
@@ -378,11 +331,7 @@ const ProductList = () => {
           <h1>Products({count})</h1>
         </Col>
         <Col className="text-right">
-          <MaterialButton
-            variant="contained"
-            color="primary"
-            onClick={() => setOpenForm(true)}
-          >
+          <MaterialButton variant="contained" color="primary" onClick={() => setOpenForm(true)}>
             <i className="fas fa-plus mr-2"></i> Add Product
           </MaterialButton>
         </Col>
@@ -422,11 +371,7 @@ const ProductList = () => {
                         <i className="fas fa-edit"></i>
                       </Button>
                     </LinkContainer>
-                    <Button
-                      variant="danger"
-                      className="btn-sm"
-                      onClick={(e) => deleteHandler(product._id, e)}
-                    >
+                    <Button variant="danger" className="btn-sm" onClick={(e) => deleteHandler(product._id, e)}>
                       <i className="fas fa-trash"></i>
                     </Button>
                   </td>

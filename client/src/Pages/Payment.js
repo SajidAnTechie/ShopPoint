@@ -1,33 +1,26 @@
-import React, { useState } from "react";
-import { Col, Form, Row } from "react-bootstrap";
-import { useDispatch } from "react-redux";
-import FormContainer from "../components/FormContainer/FormContainer";
-import CheckoutSteps from "../components/CheckoutStep/CheckoutSteps";
-import { savePaymentMethod } from "../actions/cartAction";
-import * as routes from "../constants/routes";
-import {
-  Button,
-  Radio,
-  RadioGroup,
-  FormControlLabel,
-  FormControl,
-  FormLabel,
-} from "@material-ui/core/";
+import React, { useState } from 'react';
+import { Col, Form, Row } from 'react-bootstrap';
+import { useDispatch } from 'react-redux';
+import FormContainer from '../components/FormContainer/FormContainer';
+import CheckoutSteps from '../components/CheckoutStep/CheckoutSteps';
+import { savePaymentMethod } from '../actions/cartAction';
+import * as routes from '../constants/routes';
+import { Button, Radio, RadioGroup, FormControlLabel, FormControl, FormLabel } from '@material-ui/core/';
 
 const PaymentMethod = ({ history }) => {
-  if (!localStorage.getItem("shippingAddress")) {
+  if (!localStorage.getItem('shippingAddress')) {
     history.push({
       pathname: routes.SHIPPING,
     });
   }
 
-  const [paymentMethod, setPaymentMethod] = useState("");
+  const [paymentMethod, setPaymentMethod] = useState('');
 
   const dispatch = useDispatch();
 
   const submitHandler = (e) => {
     e.preventDefault();
-    if (paymentMethod === "") {
+    if (paymentMethod === '') {
       return;
     }
     dispatch(savePaymentMethod(paymentMethod));
@@ -51,11 +44,7 @@ const PaymentMethod = ({ history }) => {
                 value={paymentMethod}
                 onChange={(e) => setPaymentMethod(e.target.value)}
               >
-                <FormControlLabel
-                  value="PayPal"
-                  control={<Radio color="primary" />}
-                  label="PayPal or Credit Card"
-                />
+                <FormControlLabel value="PayPal" control={<Radio color="primary" />} label="PayPal or Credit Card" />
               </RadioGroup>
             </Col>
             <Col md="4">
@@ -65,11 +54,7 @@ const PaymentMethod = ({ history }) => {
                 value={paymentMethod}
                 onChange={(e) => setPaymentMethod(e.target.value)}
               >
-                <FormControlLabel
-                  value="esewa"
-                  control={<Radio color="primary" />}
-                  label="Esewa"
-                />
+                <FormControlLabel value="esewa" control={<Radio color="primary" />} label="Esewa" />
               </RadioGroup>
             </Col>
           </Row>

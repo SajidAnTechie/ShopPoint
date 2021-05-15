@@ -1,31 +1,24 @@
-import React, { useState } from "react";
-import { Form } from "react-bootstrap";
-import { useDispatch, useSelector } from "react-redux";
-import ErrorMessage from "../components/Message/errorMessage";
-import SuccessMessage from "../components/Message/successMessage";
-import FormContainer from "../components/FormContainer/FormContainer";
-import {
-  TextField,
-  Button,
-  CircularProgress,
-  makeStyles,
-} from "@material-ui/core/";
-import * as userAction from "../actions/userAction";
-import * as userConstants from "../constants/userConstants";
+import React, { useState } from 'react';
+import { Form } from 'react-bootstrap';
+import { useDispatch, useSelector } from 'react-redux';
+import ErrorMessage from '../components/Message/errorMessage';
+import SuccessMessage from '../components/Message/successMessage';
+import FormContainer from '../components/FormContainer/FormContainer';
+import { TextField, Button, CircularProgress, makeStyles } from '@material-ui/core/';
+import * as userAction from '../actions/userAction';
+import * as userConstants from '../constants/userConstants';
 
 const useStyles = makeStyles((theme) => ({
   prgressColor: {
-    color: "#fff",
+    color: '#fff',
   },
 }));
 
 const ForgotPassword = () => {
-  const [email, setEmail] = useState("");
+  const [email, setEmail] = useState('');
   const classes = useStyles();
 
-  const forgotPasswordDetails = useSelector(
-    (state) => state.forgotPasswordDetails
-  );
+  const forgotPasswordDetails = useSelector((state) => state.forgotPasswordDetails);
 
   const { loading, error, message, success } = forgotPasswordDetails;
 
@@ -38,20 +31,8 @@ const ForgotPassword = () => {
 
   return (
     <>
-      {error && (
-        <ErrorMessage
-          header="Auth Error"
-          message={error}
-          reset={userConstants.FORGOT_PASSWORD_SEND_RSET}
-        />
-      )}
-      {success && (
-        <SuccessMessage
-          header="Done"
-          message={message}
-          reset={userConstants.FORGOT_PASSWORD_SEND_RSET}
-        />
-      )}
+      {error && <ErrorMessage header="Auth Error" message={error} reset={userConstants.FORGOT_PASSWORD_SEND_RSET} />}
+      {success && <SuccessMessage header="Done" message={message} reset={userConstants.FORGOT_PASSWORD_SEND_RSET} />}
       <FormContainer>
         <h1>Forgot Password</h1>
         <Form>
@@ -69,22 +50,8 @@ const ForgotPassword = () => {
             value={email}
             onChange={(e) => setEmail(e.target.value)}
           />
-          <Button
-            type="submit"
-            variant="contained"
-            color="primary"
-            fullWidth
-            onClick={handleSubmit}
-            disabled={loading}
-          >
-            {loading ? (
-              <CircularProgress
-                color="inherit"
-                className={classes.prgressColor}
-              />
-            ) : (
-              <>Send Request</>
-            )}
+          <Button type="submit" variant="contained" color="primary" fullWidth onClick={handleSubmit} disabled={loading}>
+            {loading ? <CircularProgress color="inherit" className={classes.prgressColor} /> : <>Send Request</>}
           </Button>
         </Form>
       </FormContainer>

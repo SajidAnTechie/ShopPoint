@@ -1,5 +1,5 @@
-import { createStore, applyMiddleware, combineReducers } from "redux";
-import thunk from "redux-thunk";
+import { createStore, applyMiddleware, combineReducers } from 'redux';
+import thunk from 'redux-thunk';
 import {
   listProducts,
   Product,
@@ -8,7 +8,7 @@ import {
   deleteProduct,
   createProduct,
   EditProduct,
-} from "./reducers/productReducers";
+} from './reducers/productReducers';
 
 import {
   userLogin,
@@ -19,8 +19,8 @@ import {
   getUser,
   forgotPassword,
   resetPassword,
-} from "./reducers/userReducers";
-import { cartReducer } from "./reducers/cartReducers";
+} from './reducers/userReducers';
+import { cartReducer } from './reducers/cartReducers';
 import {
   createOrderReducer,
   getOrder,
@@ -28,7 +28,7 @@ import {
   orderDeliverReducer,
   authOrders,
   listOrders,
-} from "./reducers/orderReducers";
+} from './reducers/orderReducers';
 
 const rootReducer = combineReducers({
   productList: listProducts,
@@ -55,21 +55,17 @@ const rootReducer = combineReducers({
   resetPasswordDetails: resetPassword,
 });
 
-const cartItemsFromStorage = localStorage.getItem("cartItems")
-  ? JSON.parse(localStorage.getItem("cartItems"))
-  : [];
+const cartItemsFromStorage = localStorage.getItem('cartItems') ? JSON.parse(localStorage.getItem('cartItems')) : [];
 
-const shippingAddressFromStorage = localStorage.getItem("shippingAddress")
-  ? JSON.parse(localStorage.getItem("shippingAddress"))
+const shippingAddressFromStorage = localStorage.getItem('shippingAddress')
+  ? JSON.parse(localStorage.getItem('shippingAddress'))
   : {};
 
-const paymentMethodAddressFromStorage = localStorage.getItem("paymentMethod")
-  ? JSON.parse(localStorage.getItem("paymentMethod"))
-  : "";
+const paymentMethodAddressFromStorage = localStorage.getItem('paymentMethod')
+  ? JSON.parse(localStorage.getItem('paymentMethod'))
+  : '';
 
-const userInfoFromStorage = localStorage.getItem("userInfo")
-  ? JSON.parse(localStorage.getItem("userInfo"))
-  : null;
+const userInfoFromStorage = localStorage.getItem('userInfo') ? JSON.parse(localStorage.getItem('userInfo')) : null;
 
 const initialState = {
   cart: {

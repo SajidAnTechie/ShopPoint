@@ -1,17 +1,11 @@
-import React from "react";
-import { Link } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
-import { Row, Col, ListGroup, Image, Card } from "react-bootstrap";
-import { addToCart, removeItemFromCart } from "../actions/cartAction";
-import {
-  Select,
-  Button,
-  FormControl,
-  makeStyles,
-  MenuItem,
-} from "@material-ui/core/";
-import { interpolate } from "../utils/string";
-import * as routes from "../constants/routes";
+import React from 'react';
+import { Link } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { Row, Col, ListGroup, Image, Card } from 'react-bootstrap';
+import { addToCart, removeItemFromCart } from '../actions/cartAction';
+import { Select, Button, FormControl, makeStyles, MenuItem } from '@material-ui/core/';
+import { interpolate } from '../utils/string';
+import * as routes from '../constants/routes';
 
 const useStyles = makeStyles((theme) => ({
   typography: {
@@ -57,12 +51,7 @@ const Cart = ({ history }) => {
               <ListGroup.Item key={item.productId}>
                 <Row>
                   <Col md={2}>
-                    <Image
-                      src={item.productImage}
-                      alt={item.name}
-                      fluid
-                      rounded
-                    />
+                    <Image src={item.productImage} alt={item.name} fluid rounded />
                   </Col>
                   <Col md={3}>
                     <Link
@@ -81,11 +70,7 @@ const Cart = ({ history }) => {
                         id="demo-simple-select"
                         label="Qty"
                         value={item.qty}
-                        onChange={(e) =>
-                          dispatch(
-                            addToCart(item.productId, Number(e.target.value))
-                          )
-                        }
+                        onChange={(e) => dispatch(addToCart(item.productId, Number(e.target.value)))}
                       >
                         {[...Array(item.countInStock).keys()].map((x) => (
                           <MenuItem key={x + 1} value={x + 1}>
@@ -96,11 +81,7 @@ const Cart = ({ history }) => {
                     </FormControl>
                   </Col>
                   <Col md={2}>
-                    <Button
-                      type="button"
-                      variant="light"
-                      onClick={() => removeFromCartHandler(item.productId)}
-                    >
+                    <Button type="button" variant="light" onClick={() => removeFromCartHandler(item.productId)}>
                       <i className="fas fa-trash"></i>
                     </Button>
                   </Col>
@@ -114,14 +95,8 @@ const Cart = ({ history }) => {
         <Card>
           <ListGroup variant="flush">
             <ListGroup.Item>
-              <h2>
-                Subtotal ({cartItems.reduce((acc, item) => acc + item.qty, 0)})
-                items
-              </h2>
-              $
-              {cartItems
-                .reduce((acc, item) => acc + item.qty * item.price, 0)
-                .toFixed(2)}
+              <h2>Subtotal ({cartItems.reduce((acc, item) => acc + item.qty, 0)}) items</h2>$
+              {cartItems.reduce((acc, item) => acc + item.qty * item.price, 0).toFixed(2)}
             </ListGroup.Item>
             <ListGroup.Item>
               <Button

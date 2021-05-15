@@ -1,18 +1,18 @@
-import React, { useEffect } from "react";
-import { Link } from "react-router-dom";
-import { Row, Col, ListGroup, Image, Card } from "react-bootstrap";
-import { useDispatch, useSelector } from "react-redux";
-import ErrorMessage from "../components/Message/errorMessage";
-import CheckoutSteps from "../components/CheckoutStep/CheckoutSteps";
-import { createOrder } from "../actions/orderAction";
-import * as routes from "../constants/routes";
-import { interpolate } from "../utils/string";
-import * as orderConstants from "../constants/orderConstants";
-import { Button, CircularProgress, makeStyles } from "@material-ui/core/";
+import React, { useEffect } from 'react';
+import { Link } from 'react-router-dom';
+import { Row, Col, ListGroup, Image, Card } from 'react-bootstrap';
+import { useDispatch, useSelector } from 'react-redux';
+import ErrorMessage from '../components/Message/errorMessage';
+import CheckoutSteps from '../components/CheckoutStep/CheckoutSteps';
+import { createOrder } from '../actions/orderAction';
+import * as routes from '../constants/routes';
+import { interpolate } from '../utils/string';
+import * as orderConstants from '../constants/orderConstants';
+import { Button, CircularProgress, makeStyles } from '@material-ui/core/';
 
 const useStyles = makeStyles((theme) => ({
   prgressColor: {
-    color: "#fff",
+    color: '#fff',
   },
 }));
 
@@ -22,9 +22,9 @@ const PlaceOrder = ({ history }) => {
 
   const cart = useSelector((state) => state.cart);
 
-  const redirectUser = !localStorage.getItem("shippingAddress")
+  const redirectUser = !localStorage.getItem('shippingAddress')
     ? routes.SHIPPING
-    : !localStorage.getItem("paymentMethod")
+    : !localStorage.getItem('paymentMethod')
     ? routes.PAYMENT
     : null;
 
@@ -37,16 +37,10 @@ const PlaceOrder = ({ history }) => {
     return (Math.round(num * 100) / 100).toFixed(2);
   };
 
-  cart.itemsPrice = addDecimals(
-    cart.cartItems.reduce((acc, item) => acc + item.price * item.qty, 0)
-  );
+  cart.itemsPrice = addDecimals(cart.cartItems.reduce((acc, item) => acc + item.price * item.qty, 0));
   cart.shippingPrice = addDecimals(cart.itemsPrice > 100 ? 0 : 100);
   cart.taxPrice = addDecimals(Number((0.15 * cart.itemsPrice).toFixed(2)));
-  cart.totalPrice = (
-    Number(cart.itemsPrice) +
-    Number(cart.shippingPrice) +
-    Number(cart.taxPrice)
-  ).toFixed(2);
+  cart.totalPrice = (Number(cart.itemsPrice) + Number(cart.shippingPrice) + Number(cart.taxPrice)).toFixed(2);
 
   const orderCreate = useSelector((state) => state.createOrder);
   const { order, success, error, loading } = orderCreate;
@@ -78,13 +72,7 @@ const PlaceOrder = ({ history }) => {
 
   return (
     <>
-      {error && (
-        <ErrorMessage
-          header="Create Order Error"
-          message={error}
-          reset={orderConstants.CREATE_ORDER_RESET}
-        />
-      )}
+      {error && <ErrorMessage header="Create Order Error" message={error} reset={orderConstants.CREATE_ORDER_RESET} />}
       <CheckoutSteps step1 step2 step3 />
       <Row>
         <Col md={8}>
@@ -93,8 +81,7 @@ const PlaceOrder = ({ history }) => {
               <h2>Shipping</h2>
               <p>
                 <strong>Address:</strong>
-                {cart.shippingAddress.address}, {cart.shippingAddress.city}{" "}
-                {cart.shippingAddress.postalCode},{" "}
+                {cart.shippingAddress.address}, {cart.shippingAddress.city} {cart.shippingAddress.postalCode},{' '}
                 {cart.shippingAddress.country}
               </p>
             </ListGroup.Item>
@@ -115,12 +102,7 @@ const PlaceOrder = ({ history }) => {
                     <ListGroup.Item key={index}>
                       <Row>
                         <Col md={1}>
-                          <Image
-                            src={item.productImage}
-                            alt={item.productName}
-                            fluid
-                            rounded
-                          />
+                          <Image src={item.productImage} alt={item.productName} fluid rounded />
                         </Col>
                         <Col>
                           <Link
@@ -181,14 +163,7 @@ const PlaceOrder = ({ history }) => {
                   disabled={!cart.cartItems || loading}
                   onClick={placeOrderHandler}
                 >
-                  {loading ? (
-                    <CircularProgress
-                      color="inherit"
-                      className={classes.prgressColor}
-                    />
-                  ) : (
-                    <>Place Order</>
-                  )}
+                  {loading ? <CircularProgress color="inherit" className={classes.prgressColor} /> : <>Place Order</>}
                 </Button>
               </ListGroup.Item>
             </ListGroup>

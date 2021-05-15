@@ -1,19 +1,19 @@
-import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
-import { Row, Col } from "react-bootstrap";
-import * as productAction from "../actions/productAction";
-import Product from "../components/Product/Product";
-import Filter from "../components/Filter/Filter";
-import ErrorMessage from "../components/Message/errorMessage";
-import HomeLoader from "../components/Loader/HomeLoader";
-import Meta from "../components/Meta/Meta";
-import * as routes from "../constants/routes";
+import React, { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { Row, Col } from 'react-bootstrap';
+import * as productAction from '../actions/productAction';
+import Product from '../components/Product/Product';
+import Filter from '../components/Filter/Filter';
+import ErrorMessage from '../components/Message/errorMessage';
+import HomeLoader from '../components/Loader/HomeLoader';
+import Meta from '../components/Meta/Meta';
+import * as routes from '../constants/routes';
 
 const Home = () => {
   const [sort, setSort] = useState([]);
-  const [priceRange, setPriceRange] = useState("");
-  const [ltORgt, setLtORgt] = useState("");
+  const [priceRange, setPriceRange] = useState('');
+  const [ltORgt, setLtORgt] = useState('');
   const [filters, setFilters] = useState({});
 
   const [initialLoading, setInitialLoading] = useState(true);
@@ -23,9 +23,7 @@ const Home = () => {
   const { loading, products, count, error, success } = productList;
 
   const queryParams = new URLSearchParams(window.location.search);
-  const searchProductKey = queryParams.get("search")
-    ? queryParams.get("search").trim()
-    : "";
+  const searchProductKey = queryParams.get('search') ? queryParams.get('search').trim() : '';
 
   const dispatch = useDispatch();
 
@@ -43,12 +41,12 @@ const Home = () => {
   }, [dispatch, filters, success]);
 
   useEffect(() => {
-    handleFilters("keyWord", searchProductKey);
+    handleFilters('keyWord', searchProductKey);
     // eslint-disable-next-line
   }, [searchProductKey]);
 
   useEffect(() => {
-    handleFilters("sort", sort.join(","));
+    handleFilters('sort', sort.join(','));
     // eslint-disable-next-line
   }, [sort]);
 
@@ -64,13 +62,11 @@ const Home = () => {
   };
 
   const handleSort = (value) => {
-    sort.includes(value)
-      ? setSort(sort.filter((s) => s !== value))
-      : setSort((preState) => [...preState, value]);
+    sort.includes(value) ? setSort(sort.filter((s) => s !== value)) : setSort((preState) => [...preState, value]);
   };
 
   const handlePriceRange = () => {
-    if ([priceRange, ltORgt].includes("")) {
+    if ([priceRange, ltORgt].includes('')) {
       return;
     }
     filterPrevPrice();
@@ -78,9 +74,7 @@ const Home = () => {
   };
 
   const filterPrevPrice = () => {
-    const filterprice = Object.keys(filters).filter((price) =>
-      ["price[lt]", "price[gte]"].includes(price)
-    );
+    const filterprice = Object.keys(filters).filter((price) => ['price[lt]', 'price[gte]'].includes(price));
     filterprice.forEach((price) => {
       if (filters[price]) {
         delete filters[price];
@@ -112,7 +106,7 @@ const Home = () => {
                 <h1>Latest Products ({count})</h1>
               </span>
               <span className="float-right">
-                {" "}
+                {' '}
                 <Filter
                   sort={sort}
                   handleSort={handleSort}

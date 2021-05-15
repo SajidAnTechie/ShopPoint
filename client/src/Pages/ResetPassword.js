@@ -1,33 +1,26 @@
-import React, { useState, useEffect } from "react";
-import { Form } from "react-bootstrap";
-import { useDispatch, useSelector } from "react-redux";
-import ErrorMessage from "../components/Message/errorMessage";
-import SuccessMessage from "../components/Message/successMessage";
-import FormContainer from "../components/FormContainer/FormContainer";
-import {
-  TextField,
-  Button,
-  CircularProgress,
-  makeStyles,
-} from "@material-ui/core/";
-import * as routes from "../constants/routes";
-import * as userAction from "../actions/userAction";
-import * as userConstants from "../constants/userConstants";
+import React, { useState, useEffect } from 'react';
+import { Form } from 'react-bootstrap';
+import { useDispatch, useSelector } from 'react-redux';
+import ErrorMessage from '../components/Message/errorMessage';
+import SuccessMessage from '../components/Message/successMessage';
+import FormContainer from '../components/FormContainer/FormContainer';
+import { TextField, Button, CircularProgress, makeStyles } from '@material-ui/core/';
+import * as routes from '../constants/routes';
+import * as userAction from '../actions/userAction';
+import * as userConstants from '../constants/userConstants';
 
 const useStyles = makeStyles((theme) => ({
   prgressColor: {
-    color: "#fff",
+    color: '#fff',
   },
 }));
 
 const ForgotPassword = ({ history }) => {
-  const [newPassword, setNewPassword] = useState("");
-  const [token, setToken] = useState("");
+  const [newPassword, setNewPassword] = useState('');
+  const [token, setToken] = useState('');
   const classes = useStyles();
 
-  const resetPasswordDetails = useSelector(
-    (state) => state.resetPasswordDetails
-  );
+  const resetPasswordDetails = useSelector((state) => state.resetPasswordDetails);
 
   const { loading, error, message, success } = resetPasswordDetails;
 
@@ -36,9 +29,7 @@ const ForgotPassword = ({ history }) => {
   useEffect(() => {
     const queryParams = new URLSearchParams(window.location.search);
 
-    const token = queryParams.get("token")
-      ? queryParams.get("token").trim()
-      : null;
+    const token = queryParams.get('token') ? queryParams.get('token').trim() : null;
 
     if (token) {
       setToken(token);
@@ -71,20 +62,8 @@ const ForgotPassword = ({ history }) => {
 
   return (
     <>
-      {error && (
-        <ErrorMessage
-          header="Auth Error"
-          message={error}
-          reset={userConstants.FORGOT_PASSWORD_SEND_RSET}
-        />
-      )}
-      {success && (
-        <SuccessMessage
-          header="Done"
-          message={message}
-          reset={userConstants.FORGOT_PASSWORD_SEND_RSET}
-        />
-      )}
+      {error && <ErrorMessage header="Auth Error" message={error} reset={userConstants.FORGOT_PASSWORD_SEND_RSET} />}
+      {success && <SuccessMessage header="Done" message={message} reset={userConstants.FORGOT_PASSWORD_SEND_RSET} />}
       <FormContainer>
         <h1>Reset Password</h1>
         <Form>
@@ -102,22 +81,8 @@ const ForgotPassword = ({ history }) => {
             value={newPassword}
             onChange={(e) => setNewPassword(e.target.value)}
           />
-          <Button
-            type="submit"
-            variant="contained"
-            color="primary"
-            fullWidth
-            onClick={handleSubmit}
-            disabled={loading}
-          >
-            {loading ? (
-              <CircularProgress
-                color="inherit"
-                className={classes.prgressColor}
-              />
-            ) : (
-              <>Reset</>
-            )}
+          <Button type="submit" variant="contained" color="primary" fullWidth onClick={handleSubmit} disabled={loading}>
+            {loading ? <CircularProgress color="inherit" className={classes.prgressColor} /> : <>Reset</>}
           </Button>
         </Form>
       </FormContainer>

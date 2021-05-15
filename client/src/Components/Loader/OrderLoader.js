@@ -1,12 +1,12 @@
-import React from "react";
-import { Row, Col, ListGroup, Card } from "react-bootstrap";
-import Skeleton, { SkeletonTheme } from "react-loading-skeleton";
+import React from 'react';
+import { Row, Col, ListGroup, Card } from 'react-bootstrap';
+import Skeleton, { SkeletonTheme } from 'react-loading-skeleton';
 
 const Order = () => {
   return (
     <>
       <h1>
-        {" "}
+        {' '}
         <SkeletonTheme color="lightGray">
           <Skeleton />
         </SkeletonTheme>
@@ -58,7 +58,7 @@ const Order = () => {
 
             <ListGroup.Item>
               <h2>
-                {" "}
+                {' '}
                 <SkeletonTheme color="lightGray">
                   <Skeleton />
                 </SkeletonTheme>

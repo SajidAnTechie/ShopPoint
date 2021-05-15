@@ -1,23 +1,16 @@
-import * as cartConstants from "../constants/cartConstants";
+import * as cartConstants from '../constants/cartConstants';
 
-export const cartReducer = (
-  state = { cartItems: [], shippingAddress: {}, paymentMethod: "" },
-  action
-) => {
+export const cartReducer = (state = { cartItems: [], shippingAddress: {}, paymentMethod: '' }, action) => {
   switch (action.type) {
     case cartConstants.ADD_TO_CART_ITEM:
       const item = action.payload;
 
-      const existItem = state.cartItems.find(
-        (x) => x.productId === item.productId
-      );
+      const existItem = state.cartItems.find((x) => x.productId === item.productId);
 
       if (existItem) {
         return {
           ...state,
-          cartItems: state.cartItems.map((x) =>
-            x.productId === existItem.productId ? item : x
-          ),
+          cartItems: state.cartItems.map((x) => (x.productId === existItem.productId ? item : x)),
         };
       } else {
         return {
@@ -28,9 +21,7 @@ export const cartReducer = (
     case cartConstants.CART_REMOVE_ITEM:
       return {
         ...state,
-        cartItems: state.cartItems.filter(
-          (x) => x.productId !== action.payload
-        ),
+        cartItems: state.cartItems.filter((x) => x.productId !== action.payload),
       };
     case cartConstants.CART_SAVE_SHIPPING_ADDRESS:
       return {
@@ -46,7 +37,7 @@ export const cartReducer = (
       return {
         cartItems: [],
         shippingAddress: {},
-        paymentMethod: "",
+        paymentMethod: '',
       };
     default:
       return state;

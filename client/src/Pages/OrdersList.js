@@ -1,16 +1,16 @@
-import React, { useEffect, useState } from "react";
-import { Table, Button } from "react-bootstrap";
-import { LinkContainer } from "react-router-bootstrap";
-import { useDispatch, useSelector } from "react-redux";
-import ErrorMessage from "../components/Message/errorMessage";
-import { listOrders } from "../actions/orderAction";
-import TableLoader from "../components/Loader/TableLoader";
-import Print from "../components/Print/Print";
-import pdfMake from "pdfmake/build/pdfmake";
-import pdfFonts from "pdfmake/build/vfs_fonts";
-import * as routes from "../constants/routes";
-import { createPdfData } from "../services/order";
-import { interpolate } from "../utils/string";
+import React, { useEffect, useState } from 'react';
+import { Table, Button } from 'react-bootstrap';
+import { LinkContainer } from 'react-router-bootstrap';
+import { useDispatch, useSelector } from 'react-redux';
+import ErrorMessage from '../components/Message/errorMessage';
+import { listOrders } from '../actions/orderAction';
+import TableLoader from '../components/Loader/TableLoader';
+import Print from '../components/Print/Print';
+import pdfMake from 'pdfmake/build/pdfmake';
+import pdfFonts from 'pdfmake/build/vfs_fonts';
+import * as routes from '../constants/routes';
+import { createPdfData } from '../services/order';
+import { interpolate } from '../utils/string';
 pdfMake.vfs = pdfFonts.pdfMake.vfs;
 
 const OrderList = () => {
@@ -40,13 +40,13 @@ const OrderList = () => {
     const downloadAs = value;
 
     switch (downloadAs) {
-      case "pdf":
+      case 'pdf':
         var docDefinition = createPdfData(userInfo, orders);
 
-        pdfMake.createPdf(docDefinition).download("orders-list.pdf");
+        pdfMake.createPdf(docDefinition).download('orders-list.pdf');
 
         break;
-      case "excel":
+      case 'excel':
         break;
 
       default:
@@ -62,7 +62,7 @@ const OrderList = () => {
         </span>
 
         <span className="float-right">
-          {" "}
+          {' '}
           <Print printAs={printAs} />
         </span>
       </div>
@@ -95,14 +95,14 @@ const OrderList = () => {
                   {order.isPaid ? (
                     order.paidAt.substring(0, 10)
                   ) : (
-                    <i className="fas fa-times" style={{ color: "red" }}></i>
+                    <i className="fas fa-times" style={{ color: 'red' }}></i>
                   )}
                 </td>
                 <td>
                   {order.isDelivered ? (
                     order.deliveredAt.substring(0, 10)
                   ) : (
-                    <i className="fas fa-times" style={{ color: "red" }}></i>
+                    <i className="fas fa-times" style={{ color: 'red' }}></i>
                   )}
                 </td>
                 <td>

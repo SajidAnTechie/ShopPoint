@@ -1,6 +1,6 @@
-import React from "react";
-import { Card, Row, Col } from "react-bootstrap";
-import Skeleton, { SkeletonTheme } from "react-loading-skeleton";
+import React from 'react';
+import { Card, Row, Col } from 'react-bootstrap';
+import Skeleton, { SkeletonTheme } from 'react-loading-skeleton';
 
 const HomeLoader = () => {
   return (
@@ -13,7 +13,7 @@ const HomeLoader = () => {
               <Card className="my-3 p-3 rounded">
                 <Card.Body>
                   <SkeletonTheme color="lightGray">
-                    <Skeleton height={180} width={"100%"} />
+                    <Skeleton height={180} width={'100%'} />
                     <br />
 
                     <Skeleton width={`60%`} />

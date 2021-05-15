@@ -1,0 +1,12 @@
+[*]
+indent_style = space
+indent_size = 2
+
+# Unix-style newlines with a newline ending in every file
+[*]
+insert_final_newline = true
+end_of_line = lf
+charset = utf-8
+trim_trailing_whitespace = true
+
+
