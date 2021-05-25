@@ -74,8 +74,9 @@ export const emailVerification = (verificationCode) => async (dispatch) => {
       ...authData,
       token,
     };
-
-    localStorage.setItem('userInfo', JSON.stringify(userInfo));
+   
+    tokenService.setToken(userInfo);
+    
     dispatch({
       type: userConstants.USER_AUTH_SUCCESS,
       payload: userInfo,
